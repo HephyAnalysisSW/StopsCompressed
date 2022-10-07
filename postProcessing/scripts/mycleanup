@@ -1,0 +1,11 @@
+#!/bin/sh -x
+
+if [ ! -e /groups/hephy/cms/dietrich.liko/StopsCompressed/nanoTuples/$1 ]; then
+    echo "File $1 does not exists."
+    exit
+fi
+
+rm /groups/hephy/cms/dietrich.liko/StopsCompressed/nanoTuples/$1
+rm /scratch-cbe/users/dietrich.liko/StopsCompressed/nanoTuples/$1
+
+xrdfs root://eos.grid.vbc.ac.at rm /eos/vbc/experiments/cms/store/user/liko/StopsCompressed/nanoTuples/$1

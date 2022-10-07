@@ -131,6 +131,7 @@ def filter_commands(commands, splits):
                 if not os.path.exists(path):
                     missing.append(i)
 
+#        print(sample, len(missing), split)
         if not missing:
             continue
 

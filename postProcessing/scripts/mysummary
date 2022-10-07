@@ -9,12 +9,12 @@ import sys
 NAMES = {
     'Run16APVUL': 'Data 2016 APV',
     'UL16APV': 'Monte Carlo 2016 APV',
-    'Run16UL': 'Data 2016',
-    'UL16': 'Monte Carlo 2016',
-    'Run17UL': 'Data 2017',
-    'UL17': 'Monte Carlo 2017',
-    'Run18UL': 'Data 2018',
-    'UL18': 'Monte Carlo 2018',
+#    'Run16UL': 'Data 2016',
+#    'UL16': 'Monte Carlo 2016',
+#    'Run17UL': 'Data 2017',
+#    'UL17': 'Monte Carlo 2017',
+#    'Run18UL': 'Data 2018',
+#    'UL18': 'Monte Carlo 2018',
 }
 
 EOSPATH="/eos/vbc/experiments/cms/store/user/liko/StopsCompressed/nanoTuples"

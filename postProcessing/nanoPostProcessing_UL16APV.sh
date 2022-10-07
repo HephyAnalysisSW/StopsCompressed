@@ -69,14 +69,14 @@ python nanoPostProcessing.py  --skim Met --year UL2016_preVFP  --processingEra c
 
 ##new diBoson and DYM4-50 samples
 
-python nanoPostProcessing.py  --skim Met --year UL2016_preVFP  --processingEra compstops_UL16APVv9_nano_v7  --sample WWTo1L1Nu2Q 
-python nanoPostProcessing.py  --skim Met --year UL2016_preVFP  --processingEra compstops_UL16APVv9_nano_v7  --sample ZZTo2Q2L
-python nanoPostProcessing.py  --skim Met --year UL2016_preVFP  --processingEra compstops_UL16APVv9_nano_v7  --sample ZZTo2Nu2Q
-python nanoPostProcessing.py  --skim Met --year UL2016_preVFP  --processingEra compstops_UL16APVv9_nano_v7  --sample ZZTo4L
-python nanoPostProcessing.py  --skim Met --year UL2016_preVFP  --processingEra compstops_UL16APVv9_nano_v7  --sample WZTo1L3Nu
-python nanoPostProcessing.py  --skim Met --year UL2016_preVFP  --processingEra compstops_UL16APVv9_nano_v7  --sample WZTo1L1Nu2Q
-python nanoPostProcessing.py  --skim Met --year UL2016_preVFP  --processingEra compstops_UL16APVv9_nano_v7  --sample WZTo2Q2L
-python nanoPostProcessing.py  --skim Met --year UL2016_preVFP  --processingEra compstops_UL16APVv9_nano_v7  --sample WZTo3LNu_amcatnlo 
-python nanoPostProcessing.py  --skim Met --year UL2016_preVFP  --processingEra compstops_UL16APVv9_nano_v7  --sample DYJetsToLL_M4to50_HT200to400 
-python nanoPostProcessing.py  --skim Met --year UL2016_preVFP  --processingEra compstops_UL16APVv9_nano_v7  --sample DYJetsToLL_M4to50_HT600toInf
+python nanoPostProcessing.py  --skim Met --year UL2016_preVFP  --processingEra compstops_UL16APVv9_nano_v7  --sample WWTo1L1Nu2Q #SPLIT7
+python nanoPostProcessing.py  --skim Met --year UL2016_preVFP  --processingEra compstops_UL16APVv9_nano_v7  --sample ZZTo2Q2L #SPLIT22
+python nanoPostProcessing.py  --skim Met --year UL2016_preVFP  --processingEra compstops_UL16APVv9_nano_v7  --sample ZZTo2Nu2Q #SPLIT6
+python nanoPostProcessing.py  --skim Met --year UL2016_preVFP  --processingEra compstops_UL16APVv9_nano_v7  --sample ZZTo4L #SPLIT30
+python nanoPostProcessing.py  --skim Met --year UL2016_preVFP  --processingEra compstops_UL16APVv9_nano_v7  --sample WZTo1L3Nu #SPLIT2
+python nanoPostProcessing.py  --skim Met --year UL2016_preVFP  --processingEra compstops_UL16APVv9_nano_v7  --sample WZTo1L1Nu2Q #SPLIT10
+python nanoPostProcessing.py  --skim Met --year UL2016_preVFP  --processingEra compstops_UL16APVv9_nano_v7  --sample WZTo2Q2L #SPLIT9
+python nanoPostProcessing.py  --skim Met --year UL2016_preVFP  --processingEra compstops_UL16APVv9_nano_v7  --sample WZTo3LNu_amcatnlo #SPLIT9
+python nanoPostProcessing.py  --skim Met --year UL2016_preVFP  --processingEra compstops_UL16APVv9_nano_v7  --sample DYJetsToLL_M4to50_HT200to400 #SPLIT5
+python nanoPostProcessing.py  --skim Met --year UL2016_preVFP  --processingEra compstops_UL16APVv9_nano_v7  --sample DYJetsToLL_M4to50_HT600toInf #SPLIT6
 
