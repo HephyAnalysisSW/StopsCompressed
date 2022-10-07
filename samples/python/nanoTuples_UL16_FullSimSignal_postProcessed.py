@@ -10,7 +10,8 @@ from StopsCompressed.samples.color import color
 
 from StopsCompressed.samples.default_locations import default_locations
 data_directory_ = default_locations.mc_2016_data_directory
-postProcessing_directory_ = default_locations.mc_2016_postProcessing_directory
+#postProcessing_directory_ = default_locations.mc_2016_postProcessing_directory
+postProcessing_directory_ = default_locations.signal_2016_postProcessing_directory
 
 logger.info("Loading MC samples from directory %s", os.path.join(data_directory_, postProcessing_directory_))
 

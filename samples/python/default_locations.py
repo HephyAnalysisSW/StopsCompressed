@@ -2,21 +2,25 @@ class default_locations:
 
     #mc_2016_data_directory = "/mnt/hephy/cms/priya.hussain/StopsCompressed/nanoTuples/"
     #mc_2016_data_directory = "/groups/hephy/cms/priya.hussain/StopsCompressed/nanoTuples/"
-    mc_2016_data_directory = "/scratch-cbe/users/dietrich.liko/StopsCompressed/nanoTuples/"
-    mc_2016_postProcessing_directory = "compstops_UL16v9_nano_v7/Met/"
+    #mc_2016_data_directory = "/scratch-cbe/users/dietrich.liko/StopsCompressed/nanoTuples/"
+    mc_2016_data_directory = "/scratch-cbe/users/priya.hussain/StopsCompressed/nanoTuples/"
+    #mc_2016_postProcessing_directory = "compstops_UL16v9_nano_v7/Met/noDxyDz/"
+    mc_2016_postProcessing_directory = "compstops_UL16v9_nano_v8/Met/HInoDxyDz/"
     mc_legacy16_postProcessing_directory = "compstops_2016_nano_v28/Met/"
 
     #data_2016_data_directory = "/groups/hephy/cms/priya.hussain/StopsCompressed/nanoTuples/"
-    data_2016_data_directory = "/scratch-cbe/users/dietrich.liko/StopsCompressed/nanoTuples/"
-    data_2016_postProcessing_directory = "compstops_UL16v9_nano_v7/Met/"
+    #data_2016_data_directory = "/scratch-cbe/users/dietrich.liko/StopsCompressed/nanoTuples/"
+    data_2016_data_directory = "/scratch-cbe/users/priya.hussain/StopsCompressed/nanoTuples/"
+    #data_2016_postProcessing_directory = "compstops_UL16v9_nano_v7/Met/noDxyDz/"
+    data_2016_postProcessing_directory = "compstops_UL16v9_nano_v8/Met/HInoDxyDz/"
 
     #mc_2016APV_data_directory = "/groups/hephy/cms/priya.hussain/StopsCompressed/nanoTuples/"
     mc_2016APV_data_directory = "/scratch-cbe/users/dietrich.liko/StopsCompressed/nanoTuples/"
-    mc_2016APV_postProcessing_directory = "compstops_UL16APVv9_nano_v7/Met/"
+    mc_2016APV_postProcessing_directory = "compstops_UL16APVv9_nano_v8/Met/"
 
     #data_2016APV_data_directory = "/groups/hephy/cms/priya.hussain/StopsCompressed/nanoTuples/"
     data_2016APV_data_directory = "/scratch-cbe/users/dietrich.liko/StopsCompressed/nanoTuples/"
-    data_2016APV_postProcessing_directory = "compstops_UL16APVv9_nano_v7/Met/"
+    data_2016APV_postProcessing_directory = "compstops_UL16APVv9_nano_v8/Met/"
 
     #mc_2016_36fb_data_directory = "/groups/hephy/cms/priya.hussain/StopsCompressed/nanoTuples/"
     #mc_2016_36fb_postProcessing_directory = "compstops_UL16v9_36fb_nano_v2/Met/"
@@ -42,7 +46,7 @@ class default_locations:
     # signal_2016_postProcessing_directory = "compstops_2016_nano_v25/MetSingleLep/"#looseHybridIso/"
     #signal_2016_postProcessing_directory = "compstops_2016_nano_v30/Met/"#looseHybridIso/"
     #signal_2016_postProcessing_directory = "compstops_2016_nano_v27/Met/"
-    signal_2016_postProcessing_directory = "compstops_UL16v9_nano_v7/Met/"
+    signal_2016_postProcessing_directory = "compstops_UL16v9_nano_v9/Met/HInoDxyDz/"
     ##samples w/ all ext samples && old ID: v21
     #mc_2016_postProcessing_directory = "compstops_2016_nano_v21/MetSingleLep/"
     ## samples w/ ID mu_medium, el_loose: v22
