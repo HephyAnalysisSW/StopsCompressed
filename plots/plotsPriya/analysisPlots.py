@@ -34,8 +34,10 @@ argParser.add_argument('--targetDir',          		action='store',      default='v
 #argParser.add_argument('--selection',          		action='store',      default='nISRJets1p-ntau0-lepSel-dphimetjet0to0p5-jet3Veto-met200-ht300')
 #argParser.add_argument('--selection',          		action='store',      default='nISRJets1p-ntau0-lepSel-deltaPhiMetJetsInv-jet3Veto-met200-ht300')
 #argParser.add_argument('--selection',          		action='store',      default='nISRJets1p-ntau0-lepSel-dphimetjet0p5-jet3Veto-met200-ht300')
-argParser.add_argument('--selection',          		action='store',      default='nISRJets1p-ntau0-lepSel-deltaPhiJets-jet3Veto-met200-ht300')
-#argParser.add_argument('--selection',          		action='store',      default='nISRJets1p-ntau0-lepSel-jet3Veto-met200-ht300')
+#argParser.add_argument('--selection',          		action='store',      default='nISRJets1p-ntau0-lepSel-deltaPhiJets-jet3Veto-met200-ht300-isPrompt')
+argParser.add_argument('--selection',          		action='store',      default='nISRJets1p-ntau0-lepSel-deltaPhiJets-jet3Veto-met200-ht300-isFake')
+#argParser.add_argument('--selection',          		action='store',      default='nISRJets1p-ntau0-lepSel-deltaPhiJets-jet3Veto-met200-ht300-isGenMatched')
+#argParser.add_argument('--selection',          		action='store',      default='nISRJets1p-ntau0-lepSel-deltaPhiJets-jet3Veto-met200-ht300')
 argParser.add_argument('--reweightPU',         		action='store',      default=None, 		  choices=['VDown', 'Down', 'Central', 'Up', 'VUp', 'VVUp'])
 argParser.add_argument('--badMuonFilters',     		action='store',      default="Summer2016",  	  help="Which bad muon filters" )
 argParser.add_argument('--noBadPFMuonFilter',           action='store_true', default=False)
@@ -77,7 +79,7 @@ if args.eos and "2016" in args.era:
     
 elif args.era == "Run2016preVFP" and not args.eos:
     from StopsCompressed.samples.nanoTuples_UL16APV_postProcessed import *
-    samples = [WJetsToLNu_HT_16APV, Top_pow_16APV, singleTop_16APV, ZInv_16APV, DY_HT_M50_LO_16APV, QCD_HT_16APV, VV_16APV, TTX_16APV]
+    samples = [WJetsToLNu_HT_16APV, Top_pow_16APV, singleTop_16APV, ZInv_16APV, DY_HT_LO_16APV, QCD_HT_16APV, VV_16APV, TTX_16APV]
     from StopsCompressed.samples.nanoTuples_RunUL16APV_postProcessed import *
     data_sample = Run2016preVFP
     from StopsCompressed.samples.nanoTuples_UL16APV_FullSimSignal_postProcessed import *
@@ -90,21 +92,21 @@ elif args.era == "Run2016postVFP" and not args.eos:
     #samples = [WJetsToLNu_HT_16, TTJets_1l_16, singleTop_16, ZInv_16, DY_HT_LO_16, QCD_HT_16, VV_16, TTX_16]
     #samples = [WJetsToLNu_HT_16, Top_pow_16, singleTop_16, ZInv_16, DY_HT_LO_16, QCD_HT_16, VV_16, TTX_16]
     #samples = [WJetsToLNu_HT_16]
-    samples = [WJetsToLNu_HT_16, Top_pow_16, singleTop_16, ZInv_16, DY_HT_M50_LO_16,QCD_HT_16, VV_16, TTX_16]
+    samples = [WJetsToLNu_HT_16, Top_pow_16, singleTop_16, ZInv_16, DY_HT_LO_16,QCD_HT_16, VV_16, TTX_16]
     from StopsCompressed.samples.nanoTuples_RunUL16_postProcessed import *
     data_sample = Run2016postVFP
     from StopsCompressed.samples.nanoTuples_UL16_FullSimSignal_postProcessed import *
+    signals = [T2tt_500_420, T2tt_500_470, T2tt_LL_300_290, T2tt_LL_400_380, T2tt_LL_350_335]
     #from StopsCompressed.samples.nanoTuples_FastSim_Summer16_postProcessed import *
-    #signals = [T2tt_375_365,T2tt_500_470]
-    #signals = [T2tt_375_365,T2tt_500_470, T2tt_500_420 ]
-    signals = [T2tt_500_420, T2tt_500_470]
+    #signals = [T2tt_500_420, T2tt_500_470]
+
     #if args.reweightPU:
     #	    nTrueInt_puRW = getReweightingFunction(data="PU_2016_35920_XSec%s"%args.reweightPU, mc="Summer16")
 elif  args.era == "Run2016" and not args.eos:
     from StopsCompressed.samples.nanoTuples_UL16_36fb_postProcessed_v2 import *
     from StopsCompressed.samples.nanoTuples_UL16_36fb_FullSimSignal_postProcessed import *
     #samples = [WJetsToLNu_HT_16, Top_pow_16, singleTop_16, ZInv_16, DY_HT_M50_LO_16, QCD_HT_16, VV_16, WWToLNuQQ_16, TTX_16]
-    samples = [WJetsToLNu_HT_16, Top_pow_16, singleTop_16, ZInv_16, DY_HT_M50_LO_16, QCD_HT_16, VV_16, TTX_16]
+    samples = [WJetsToLNu_HT_16, Top_pow_16, singleTop_16, ZInv_16, DY_HT_LO_16, QCD_HT_16, VV_16, TTX_16]
     #samples = [QCD_HT_16]
     #samples = [WJetsToLNu_HT_16, Top_pow_16, singleTop_16, ZInv_16, DY_HT_M50_LO_16, QCD_HT_16, TTX_16]
     data_sample = RunUL16_36fb
@@ -114,7 +116,7 @@ elif "2017" in args.era and not args.eos:
     from StopsCompressed.samples.nanoTuples_UL17_postProcessed import *
     #samples = [WJetsToLNu_HT_17, Top_pow_17, singleTop_17, ZInv_17, DY_HT_LO_17,QCD_Ele_17,QCD_Mu_17, VV_17, TTX_17]
     #samples = [WJetsToLNu_HT_17, Top_pow_17, singleTop_17, ZInv_17, DY_HT_LO_17, VV_17, TTX_17]
-    samples = [WJetsToLNu_HT_17, Top_pow_17, singleTop_17, ZInv_17, DY_HT_M50_LO_17, QCD_HT_17, VV_17, TTX_17]
+    samples = [WJetsToLNu_HT_17, Top_pow_17, singleTop_17, ZInv_17, DY_HT_LO_17, QCD_HT_17, VV_17, TTX_17]
     #from StopsCompressed.samples.nanoTuples_Run2017_14Dec2018_postProcessed import *
     from StopsCompressed.samples.nanoTuples_RunUL17_postProcessed import *
     data_sample = Run2017
@@ -127,7 +129,7 @@ elif "2018" in args.era and not args.eos:
     from StopsCompressed.samples.nanoTuples_UL18_postProcessed import *
     #samples =[WJetsToLNu_HT_18, Top_pow_18, singleTop_18, ZInv_18, DY_HT_LO_18, QCD_Ele_18, QCD_Mu_18, VV_18, TTX_18]
     #samples =[WJetsToLNu_HT_18, Top_pow_18, singleTop_18, ZInv_18, DY_HT_LO_18, VV_18, TTX_18]
-    samples =[WJetsToLNu_HT_18, Top_pow_18, singleTop_18, ZInv_18, DY_HT_M50_LO_18, QCD_HT_18, VV_18, TTX_18]
+    samples =[WJetsToLNu_HT_18, Top_pow_18, singleTop_18, ZInv_18, DY_HT_LO_18, QCD_HT_18, VV_18, TTX_18]
     from StopsCompressed.samples.nanoTuples_RunUL18_postProcessed import *
     data_sample = Run2018
     from StopsCompressed.samples.nanoTuples_UL18_FullSimSignal_postProcessed import *
@@ -163,7 +165,8 @@ def drawObjects( plotData, dataMCScale):
 def drawPlots(plots,mode, dataMCScale):
   for log in [False, True]:
     
-    plot_directory_ = os.path.join(plot_directory, 'analysisPlots', args.targetDir, args.era ,mode +("log" if log else ""), args.selection)
+    #plot_directory_ = os.path.join(plot_directory, 'analysisPlots','looseDxy' ,args.targetDir, args.era ,mode +("log" if log else ""), args.selection)
+    plot_directory_ = os.path.join(plot_directory, 'analysisPlots','HInoDxyDz' ,args.targetDir, args.era ,mode +("log" if log else ""), args.selection)
     for plot in plots:
       #print "data?? : ", plot.histos[1], "mc:?? ", plot.histos[0]
       #if not max(l[0].GetMaximum() for l in plot.histos): continue # Empty plot
@@ -180,8 +183,8 @@ def drawPlots(plots,mode, dataMCScale):
       _drawObjects = []
       plotting.draw(plot,
         plot_directory = plot_directory_,
-	ratio = {'yRange':(0.1,1.9)},
-        #ratio = None,
+	#ratio = {'yRange':(0.1,1.9)},
+        ratio = None,
         logX = False, logY = log, sorting = False,
         yRange = (0.03, "auto") if log else (0.001, "auto"),
         scaling = {},
@@ -196,7 +199,7 @@ read_variables = [
 	    "lep[pt/F, eta/F, phi/F]",
             "JetGood[pt/F, eta/F, phi/F, genPt/F]", 
             "Jet[pt/F, eta/F, phi/F, jetId/I]", 
-            "met_pt/F", "met_phi/F","CT1/F", "HT/F","mt/F", 'l1_dxy/F', 'l1_dz/F', 'dphij0j1/F','ISRJets_pt/F', 'nISRJets/I','nSoftBJets/I','nHardBJets/I', "nBTag/I", "nJetGood/I", "PV_npvsGood/I","event/I","run/I", "Flag_BadPFMuonDzFilter/O"]
+            "met_pt/F", "met_phi/F","CT1/F", "HT/F","mt/F", 'l1_dxy/F', 'l1_dz/F', 'l1_dzErr/F', 'l1_dxyErr/F', 'dphij0j1/F','ISRJets_pt/F', 'nISRJets/I','nSoftBJets/I','nHardBJets/I', "nBTag/I", "nJetGood/I", "PV_npvsGood/I","event/I","run/I", "Flag_BadPFMuonDzFilter/O"]
 read_variables += [
             "nMuon/I","nElectron/I","nJet/I", "dPhiMetJet/F", "metJet/I",
             "Muon[dxy/F,dxyErr/F,dz/F,dzErr/F,eta/F,ip3d/F,jetRelIso/F,mass/F,miniPFRelIso_all/F,miniPFRelIso_chg/F,pfRelIso03_all/F,pfRelIso03_chg/F,pfRelIso04_all/F,phi/F,pt/F,ptErr/F,segmentComp/F,sip3d/F,mvaTTH/F,charge/I,jetIdx/I,nStations/I,nTrackerLayers/I,pdgId/I,tightCharge/I,highPtId/b,inTimeMuon/O,isGlobal/O,isPFcand/O,isTracker/O,mediumId/O,mediumPromptId/O,miniIsoId/b,multiIsoId/b,mvaId/b,pfIsoId/b,softId/O,softMvaId/O,tightId/O,tkIsoId/b,triggerIdLoose/O]",
@@ -210,6 +213,13 @@ genFilter = genFilter(year=year)
 
 
 sequence = []
+def lepLooseDxy(event, sample): 
+	event.l1_abs_dxy = abs(event.l1_dxy)
+	event.l1_abs_dz  = abs(event.l1_dz)
+	event.l1_dxySig  = event.l1_abs_dxy / event.l1_dxyErr
+	event.l1_dzSig  = event.l1_abs_dz / event.l1_dzErr
+sequence.append (lepLooseDxy)
+
 
 def mtwithdphi(event, sample):
 	event.mtmod = float('nan')
@@ -335,6 +345,9 @@ for index, mode in enumerate(allModes):
 	if signals:
 	    T2tt_500_470.color = ROOT.kPink+6
 	    T2tt_500_420.color = ROOT.kCyan+2
+	    T2tt_LL_300_290.color = ROOT.kYellow
+	    T2tt_LL_400_380.color = ROOT.kRed
+	    T2tt_LL_350_335.color = ROOT.kBlue
 	    #T2tt_375_365.color = ROOT.kAzure+1
 	
 	weight_ = lambda event, sample: event.weight*event.reweightHEM
@@ -352,7 +365,7 @@ for index, mode in enumerate(allModes):
 				genEff = genFilter.getEff(mStop,mNeu)
 				#print "signal name: ",sample.name, "mStop: ", mStop, "mNeu: ", mNeu,"genEff: " ,genEff
 				#sample.read_variables += [ 'reweight_nISR/F']
-				sample.read_variables += [ 'year/I']
+				sample.read_variables += [ 'year/I', 'stop1_Lxy/F', 'stop1_dt/F']
 				sample.weight         = lambda event, sample: event.reweightPU * event.reweightBTag_SF * event.reweightL1Prefire * event.reweightwPt * event.reweightLeptonSF * genEff * lumi_year[event.year]/1000
 				#sample.weight         = lambda event, sample: event.reweightPU * event.reweightBTag_SF * event.reweightL1Prefire  * event.reweightLeptonSF 
 				sample.style = styles.errorStyle( color=sample.color, markerSize = 0.6)
@@ -388,17 +401,19 @@ for index, mode in enumerate(allModes):
 	#stack_ = Stack( samples, data_sample ) 
 	#stack_ = Stack( samples )
 	#stack_ = Stack( samples, T2tt_500_470, T2tt_500_420 )
-	stack_ = Stack( samples, data_sample, T2tt_500_470, T2tt_500_420 )
+
+	#stack_ = Stack( samples, data_sample, T2tt_500_470, T2tt_500_420 )
+	stack_ = Stack( samples, data_sample, T2tt_500_470,  T2tt_LL_400_380, T2tt_LL_350_335, T2tt_LL_300_290)
 
 	if args.small:
 		for sample in samples + [data_sample] + signals:
 			sample.normalization = 1.
-			sample.reduceFiles( factor = 70 )
+			sample.reduceFiles( factor = 50 )
 			#sample.scale /= sample.normalization
 
 	# Use some defaults
 	Plot.setDefaults(stack = stack_, weight = (staticmethod(weight_)), selectionString = cutInterpreter.cutString(args.selection), addOverFlowBin='upper', histo_class=ROOT.TH1D)
-	#Plot2D.setDefaults( weight = (staticmethod(weight_)), selectionString = cutInterpreter.cutString(args.selection) )
+	Plot2D.setDefaults( weight = (staticmethod(weight_)), selectionString = cutInterpreter.cutString(args.selection) )
 	plots   = []
 	plots2D = []
 
@@ -418,17 +433,67 @@ for index, mode in enumerate(allModes):
 	    binning=[20,-pi,pi],
 	  ))
 	plots.append(Plot(
-	    texX = 'dxy(l_{1}) (GeV)', texY = 'Number of Events ',
+	    texX = 'dxy(l_{1}) (cm)', texY = 'Number of Events ',
 	    attribute = TreeVariable.fromString( "l1_dxy/F" ),
 	    binning=[20,-.02,.02],
 	  ))
+	plots.append(Plot(name= 'loose_l1_dxy',
+	    texX = 'loose_dxy(l_{1}) (cm)', texY = 'Number of Events ',
+	    attribute = TreeVariable.fromString( "l1_dxy/F" ),
+	    binning= [100,-10,10],
+	  ))
 	plots.append(Plot(
-	    texX = 'dz(l_{1}) (GeV)', texY = 'Number of Events ',
+	    texX = 'loose_abs_dxy_full(l_{1}) (cm)', texY = 'Number of Events ',
+	    name = 'l1_abs_dxy_full_nodxydz', attribute = lambda event, sample: event.l1_abs_dxy,
+	    binning= [50,0,10],
+	  ))
+	plots.append(Plot(
+	    texX = 'loose_abs_dxy(l_{1}) (cm)', texY = 'Number of Events ',
+	    name = 'l1_abs_dxy_nodxydz', attribute = lambda event, sample: event.l1_abs_dxy,
+	    binning= [49,0.2,10],
+	  ))
+	plots.append(Plot(
+	    texX = 'loose_abs_low_dxy(l_{1}) (cm)', texY = 'Number of Events ',
+	    name = 'l1_abs_low_dxy_nodxydz', attribute = lambda event, sample: event.l1_abs_dxy,
+	    binning= [20,0,0.4],
+	  ))
+	plots.append(Plot(
+	    texX = 'dz(l_{1}) (cm)', texY = 'Number of Events ',
 	    attribute = TreeVariable.fromString( "l1_dz/F" ),
 	    binning=[20,-.1,.1],
 	  ))
+	plots.append(Plot(name = 'loose_l1_dz',
+	    texX = 'loose_dz(l_{1}) (cm)', texY = 'Number of Events ',
+	    attribute = TreeVariable.fromString( "l1_dz/F" ),
+	    binning=[48,-12,12],
+	  ))
 	plots.append(Plot(
-	    texX = 'relIso03_all(l_{1}) (GeV)', texY = 'Number of Events ',
+	    texX = 'loose_abs_dz(l_{1}) (cm)', texY = 'Number of Events ',
+	    name = 'l1_abs_dz_nodxydz', attribute = lambda event, sample: event.l1_abs_dz,
+	    binning=[23,0.5,12],
+	  ))
+	plots.append(Plot(
+	    texX = 'loose_abs_full_dz(l_{1}) (cm)', texY = 'Number of Events ',
+	    name = 'l1_abs_full_dz_nodxydz', attribute = lambda event, sample: event.l1_abs_dz,
+	    binning=[24,0,12],
+	  ))
+	plots.append(Plot(
+	    texX = 'loose_abs_low_dz(l_{1}) (cm)', texY = 'Number of Events ',
+	    name = 'l1_abs_low_dz_nodxydz', attribute = lambda event, sample: event.l1_abs_dz,
+	    binning=[6,0,0.6],
+	  ))
+	plots.append(Plot(
+	    texX = 'dzErr', texY = 'Number of Events ',
+	    attribute = TreeVariable.fromString( "l1_dzErr/F" ),
+	    binning=[24,0,12],
+	  ))
+	plots.append(Plot(
+	    texX = 'dxyErr', texY = 'Number of Events ',
+	    attribute = TreeVariable.fromString( "l1_dxyErr/F" ),
+	    binning=[50,0,10],
+	  ))
+	plots.append(Plot(
+	    texX = 'relIso03_all(l_{1})', texY = 'Number of Events ',
 	    attribute = TreeVariable.fromString( "l1_relIso03/F" ),
 	    binning=[30,0,5],
 	  ))
@@ -559,6 +624,53 @@ for index, mode in enumerate(allModes):
 	    name = 'ptRatio', attribute = lambda event, sample: (event.JetGood_pt[0] / event.l1_pt),
 	    binning=[10,0,10],
 	  ))
+
+	plots.append(Plot(
+	    texX = 'dxy Significance', texY = 'Number of Events ',
+	    name = 'dxySig', attribute = lambda event, sample: event.l1_dxySig,
+	    binning=[50,0,10],
+	  ))
+	plots.append(Plot(
+	    texX = 'dz Significance', texY = 'Number of Events ',
+	    name = 'dzSig', attribute = lambda event, sample: event.l1_dzSig,
+	    binning=[24,0,12],
+	  ))
+	plots.append(Plot(name='stop_ct0p3_Lxy',
+	    texX = 'Lxy(stop_{1}_ct0p3) (cm)', texY = 'Number of Events ',
+	    attribute = TreeVariable.fromString( "stop1_Lxy/F" ),
+	    stack = Stack(T2tt_LL_400_380),
+	    binning=[100,0,10],
+	  ))
+	plots.append(Plot(name='stop_ct15_Lxy',
+	    texX = 'Lxy(stop_{1}_ct15) (cm)', texY = 'Number of Events ',
+	    attribute = TreeVariable.fromString( "stop1_Lxy/F" ),
+	    stack = Stack(T2tt_LL_350_335),
+	    binning=[100,0,100],
+	  ))
+	plots.append(Plot(name='stop_ct8m_Lxy',
+	    texX = 'Lxy(stop_{1}_ct8m) (cm)', texY = 'Number of Events ',
+	    attribute = TreeVariable.fromString( "stop1_Lxy/F" ),
+	    stack = Stack(T2tt_LL_300_290),
+	    binning=[800,0,4000],
+	  ))
+	plots.append(Plot(name= 'stop_ct15_dt',
+	    texX = 'dt(stop_{1}_ct15)', texY = 'Number of Events ',
+	    attribute = TreeVariable.fromString( "stop1_dt/F" ),
+	    stack = Stack(T2tt_LL_350_335),
+	    binning=[100,0,100],
+	  ))
+	plots.append(Plot(name = 'stop_ct8m_dt',
+	    texX = 'dt(stop_{1}_ct8m)', texY = 'Number of Events ',
+	    attribute = TreeVariable.fromString( "stop1_dt/F" ),
+	    stack = Stack(T2tt_LL_300_290),
+	    binning=[800,0,4000],
+	  ))
+	plots.append(Plot( name = 'stop_ct0p3_dt',
+	    texX = 'dt(stop_{1}_ct0p3)', texY = 'Number of Events ',
+	    attribute = TreeVariable.fromString( "stop1_dt/F" ),
+	    stack = Stack(T2tt_LL_400_380),
+	    binning=[100,0,10],
+	  ))
 	#plots.append(Plot(
 	#    texX = 'p_{T}(clean-leading jet) (GeV)', texY = 'Number of Events / 30 GeV',
 	#    name = 'cleanjet1_pt', attribute = lambda event, sample: event.cleanJets_pt,
@@ -662,6 +774,381 @@ for index, mode in enumerate(allModes):
 	    binning=[3, 0, 3],
 	  ))
 
+	plots2D.append(Plot2D(
+		name = "WJets l1_dz vs dxy",
+		texX  = 'l1_dz', texY = "l1_dxy",
+		stack = Stack (samples[0]),
+		attribute = (
+			TreeVariable.fromString( "l1_dz/F" ),
+			TreeVariable.fromString( "l1_dxy/F" ),
+			),
+		binning = [50,-12,12, 50,-10,10],
+	  ))
+
+	plots2D.append(Plot2D(
+		name = "WJets l1_dz vs dzErr",
+		texX  = 'l1_dz', texY = "l1_dzErr",
+		stack = Stack (samples[0]),
+		attribute = (
+			lambda event, sample: event.l1_abs_dz,
+			TreeVariable.fromString( "l1_dzErr/F" ),
+			),
+		binning = [24,0,12, 24,0,12],
+	  ))
+
+	plots2D.append(Plot2D(
+		name = "WJets l1_dxy vs dxyErr",
+		texX  = 'l1_dxy', texY = "l1_dxyErr",
+		stack = Stack (samples[0]),
+		attribute = (
+			lambda event, sample: event.l1_abs_dxy,
+			TreeVariable.fromString( "l1_dxyErr/F" ),
+			),
+		binning = [50,0,10, 50,0,10],
+	  ))
+
+	plots2D.append(Plot2D(
+		name = "WJets pfRelIso03_all vs dz",
+		texX  = 'l1_pfRelIso03', texY = "l1_dz",
+		stack = Stack (samples[0]),
+		attribute = (
+			TreeVariable.fromString( "l1_relIso03/F" ),
+			TreeVariable.fromString( "l1_dz/F" ),
+			),
+		binning = [30,0,5, 50,-10,10],
+	  ))
+	plots2D.append(Plot2D(
+		name = "WJets pfRelIso03_all vs dxy",
+		texX  = 'l1_pfRelIso03', texY = "l1_dxy",
+		stack = Stack (samples[0]),
+		attribute = (
+			TreeVariable.fromString( "l1_relIso03/F" ),
+			TreeVariable.fromString( "l1_dxy/F" ),
+			),
+		binning = [30,0,5, 50,-10,10],
+	  ))
+
+	plots2D.append(Plot2D(
+		name = "T2tt_500_420 l1_dz vs dxy",
+		texX  = 'l1_dz', texY = "l1_dxy",
+		stack = Stack (T2tt_500_420),
+		attribute = (
+			TreeVariable.fromString( "l1_dz/F" ),
+			TreeVariable.fromString( "l1_dxy/F" ),
+			),
+		binning = [50,-12,12, 50,-10,10],
+	  ))
+
+	plots2D.append(Plot2D(
+		name = "T2tt_500_420 pfRelIso03_all vs dz",
+		texX  = 'l1_pfRelIso03', texY = "l1_dz",
+		stack = Stack (T2tt_500_420),
+		attribute = (
+			TreeVariable.fromString( "l1_relIso03/F" ),
+			TreeVariable.fromString( "l1_dz/F" ),
+			),
+		binning = [30,0,5, 50,-10,10],
+	  ))
+	plots2D.append(Plot2D(
+		name = "T2tt_500_420 pfRelIso03_all vs dxy",
+		texX  = 'l1_pfRelIso03', texY = "l1_dxy",
+		stack = Stack (T2tt_500_420),
+		attribute = (
+			TreeVariable.fromString( "l1_relIso03/F" ),
+			TreeVariable.fromString( "l1_dxy/F" ),
+			),
+		binning = [30,0,5, 50,-10,10],
+	  ))
+
+	plots2D.append(Plot2D(
+		name = "T2tt_500_420 l1_dz vs dzErr",
+		texX  = 'l1_dz', texY = "l1_dzErr",
+		stack = Stack (T2tt_500_420),
+		attribute = (
+			lambda event, sample: event.l1_abs_dz,
+			TreeVariable.fromString( "l1_dzErr/F" ),
+			),
+		binning = [24,0,12, 24,0,12],
+	  ))
+
+	plots2D.append(Plot2D(
+		name = "T2tt_500_420 l1_dxy vs dxyErr",
+		texX  = 'l1_dxy', texY = "l1_dxyErr",
+		stack = Stack (T2tt_500_420),
+		attribute = (
+			lambda event, sample: event.l1_abs_dxy,
+			TreeVariable.fromString( "l1_dxyErr/F" ),
+			),
+		binning = [50,0,10, 50,0,10],
+	  ))
+
+	plots2D.append(Plot2D(
+		name = "T2tt_500_470 l1_dz vs dxy",
+		texX  = 'l1_dz', texY = "l1_dxy",
+		stack = Stack (T2tt_500_470),
+		attribute = (
+			TreeVariable.fromString( "l1_dz/F" ),
+			TreeVariable.fromString( "l1_dxy/F" ),
+			),
+		binning = [50,-12,12, 50,-10,10],
+	  ))
+
+	plots2D.append(Plot2D(
+		name = "T2tt_500_470 pfRelIso03_all vs dz",
+		texX  = 'l1_pfRelIso03', texY = "l1_dz",
+		stack = Stack (T2tt_500_470),
+		attribute = (
+			TreeVariable.fromString( "l1_relIso03/F" ),
+			TreeVariable.fromString( "l1_dz/F" ),
+			),
+		binning = [30,0,5, 50,-10,10],
+	  ))
+	plots2D.append(Plot2D(
+		name = "T2tt_500_470 pfRelIso03_all vs dxy",
+		texX  = 'l1_pfRelIso03', texY = "l1_dxy",
+		stack = Stack (T2tt_500_470),
+		attribute = (
+			TreeVariable.fromString( "l1_relIso03/F" ),
+			TreeVariable.fromString( "l1_dxy/F" ),
+			),
+		binning = [30,0,5, 50,-10,10],
+	  ))
+
+	plots2D.append(Plot2D(
+		name = "T2tt_500_470 l1_dz vs dzErr",
+		texX  = 'l1_dz', texY = "l1_dzErr",
+		stack = Stack (T2tt_500_470),
+		attribute = (
+			lambda event, sample: event.l1_abs_dz,
+			TreeVariable.fromString( "l1_dzErr/F" ),
+			),
+		binning = [24,0,12, 24,0,12],
+	  ))
+
+	plots2D.append(Plot2D(
+		name = "T2tt_500_470 l1_dxy vs dxyErr",
+		texX  = 'l1_dxy', texY = "l1_dxyErr",
+		stack = Stack (T2tt_500_470),
+		attribute = (
+			lambda event, sample: event.l1_abs_dxy,
+			TreeVariable.fromString( "l1_dxyErr/F" ),
+			),
+		binning = [50,0,10, 50,0,10],
+	  ))
+
+	plots2D.append(Plot2D(
+		name = "T2tt_LL_300_290 l1_dz vs dxy",
+		texX  = 'l1_dz', texY = "l1_dxy",
+		stack = Stack (T2tt_LL_300_290),
+		attribute = (
+			TreeVariable.fromString( "l1_dz/F" ),
+			TreeVariable.fromString( "l1_dxy/F" ),
+			),
+		binning = [50,-12,12, 50,-10,10],
+	  ))
+
+	plots2D.append(Plot2D(
+		name = "T2tt_LL_300_290 pfRelIso03_all vs dz",
+		texX  = 'l1_pfRelIso03', texY = "l1_dz",
+		stack = Stack (T2tt_LL_300_290),
+		attribute = (
+			TreeVariable.fromString( "l1_relIso03/F" ),
+			TreeVariable.fromString( "l1_dz/F" ),
+			),
+		binning = [30,0,5, 50,-10,10],
+	  ))
+	plots2D.append(Plot2D(
+		name = "T2tt_LL_300_290 pfRelIso03_all vs dxy",
+		texX  = 'l1_pfRelIso03', texY = "l1_dxy",
+		stack = Stack (T2tt_LL_300_290),
+		attribute = (
+			TreeVariable.fromString( "l1_relIso03/F" ),
+			TreeVariable.fromString( "l1_dxy/F" ),
+			),
+		binning = [30,0,5, 50,-10,10],
+	  ))
+
+	plots2D.append(Plot2D(
+		name = "T2tt_LL_300_290 l1_dz vs dzErr",
+		texX  = 'l1_dz', texY = "l1_dzErr",
+		stack = Stack (T2tt_LL_300_290),
+		attribute = (
+			lambda event, sample: event.l1_abs_dz,
+			TreeVariable.fromString( "l1_dzErr/F" ),
+			),
+		binning = [24,0,12, 24,0,12],
+	  ))
+
+	plots2D.append(Plot2D(
+		name = "T2tt_LL_300_290 l1_dxy vs dxyErr",
+		texX  = 'l1_dxy', texY = "l1_dxyErr",
+		stack = Stack (T2tt_LL_300_290),
+		attribute = (
+			lambda event, sample: event.l1_abs_dxy,
+			TreeVariable.fromString( "l1_dxyErr/F" ),
+			),
+		binning = [50,0,10, 50,0,10],
+	  ))
+	plots2D.append(Plot2D(
+		name = "T2tt_LL_400_380 l1_dz vs dxy",
+		texX  = 'l1_dz', texY = "l1_dxy",
+		stack = Stack (T2tt_LL_400_380),
+		attribute = (
+			TreeVariable.fromString( "l1_dz/F" ),
+			TreeVariable.fromString( "l1_dxy/F" ),
+			),
+		binning = [50,-12,12, 50,-10,10],
+	  ))
+
+	plots2D.append(Plot2D(
+		name = "T2tt_LL_400_380 pfRelIso03_all vs dz",
+		texX  = 'l1_pfRelIso03', texY = "l1_dz",
+		stack = Stack (T2tt_LL_400_380),
+		attribute = (
+			TreeVariable.fromString( "l1_relIso03/F" ),
+			TreeVariable.fromString( "l1_dz/F" ),
+			),
+		binning = [30,0,5, 50,-10,10],
+	  ))
+	plots2D.append(Plot2D(
+		name = "T2tt_LL_400_380 pfRelIso03_all vs dxy",
+		texX  = 'l1_pfRelIso03', texY = "l1_dxy",
+		stack = Stack (T2tt_LL_400_380),
+		attribute = (
+			TreeVariable.fromString( "l1_relIso03/F" ),
+			TreeVariable.fromString( "l1_dxy/F" ),
+			),
+		binning = [30,0,5, 50,-10,10],
+	  ))
+
+	plots2D.append(Plot2D(
+		name = "T2tt_LL_400_380 l1_dz vs dzErr",
+		texX  = 'l1_dz', texY = "l1_dzErr",
+		stack = Stack (T2tt_LL_400_380),
+		attribute = (
+			lambda event, sample: event.l1_abs_dz,
+			TreeVariable.fromString( "l1_dzErr/F" ),
+			),
+		binning = [24,0,12, 24,0,12],
+	  ))
+
+	plots2D.append(Plot2D(
+		name = "T2tt_LL_400_380 l1_dxy vs dxyErr",
+		texX  = 'l1_dxy', texY = "l1_dxyErr",
+		stack = Stack (T2tt_LL_400_380),
+		attribute = (
+			lambda event, sample: event.l1_abs_dxy,
+			TreeVariable.fromString( "l1_dxyErr/F" ),
+			),
+		binning = [50,0,10, 50,0,10],
+	  ))
+
+	plots2D.append(Plot2D(
+		name = "T2tt_LL_350_335 l1_dz vs dxy",
+		texX  = 'l1_dz', texY = "l1_dxy",
+		stack = Stack (T2tt_LL_350_335),
+		attribute = (
+			TreeVariable.fromString( "l1_dz/F" ),
+			TreeVariable.fromString( "l1_dxy/F" ),
+			),
+		binning = [50,-12,12, 50,-10,10],
+	  ))
+
+	plots2D.append(Plot2D(
+		name = "T2tt_LL_350_335 pfRelIso03_all vs dz",
+		texX  = 'l1_pfRelIso03', texY = "l1_dz",
+		stack = Stack (T2tt_LL_350_335),
+		attribute = (
+			TreeVariable.fromString( "l1_relIso03/F" ),
+			TreeVariable.fromString( "l1_dz/F" ),
+			),
+		binning = [30,0,5, 50,-10,10],
+	  ))
+	plots2D.append(Plot2D(
+		name = "T2tt_LL_350_335 pfRelIso03_all vs dxy",
+		texX  = 'l1_pfRelIso03', texY = "l1_dxy",
+		stack = Stack (T2tt_LL_350_335),
+		attribute = (
+			TreeVariable.fromString( "l1_relIso03/F" ),
+			TreeVariable.fromString( "l1_dxy/F" ),
+			),
+		binning = [30,0,5, 50,-10,10],
+	  ))
+
+	plots2D.append(Plot2D(
+		name = "T2tt_LL_350_335 l1_dz vs dzErr",
+		texX  = 'l1_dz', texY = "l1_dzErr",
+		stack = Stack (T2tt_LL_350_335),
+		attribute = (
+			lambda event, sample: event.l1_abs_dz,
+			TreeVariable.fromString( "l1_dzErr/F" ),
+			),
+		binning = [24,0,12, 24,0,12],
+	  ))
+
+	plots2D.append(Plot2D(
+		name = "T2tt_LL_350_335 l1_dxy vs dxyErr",
+		texX  = 'l1_dxy', texY = "l1_dxyErr",
+		stack = Stack (T2tt_LL_350_335),
+		attribute = (
+			lambda event, sample: event.l1_abs_dxy,
+			TreeVariable.fromString( "l1_dxyErr/F" ),
+			),
+		binning = [50,0,10, 50,0,10],
+	  ))
+	plots2D.append(Plot2D(
+		name = "QCD l1_dz vs dxy",
+		texX  = 'l1_dz', texY = "l1_dxy",
+		stack = Stack (samples[5]),
+		attribute = (
+			TreeVariable.fromString( "l1_dz/F" ),
+			TreeVariable.fromString( "l1_dxy/F" ),
+			),
+		binning = [50,-12,12, 50,-10,10],
+	  ))
+
+	plots2D.append(Plot2D(
+		name = "QCD pfRelIso03_all vs dz",
+		texX  = 'l1_pfRelIso03', texY = "l1_dz",
+		stack = Stack (samples[5]),
+		attribute = (
+			TreeVariable.fromString( "l1_relIso03/F" ),
+			TreeVariable.fromString( "l1_dz/F" ),
+			),
+		binning = [30,0,5, 50,-10,10],
+	  ))
+	plots2D.append(Plot2D(
+		name = "QCD pfRelIso03_all vs dxy",
+		texX  = 'l1_pfRelIso03', texY = "l1_dxy",
+		stack = Stack (samples[5]),
+		attribute = (
+			TreeVariable.fromString( "l1_relIso03/F" ),
+			TreeVariable.fromString( "l1_dxy/F" ),
+			),
+		binning = [30,0,5, 50,-10,10],
+	  ))
+
+	plots2D.append(Plot2D(
+		name = "QCD l1_dz vs dzErr",
+		texX  = 'l1_dz', texY = "l1_dzErr",
+		stack = Stack (samples[5]),
+		attribute = (
+			lambda event, sample: event.l1_abs_dz,
+			TreeVariable.fromString( "l1_dzErr/F" ),
+			),
+		binning = [24,0,12, 24,0,12],
+	  ))
+
+	plots2D.append(Plot2D(
+		name = "QCD l1_dxy vs dxyErr",
+		texX  = 'l1_dxy', texY = "l1_dxyErr",
+		stack = Stack (samples[5]),
+		attribute = (
+			lambda event, sample: event.l1_abs_dxy,
+			TreeVariable.fromString( "l1_dxyErr/F" ),
+			),
+		binning = [50,0,10, 50,0,10],
+	  ))
 #	plots2D.append(Plot2D(
 #		name = "Data_Jet_eta_vs_phi",
 #		texX  = '#eta', texY = "#phi",
@@ -744,8 +1231,8 @@ for index, mode in enumerate(allModes):
 #	  ))
 
 
-	#plotting.fill(plots+plots2D, read_variables = read_variables, sequence = sequence)
-	plotting.fill(plots, read_variables = read_variables, sequence = sequence)
+	plotting.fill(plots+plots2D, read_variables = read_variables, sequence = sequence)
+	#plotting.fill(plots, read_variables = read_variables, sequence = sequence)
 
 	#Get normalization yields from yield histogram
 	for plot in plots:
@@ -774,7 +1261,7 @@ for index, mode in enumerate(allModes):
 	for plot in plots2D:
 		plotting.draw2D(
 				plot=plot,
-				plot_directory=os.path.join(plot_directory, 'analysisPlots', args.targetDir, args.era ,mode+"log",args.selection) ,
+				plot_directory=os.path.join(plot_directory, 'analysisPlots','HInoDxyDz', args.targetDir, args.era ,mode+"log",args.selection) ,
 				logX = False, logY = False, logZ = True,
 				drawObjects = drawObjects( True, float('nan')),
 				)
@@ -783,6 +1270,7 @@ for index, mode in enumerate(allModes):
 
 # Add the different channels into all	
 yields['all'] = {}
+allPlots['all']= {}
 for y in yields[allModes[0]]:
 	try:	yields['all'][y] = sum(yields[c][y] for c in (['mu','e']))
 	except: yields['all'][y] = 0
@@ -798,10 +1286,52 @@ else:
 
 ## if only plotting MC and data
 #dataMCScale = 1
+
 for plot in allPlots['mu']:
 	for plot2 in (p for p in allPlots['e'] if p.name == plot.name): 
 		for i, j in enumerate(list(itertools.chain.from_iterable(plot.histos))):
 			for k, l in enumerate(list(itertools.chain.from_iterable(plot2.histos))):
 				if i==k:
 					j.Add(l)
+	
 drawPlots(allPlots['mu'], 'all', dataMCScale)
+
+### For saving specific histograms in root files with simplified names ###
+
+plots_root = ["l1_abs_full_dz_nodxydz", "l1_abs_low_dz_nodxydz", "l1_abs_dxy_full_nodxydz", "l1_abs_low_dxy_nodxydz" ]
+
+print "Now write results in root file."
+plot_dir = os.path.join(plot_directory, 'analysisPlots', 'HInoDxyDz', args.targetDir, args.era, args.selection)
+if not os.path.exists(plot_dir):
+	try:
+		os.makedirs(plot_dir)
+	except:
+		print 'Could not create', plot_dir
+outfilename = plot_dir+'/Results.root'
+print "Saving in", outfilename
+outfile = ROOT.TFile(outfilename, 'recreate')
+outfile.cd()
+for plot in allPlots['mu']:
+	if plot.name in plots_root:
+		for idx, histo_list in enumerate(plot.histos):
+			for j, h in enumerate(histo_list):
+				histname = h.GetName()
+				process = histname
+				if "WJetsToLNu_HT" in histname: process = "WJets"
+				elif "Top_pow" in histname: process = "Top"
+				elif "singleTop" in histname: process = "singleTop"
+				elif "ZInv" in histname: process = "ZInv"
+				elif "DY_HT_LO" in histname: process = "DY_HT_LO"
+				elif "QCD_HT" in histname: process = "QCD"
+				elif "VV" in histname: process = "VV"
+				elif "TTX" in histname: process = "TTX"
+				elif "T2tt_500_470" in histname: process = "T2tt_500_470"
+				elif "T2tt_500_450" in histname: process = "T2tt_500_450"
+				elif "T2tt_500_420" in histname: process = "T2tt_500_470"
+				elif "T2tt_LL_400_380" in histname: process = "T2tt_LL_400_380"
+				elif "T2tt_LL_350_335" in histname: process = "T2tt_LL_350_335"
+				elif "T2tt_LL_300_290" in histname: process = "T2tt_LL_300_290"
+				elif "data" in histname: process = "data"
+				h.Write(plot.name+"__"+process)
+outfile.Close()
+logger.info( "Done with prefix %s and selectionString %s", args.selection, cutInterpreter.cutString(args.selection) )
