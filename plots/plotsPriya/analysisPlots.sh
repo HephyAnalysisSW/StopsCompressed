@@ -1,4 +1,9 @@
 #!/bin/sh
+
+##Test command:
+python analysisPlots.py --era Run2016postVFP --reweightPU Central     --targetDir v_UL01 --small
+
+## For submission over all eras
 python analysisPlots.py --era Run2016preVFP --reweightPU Central --targetDir UL_v02  
 python analysisPlots.py --era Run2016postVFP --reweightPU Central     --targetDir UL_v02 
 python analysisPlots.py --era Run2017 --reweightPU Central     --targetDir UL_v02 
