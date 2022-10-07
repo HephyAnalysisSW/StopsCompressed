@@ -26,7 +26,7 @@ from StopsCompressed.Tools.helpers           import deltaR, deltaPhi, get_wPt
 from StopsCompressed.Tools.wPtWeight	     import wPtWeight
 from StopsCompressed.Tools.isrWeight         import ISRweight
 from StopsCompressed.Tools.objectSelection   import muonSelector, eleSelector,  getGoodMuons, getGoodElectrons, getGoodTaus #tauSelector,
-from StopsCompressed.Tools.objectSelection   import getGoodJets, isBJet, jetId, getGenPartsAll, getJets, getPhotons, getAllJets, categorizeLep, matchLep
+from StopsCompressed.Tools.objectSelection   import getGoodJets, isBJet, jetId, getGenPartsAll, getJets, getPhotons, getAllJets, categorizeLep, matchLep, getParentIds
 from StopsCompressed.Tools.leptonSF          import leptonSF as leptonSF_
 #from StopsDilepton.Tools.triggerEfficiency   import triggerEfficiency
 #from StopsDilepton.Tools.leptonFastSimSF     import leptonFastSimSF as leptonFastSimSF_
@@ -111,6 +111,7 @@ elif isMetSingleLep:
 elif isMet:
     skimConds.append( "MET_pt>=100" )
 elif isFake:
+    print "using MET < 100 skim"
     skimConds.append( "MET_pt<=100" )
 elif isMetLepEnergy:
     skimConds.append( (
@@ -123,7 +124,7 @@ elif noSkim:
 maxN = 1 if options.small else None
 if options.small:
     maxNFiles = 1
-    maxNEvents = 200
+    maxNEvents = 3000
     options.job = 0
     options.nJobs = 1000 # set high to just run over 1 input file
 
@@ -306,7 +307,7 @@ output_directory = os.path.join( '/tmp/%s'%os.environ['USER'], str(uuid.uuid4())
 if options.looseHybridIso:
 	targetPath       = os.path.join( directory, options.skim, "looseHybridIso", sampleName )
 elif options.noDxyDz:
-	targetPath       = os.path.join( directory, options.skim, "noDxyDz", sampleName )
+	targetPath       = os.path.join( directory, options.skim, "HInoDxyDz", sampleName )
 elif options.noDxy:
 	targetPath       = os.path.join( directory, options.skim, "noDxy", sampleName )
 elif options.noDz:
@@ -460,7 +461,7 @@ if isMC:
     jetVars     += ['pt_jesTotalUp/F', 'pt_jesTotalDown/F', 'pt_jerUp/F', 'pt_jerDown/F', 'corr_JER/F', 'corr_JEC/F']
 jetVarNames     = [x.split('/')[0] for x in jetVars]
 # those are for writing leptons
-lepVars         = ['pt/F','eta/F','phi/F','pdgId/I','cutBased/I','miniPFRelIso_all/F','pfRelIso03_all/F','sip3d/F','lostHits/I','convVeto/I','dxy/F','dz/F','charge/I','deltaEtaSC/F','mediumId/I','eleIndex/I','muIndex/I','index/I', 'wPt/F', 'charge/I', 'isPrompt/O', 'dRgen/F','genPartIdx/I'] 
+lepVars         = ['pt/F','eta/F','phi/F','pdgId/I','cutBased/I','miniPFRelIso_all/F','pfRelIso03_all/F','sip3d/F','lostHits/I','convVeto/I','dxy/F','dz/F','dzErr/F', 'dxyErr/F','charge/I','deltaEtaSC/F','mediumId/I','eleIndex/I','muIndex/I','index/I', 'wPt/F', 'charge/I', 'isPrompt/O','isGenMatched/O',  'dRgen/F','genPartIdx/I'] 
 if isMC:
     lepVarNames     = [x.split('/')[0] for x in lepVars]
 else:
@@ -495,16 +496,16 @@ if isMC:
     read_variables.append( VectorTreeVariable.fromString('Electron[genPartIdx/I, genPartFlav/b]' ))
     #new_variables.extend([ 'reweightTopPt/F', 'reweight_nISR/F', 'reweight_nISRUp/F', 'reweight_nISRDown/F'] )
     new_variables.extend([ 'reweight_nISR/F', 'reweight_nISRUp/F', 'reweight_nISRDown/F'] )
-    read_variables.append( VectorTreeVariable.fromString('GenPart[pt/F,mass/F,phi/F,eta/F,pdgId/I,genPartIdxMother/I,status/I,statusFlags/I]', nMax=200 )) # default nMax is 100, which would lead to corrupt values in this case
+    read_variables.append( VectorTreeVariable.fromString('GenPart[pt/F,mass/F,phi/F,eta/F,pdgId/I,genPartIdxMother/I,status/I,statusFlags/I,vx/F,vy/F,vz/F]', nMax=200 )) # default nMax is 100, which would lead to corrupt values in this case
     read_variables.append( TreeVariable.fromString('genWeight/F') )
     read_variables.append( TreeVariable.fromString('nGenJet/I') )
     new_variables.extend([ 'reweightPU/F','reweightPUUp/F','reweightPUDown/F', 'reweightPUVUp/F','reweightPUVVUp/F', 'reweightPUVDown/F', ])
 
 read_variables += [\
     TreeVariable.fromString('nElectron/I'),
-    VectorTreeVariable.fromString('Electron[pt/F,eta/F,phi/F,pdgId/I,cutBased/I,miniPFRelIso_all/F,pfRelIso03_all/F,sip3d/F,lostHits/b,convVeto/O,dxy/F,dz/F,charge/I,deltaEtaSC/F,vidNestedWPBitmap/I]'),
+    VectorTreeVariable.fromString('Electron[pt/F,eta/F,phi/F,pdgId/I,cutBased/I,miniPFRelIso_all/F,pfRelIso03_all/F,sip3d/F,lostHits/b,convVeto/O,dxy/F,dxyErr/F,dz/F,dzErr/F,charge/I,deltaEtaSC/F,vidNestedWPBitmap/I]'),
     TreeVariable.fromString('nMuon/I'),
-    VectorTreeVariable.fromString('Muon[pt/F,eta/F,phi/F,pdgId/I,mediumId/O,miniPFRelIso_all/F,pfRelIso03_all/F,sip3d/F,dxy/F,dz/F,charge/I,looseId/O]'),
+    VectorTreeVariable.fromString('Muon[pt/F,eta/F,phi/F,pdgId/I,mediumId/O,miniPFRelIso_all/F,pfRelIso03_all/F,sip3d/F,dxy/F,dxyErr/F,dz/F,dzErr/F,charge/I,looseId/O]'),
     TreeVariable.fromString('nJet/I'),
     VectorTreeVariable.fromString('Tau[pt/F,eta/F,phi/F,neutralIso/F,idAntiMu/O,dxy/F,dz/F,charge/I,decayMode/I,idDeepTau2017v2p1VSjet/b]'),
     TreeVariable.fromString('nTau/I'),
@@ -553,7 +554,7 @@ new_variables.append( 'lep[%s]'% ( ','.join(lepVars) ) )
 
 if isSingleLep or isMetSingleLep or isMet or isFake or noSkim:
     new_variables.extend( ['nGoodMuons/I','nGoodTaus/I', 'nGoodElectrons/I', 'nGoodLeptons/I' ] )
-    new_variables.extend( ['l1_pt/F', 'l1_eta/F', 'l1_phi/F', 'l1_pdgId/I', 'l1_index/I', 'l1_jetPtRelv2/F', 'l1_jetPtRatiov2/F', 'l1_miniRelIso/F', 'l1_relIso03/F', 'l1_dxy/F', 'l1_dz/F', 'l1_mIsoWP/I', 'l1_eleIndex/I', 'l1_muIndex/I' , 'mt/F', 'l1_charge/I', 'l1_isPrompt/O', 'l1_dRgen/F', 'l1_HI/F' ,'l1_muLooseId/O'] )
+    new_variables.extend( ['l1_pt/F', 'l1_eta/F', 'l1_phi/F', 'l1_pdgId/I', 'l1_index/I', 'l1_jetPtRelv2/F', 'l1_jetPtRatiov2/F', 'l1_miniRelIso/F', 'l1_relIso03/F', 'l1_dxy/F', 'l1_dxyErr/F', 'l1_dz/F', 'l1_dzErr/F', 'l1_mIsoWP/I', 'l1_eleIndex/I', 'l1_muIndex/I' , 'mt/F', 'l1_charge/I', 'l1_isPrompt/O','l1_isGenMatched/O', 'l1_dRgen/F', 'l1_HI/F' ,'l1_muLooseId/O'] )
     if isMC: 
         new_variables.extend(['reweightLeptonSF/F', 'reweightLeptonSFUp/F', 'reweightLeptonSFDown/F', 'reweightnISR/F','reweightnISRUp/F','reweightnISRDown/F', 'reweightwPt/F', 'reweightwPtUp/F', 'reweightwPtDown/F'])
 
@@ -571,7 +572,7 @@ for var in btagEff.btagWeightNames:
 #if options.susySignal or options.TTDM:
 #    read_variables += map(TreeVariable.fromString, ['met_genPt/F', 'met_genPhi/F'] )
 if options.susySignal:
-    new_variables  += ['reweightXSecUp/F', 'reweightXSecDown/F', 'mStop/I', 'mNeu/I']
+    new_variables  += ['reweightXSecUp/F', 'reweightXSecDown/F', 'mStop/I', 'mNeu/I', 'stop1_Lxy/F', 'stop1_dt/F', 'stop2_Lxy/F', 'stop2_dt/F']
     if  'T8bbllnunu' in options.samples[0]:
         new_variables  += ['mCha/I', 'mSlep/I', 'sleptonPdg/I']
     if 'T2tt' in options.samples[0]:
@@ -683,25 +684,26 @@ def filler( event ):
 	# get Zs
 	#GenZ    = filter( lambda l: abs(l['pdgId']) == 23 and l["genPartIdxMother"] >= 0 and l["genPartIdxMother"] < len(gPart), gPart )
 	#GenZ    = filter( lambda l: abs(gPart[l["genPartIdxMother"]]["pdgId"]) != 23, GenZ )
-	## Gen Leptons in ttbar decays
-	## get Ws from top
+	### Gen Leptons in ttbar decays
+	### get Ws from top
 	#GenW    = filter( lambda l: abs(l['pdgId']) == 24 and l["genPartIdxMother"] >= 0 and l["genPartIdxMother"] < len(gPart), gPart )
 	#GenW    = filter( lambda l: abs(gPart[l["genPartIdxMother"]]["pdgId"]) != 24, GenW )
 	#GenWtop = filter( lambda l: abs(gPart[l["genPartIdxMother"]]["pdgId"]) == 6, GenW )
 	## e/mu with W mother
-	#GenLep    = filter( lambda l: abs(l['pdgId']) in [11,13] and l["genPartIdxMother"] >= 0 and l["genPartIdxMother"] < len(gPart), gPart )
-	##GenLep    = filter( lambda l: abs(l['pdgId']) in [11,13] and l["genPartIdxMother"] >= 0 and l["genPartIdxMother"] < len(gPart) and l['status'] ==1, gPart )
+	#GenLep     = filter( lambda l: abs(l['pdgId']) in [11,13] and l["genPartIdxMother"] >= 0 and l["genPartIdxMother"] < len(gPart), gPart )
+	#GenLepTop  = filter( lambda l: abs(gPart[l["genPartIdxMother"]]["pdgId"])==24 and 6 in map( abs, getParentIds( gPart[l["genPartIdxMother"]], gPart)), GenLepWMother )
+	GenLep    = filter( lambda l: abs(l['pdgId']) in [11,13] and l["genPartIdxMother"] >= 0 and l["genPartIdxMother"] < len(gPart) and l['status'] ==1, gPart )
 
-	#GenLepWMother    = filter( lambda l: abs(gPart[l["genPartIdxMother"]]["pdgId"])==24 , GenLep )
-	#GenLepTop        = filter( lambda l: abs(gPart[l["genPartIdxMother"]]["pdgId"])==24 and 6 in map( abs, getParentIds( gPart[l["genPartIdxMother"]], gPart)), GenLepWMother )
+	GenLepWMother    = filter( lambda l: abs(gPart[l["genPartIdxMother"]]["pdgId"])==24 , GenLep )
 	## e/mu with tau mother and tau has a W in parentsList
-	#GenLepTauMotherW  = filter( lambda l: abs(gPart[l["genPartIdxMother"]]["pdgId"])==15 and 24 in map( abs, getParentIds( gPart[l["genPartIdxMother"]], gPart)), GenLep )
-	#GenLepZMother    = filter( lambda l: abs(gPart[l["genPartIdxMother"]]["pdgId"])==23 , GenLep )
-	#GenLepTauMotherZ  = filter( lambda l: abs(gPart[l["genPartIdxMother"]]["pdgId"])==15 and 23 in map( abs, getParentIds( gPart[l["genPartIdxMother"]], gPart)), GenLep )
-	#genLeptons = GenLepWMother + GenLepTauMotherW + GenLepTauMotherZ + GenLepZMother
+	GenLepTauMotherW  = filter( lambda l: abs(gPart[l["genPartIdxMother"]]["pdgId"])==15 and 24 in map( abs, getParentIds( gPart[l["genPartIdxMother"]], gPart)), GenLep )
+	GenLepZMother    = filter( lambda l: abs(gPart[l["genPartIdxMother"]]["pdgId"])==23 , GenLep )
+	GenLepTauMotherZ  = filter( lambda l: abs(gPart[l["genPartIdxMother"]]["pdgId"])==15 and 23 in map( abs, getParentIds( gPart[l["genPartIdxMother"]], gPart)), GenLep )
+	genLeptons = GenLepWMother + GenLepTauMotherW + GenLepTauMotherZ + GenLepZMother
 
 	#for lep in genLeptons:
-	#    print "gen leptons index: ", lep['index'], "status: ", lep['status'] 
+	#    print "gen leptons index: ", lep['index'], "status: ", lep['status']
+	
 
     # weight
     if options.susySignal:
@@ -711,7 +713,6 @@ def filler( event ):
                 event.nLHE = int(weight_friend.chain.GetLeaf("nLHE").GetValue())
                 for nEvt in range(event.nLHE):
                     event.LHE_weight[nEvt] = weight_friend.chain.GetLeaf("LHE_weight").GetValue(nEvt)
-
 
         r.GenSusyMStop = max([p['mass']*(abs(p['pdgId']==1000006)) for p in gPart])
         r.GenSusyMNeutralino = max([p['mass']*(abs(p['pdgId']==1000022)) for p in gPart])
@@ -746,6 +747,38 @@ def filler( event ):
             logger.info("Couldn't find weight for %s, %s. Setting weight to 0.", r.GenSusyMStop, r.GenSusyMNeutralino)
             event.reweightXSecUp    = 0.
             event.reweightXSecDown  = 0.
+	stops = []
+	neus  = []
+	Lxy   = []
+	dt    = []
+	for gen in gPart:
+	    if abs(gen['pdgId'])==1000006:
+		stops.append(gen)
+		print "stop vertices for all stops: ", gen['vx'], gen['vy']
+	stopVx	= stops[0]['vx']
+	stopVy  = stops[0]['vy']
+	stopVz  = stops[0]['vz']
+	#print "stop vertices: ", stopVx, stopVy, stopVz
+	for gen in gPart:
+	    if abs(gen['pdgId'])==1000022:
+		for stop in stops:
+			if gen['genPartIdxMother'] == stop['index']:
+				stop_Lxy = sqrt( ((stopVx-gen['vx'])**2) + ((stopVy-gen['vy'])**2) )
+				stop_dt = (stop_Lxy* stop['mass']) / stop['pt']
+				Lxy.append(stop_Lxy)
+				dt.append(stop_dt)
+				print "*"*12
+				print "stored stop vertex: ", stopVx, stopVy, "stop_mass: ",stop['mass'], "stop pt: ", stop['pt'], "neu vertex: ", gen['vx'], gen['vy'], "neu pt: ", gen['pt']
+				print "matched stop vertex: ",stop['vx'], stop['vy']
+				print "*"*12
+				#print "#"*12
+				#print "Lxy for stop: ", Lxy, "dt for stop: ", dt
+				#print "#"*12
+	if Lxy:
+	    event.stop1_Lxy = Lxy[0]
+	    event.stop1_dt  = dt[0]
+	    event.stop2_Lxy = Lxy[1]
+	    event.stop2_dt  = dt[1]
     elif isMC:
         if hasattr(r, "genWeight"):
             event.weight = lumiScaleFactor*r.genWeight if lumiScaleFactor is not None else 1
@@ -822,8 +855,9 @@ def filler( event ):
     leptons 		= electrons + muons
     leptons.sort(key = lambda p:-p['pt'])
 
-    event.l1_isPrompt = True
-    #event.l1_dRgen = -999
+    event.l1_isPrompt     = True
+    event.l1_isGenMatched = True
+    event.l1_dRgen = -999
     for iLep, lep in enumerate(leptons):
         lep['index'] = iLep
 	lep['wPt']   = get_wPt(r.MET_pt, r.MET_phi,lep)
@@ -1038,21 +1072,17 @@ def filler( event ):
 
     #if sampleName.startswith('WJets') or sampleName.startswith('TTLep') or sampleName.startswith('TTSingle'):
     if isMC or options.susySignal:
-	    #for gl in genLeptons:
-	    #	print "genlep: ", gl['pdgId'],"genlep mother index: ",  gl["genPartIdxMother"], "genlep pt: ", gl['pt'], "gen status: ", gl['status'], "gen index: ", gl['index']
-	    #print "gen leptons length: ", len(genLeptons)
-	    #print "reco leptons length: ", len(leptons)
-	    #print "before l1_isPrompt: ", event.l1_isPrompt 
+	#    for gl in genLeptons:
+	#	    print "genlep: ", gl['pdgId'],"genlep mother index: ",  gl["genPartIdxMother"], "genlep pt: ", gl['pt'], "gen status: ", gl['status'], "gen index: ", gl['index']
 	    for l in leptons:
-		    #l['isPrompt'],l['dRgen'] = categorizeLep(l, genLeptons, cone =0.1)
+		    l['isGenMatched'],l['dRgen'] = categorizeLep(l, genLeptons, cone =0.1)
 		    l['isPrompt'] = matchLep(l)
-	    #for t in taus:
-		    #print "Tau decay mode", t['decayMode'] 
 
 
 	    if leptons:
 	    	event.l1_isPrompt = leptons[0]['isPrompt']
-	    	#event.l1_dRgen    = leptons[0]['dRgen']
+	    	event.l1_isGenMatched = leptons[0]['isGenMatched']
+	    	event.l1_dRgen    = leptons[0]['dRgen']
 #		print "leading lepton prompt: ", event.l1_isPrompt
 	#	if len(leptons) > 1:
 	#		print "sub-leading lepton prompt: ", leptons[1]['isPrompt']
@@ -1074,6 +1104,8 @@ def filler( event ):
             event.l1_relIso03   = leptons[0]['pfRelIso03_all']
             event.l1_dxy        = leptons[0]['dxy']
             event.l1_dz         = leptons[0]['dz']
+            event.l1_dxyErr     = leptons[0]['dxyErr']
+            event.l1_dzErr      = leptons[0]['dzErr']
             event.l1_eleIndex   = leptons[0]['eleIndex']
             event.l1_muIndex    = leptons[0]['muIndex']
             event.l1_muLooseId  = leptons[0]['muLooseId']

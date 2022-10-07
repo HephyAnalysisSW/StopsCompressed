@@ -72,7 +72,7 @@ def getGenLeps(c):
 def getGenParts(c):
     return [getObjDict(c, 'GenPart_', ['eta','pt','phi','charge', 'pdgId', 'motherId', 'grandmotherId'], i) for i in range(int(getVarValue(c, 'nGenPart')))]
 
-genVars = ['eta','pt','phi','mass','charge', 'status', 'pdgId', 'genPartIdxMother', 'statusFlags','index'] 
+genVars = ['eta','pt','phi','mass','charge', 'status', 'pdgId', 'genPartIdxMother', 'statusFlags','index', 'vx', 'vy', 'vz'] 
 def getGenPartsAll(c, genVars=genVars):
     return [getObjDict(c, 'GenPart_', genVars, i) for i in range(int(getVarValue(c, 'nGenPart')))]
 
@@ -93,12 +93,15 @@ def categorizeLep(recoPart, genParts, cone=0.1):
 	dRcoll =[]
 	for g in genParts:
 		dR = deltaR(recoPart,g)	
-		print "deltaR: ", dR, "gen index: ", g['index'], "reco genPartIdx: ", recoPart['genPartIdx']
-		if g['index'] == recoPart['genPartIdx'] : return True, dR
+		print "deltaR: ", dR, "gen index: ", g['index'], "gen pt: ", g['pt'], "reco genPartIdx: ", recoPart['genPartIdx'], "reco pt: ", recoPart['pt'], "reco part eta: ", recoPart['eta'], "reco part phi: ", recoPart['phi']
+		if g['index'] == recoPart['genPartIdx'] : 
+			print "matched gen Idx with vertices: ", g['vx'], g['vy'], g['vz'], "pt: ", g['pt'],"phi: ",  g['phi'], "eta: ", g['eta']
+			return True, dR
 		if deltaR(recoPart,g) < cone: 
-			print "?"*15
-			print "deltaR: ", dR
+			print "matched gen particle w/ Reco dR cone of < 0.1  with vertices: ", g['vx'], g['vy'], g['vz'],  "pt: ", g['pt'],"phi: ",  g['phi'] , "eta: ", g['eta'] 
 			dRcoll.append(dR)
+		else:
+			print "non matched gen particles  with vertices: ", g['vx'], g['vy'], g['vz'], "pt: ", g['pt'], "phi: ", g['phi'] , "eta: ", g['eta'] 
 	if dRcoll:
 		return True, min(dRcoll)
 	else:	
@@ -189,17 +192,17 @@ def muonSelector( lepton_selection, year):
                     and l["looseId"] 
                     
     elif lepton_selection == 'noDxyDz':
-                    #and (l['pfRelIso03_all']*l['pt']) < 5.0 \
-                    #and l['pfRelIso03_all'] < 0.2 \
 	print "here for %s"%lepton_selection
         def func(l):
             if l["pt"] <= 25 and l["pt"] >3.5:
                 return \
                     abs(l["eta"])       < 2.4 \
+                    and (l['pfRelIso03_all']*l['pt']) < 5.0 \
                     and l["looseId"] 
             elif l["pt"] > 25:
                 return \
                     abs(l["eta"])       < 2.4 \
+                    and l['pfRelIso03_all'] < 0.2 \
                     and l["looseId"] 
 
     elif lepton_selection == 'noDz':
@@ -344,21 +347,21 @@ def eleSelector( lepton_selection, year):
                     and abs(l["dz"])        < 0.1 
 
     elif lepton_selection == 'noDxyDz':
-                    #and (l['pfRelIso03_all']*l['pt']) < 5.0 
-                    #and l['pfRelIso03_all'] < 0.2 
 	print "here for %s"%lepton_selection
         def func(l):
             if l["pt"] <= 25 and l["pt"] >5:
                 return \
 		    abs(l["eta"]) < 2.5 \
 		    and ECALGap(l) \
-                    and electronVIDSelector( l, idVal= 1, removedCuts=['pfRelIso03_all'] ) 
+                    and electronVIDSelector( l, idVal= 1, removedCuts=['pfRelIso03_all'] ) \
+                    and (l['pfRelIso03_all']*l['pt']) < 5.0
             elif l["pt"] > 25:
                 
                 return \
 		    abs(l["eta"]) < 2.5 \
 		    and ECALGap(l) \
-                    and electronVIDSelector( l, idVal= 1, removedCuts=['pfRelIso03_all'] ) 
+                    and electronVIDSelector( l, idVal= 1, removedCuts=['pfRelIso03_all'] ) \
+                    and l['pfRelIso03_all'] < 0.2 
 
     elif lepton_selection == 'noDz':
 	print "here for %s"%lepton_selection
@@ -420,13 +423,13 @@ def eleSelector( lepton_selection, year):
     return func
 
 
-leptonVars_data = ['eta','etaSc', 'pt','phi','dxy', 'dz','tightId', 'pdgId', 'mediumMuonId', 'miniRelIso', 'relIso03', 'sip3d', 'mvaIdSpring15', 'convVeto', 'lostHits', 'jetPtRelv2', 'jetPtRatiov2', 'eleCutId_Spring2016_25ns_v1_ConvVetoDxyDz','genPartFlav']
+leptonVars_data = ['eta','etaSc', 'pt','phi','dxy','dxyErr', 'dz','dzErr', 'tightId', 'pdgId', 'mediumMuonId', 'miniRelIso', 'relIso03', 'sip3d', 'mvaIdSpring15', 'convVeto', 'lostHits', 'jetPtRelv2', 'jetPtRatiov2', 'eleCutId_Spring2016_25ns_v1_ConvVetoDxyDz','genPartFlav']
 leptonVars = leptonVars_data + ['mcMatchId','mcMatchAny','genPartIdx']
 
-electronVars_data = ['pt','eta','phi','pdgId','cutBased','miniPFRelIso_all','pfRelIso03_all','sip3d','lostHits','convVeto','dxy','dz','charge','deltaEtaSC','mvaFall17V2noIso_WP80', 'vidNestedWPBitmap', 'genPartIdx','genPartFlav']
+electronVars_data = ['pt','eta','phi','pdgId','cutBased','miniPFRelIso_all','pfRelIso03_all','sip3d','lostHits','convVeto','dxy','dxyErr','dz','dzErr', 'charge','deltaEtaSC','mvaFall17V2noIso_WP80', 'vidNestedWPBitmap', 'genPartIdx','genPartFlav']
 electronVars = electronVars_data + []
 
-muonVars_data = ['pt','eta','phi','pdgId','mediumId','looseId','miniPFRelIso_all','pfRelIso03_all','sip3d','dxy','dz','charge','Wpt','genPartFlav']
+muonVars_data = ['pt','eta','phi','pdgId','mediumId','looseId','miniPFRelIso_all','pfRelIso03_all','sip3d','dxy','dxyErr','dz','dzErr','charge','Wpt','genPartFlav']
 muonVars = muonVars_data + ['genPartIdx']
 
 def getLeptons(c, collVars=leptonVars):
