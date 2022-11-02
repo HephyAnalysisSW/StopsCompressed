@@ -22,8 +22,9 @@ class genFilter:
 		##print self.genEff
 		#for self.effMap in self.genEff: assert self.effMap
 
-		#self.dataDir = "/users/priya.hussain/public/CMSSW_10_2_18/src/StopsCompressed/Tools/data/filterEffs"
-		self.dataDir = "/scratch/priya.hussain/StopsCompressed/filterEff"
+		self.dataDir = "/users/priya.hussain/private/CMSSW_10_6_25/src/StopsCompressed/Tools/data/filterEffs"
+		#self.dataDir = "$CMSSW_BASE/src/StopsCompressed/Tools/data/filterEffs"
+		#self.dataDir = "/scratch/priya.hussain/StopsCompressed/filterEff"
 		self.name = "filterEffs_T2tt_dM_10to80_genHT_160_genMET_80_mWMin0p1"
 		pklFile= os.path.join(self.dataDir,"filterEffs_T2tt_dM_10to80_genHT_160_genMET_80_mWMin0p1.pkl")
 		self.eff=pickle.load(file(pklFile))
@@ -66,11 +67,11 @@ class genFilter:
 		return genEff
 
 
-#print "This is only for debug purposes" 
-#g = genFilter("2016")
-#for mstop,mn in [[526,505],[576,495],[576,566]] :
-#	#print "using pickle file"
-#	#g.getEff(mstop,mn)
-#	print "using th2f eff map"
-#	g.getEff(mstop,mn)
-#	print "-"*90
+print "This is only for debug purposes" 
+g = genFilter("2016")
+for mstop,mn in [[526,505],[576,495],[576,566]] :
+	#print "using pickle file"
+	#g.getEff(mstop,mn)
+	print "using th2f eff map"
+	g.getEff(mstop,mn)
+	print "-"*90

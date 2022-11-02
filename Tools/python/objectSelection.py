@@ -53,10 +53,10 @@ def isBJet(j, tagger = 'DeepCSV', year = 'UL2016'):
     elif tagger == 'DeepCSV':
         if year == 'UL2016':
 		# https://twiki.cern.ch/twiki/bin/view/CMS/BtagRecommendation106XUL16postVFP
-            return j['btagDeepB'] > 0.6001
+            return j['btagDeepB'] > 0.5847 
         elif year == 'UL2016_preVFP':
-		# https://twiki.cern.ch/twiki/bin/view/CMS/BtagRecommendation106XUL16postVFP
-            return j['btagDeepB'] > 0.5847
+		# https://twiki.cern.ch/twiki/bin/view/CMS/BtagRecommendation106XUL16preVFP
+            return j['btagDeepB'] > 0.6001
         elif year == 'UL2017':
 		# https://twiki.cern.ch/twiki/bin/view/CMS/BtagRecommendation106XUL17
             return j['btagDeepB'] > 0.4506
@@ -93,15 +93,17 @@ def categorizeLep(recoPart, genParts, cone=0.1):
 	dRcoll =[]
 	for g in genParts:
 		dR = deltaR(recoPart,g)	
-		print "deltaR: ", dR, "gen index: ", g['index'], "gen pt: ", g['pt'], "reco genPartIdx: ", recoPart['genPartIdx'], "reco pt: ", recoPart['pt'], "reco part eta: ", recoPart['eta'], "reco part phi: ", recoPart['phi']
+		print "*"*12
+		print "deltaR: ", dR, "gen index: ", g['index'], "gen pt: ", g['pt'],"gen pdgId: ",g['pdgId'], "reco genPartIdx: ", recoPart['genPartIdx'], "reco pdgId: ", recoPart['pdgId'], "reco pt: ", recoPart['pt'], "reco part eta: ", recoPart['eta'], "reco part phi: ", recoPart['phi']
 		if g['index'] == recoPart['genPartIdx'] : 
-			print "matched gen Idx with vertices: ", g['vx'], g['vy'], g['vz'], "pt: ", g['pt'],"phi: ",  g['phi'], "eta: ", g['eta']
+			print "matched gen Idx with vertices: ", g['vx'], g['vy'], g['vz'], "pt: ", g['pt'],"phi: ",  g['phi'], "eta: ", g['eta'], "pdgId: ", g['pdgId']
 			return True, dR
 		if deltaR(recoPart,g) < cone: 
-			print "matched gen particle w/ Reco dR cone of < 0.1  with vertices: ", g['vx'], g['vy'], g['vz'],  "pt: ", g['pt'],"phi: ",  g['phi'] , "eta: ", g['eta'] 
+			print "matched gen particle w/ Reco dR cone of < 0.1  with vertices: ", g['vx'], g['vy'], g['vz'],  "pt: ", g['pt'],"phi: ",  g['phi'] , "eta: ", g['eta'], "pdgId: ", g['pdgId'] 
 			dRcoll.append(dR)
 		else:
-			print "non matched gen particles  with vertices: ", g['vx'], g['vy'], g['vz'], "pt: ", g['pt'], "phi: ", g['phi'] , "eta: ", g['eta'] 
+			print "Fake gen particles  with vertices: ", g['vx'], g['vy'], g['vz'], "pt: ", g['pt'], "phi: ", g['phi'] , "eta: ", g['eta'], "pdgId: ", g['pdgId'] 
+	print "*"*12
 	if dRcoll:
 		return True, min(dRcoll)
 	else:	

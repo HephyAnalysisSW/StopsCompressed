@@ -31,6 +31,7 @@ special_cuts = {
     "all"		:  "(1)",
     "isPrompt"          :  "l1_isPrompt>0",
     "isFake"            :  "l1_isPrompt==0",
+    "isGenMatched"      :  "l1_isGenMatched>0",
   }
 
 continous_variables = [ ("met", "met_pt"), ("mt", "mt"), ("ht", "HT") , ('ISRJets_pt', 'ISRJets_pt'), ("nPV", "PV_npvsGood"), ("lpt","l1_pt") ,("leta","abs(l1_eta)"), ("Cone", "CT1"), ("Ctwo", "CT2"),("dphimetjet","dPhiMetJet")]
