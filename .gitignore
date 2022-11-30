@@ -8,3 +8,4 @@ plots/plotsJanik/regions/utilities/jsonFilesDCcomparison/*
 Analysis/python/run/testing/InvestigateDataCards/**/*.txt
 postProcessing/mysubmit.log
 postProcessing/files.stat
+.ipynb_checkpoints/
