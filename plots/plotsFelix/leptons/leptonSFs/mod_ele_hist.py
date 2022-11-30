@@ -25,7 +25,7 @@ if len(sys.argv)>1: mode = sys.argv[1]
 if mode != "Data" and mode != "MC":
     print "wrong mode"
     sys.exit()
-    
+
 stage = "IdSpec"
 #stage = "IpIso"
 if len(sys.argv)>2: stage = sys.argv[2]
@@ -76,8 +76,8 @@ HISO = relISO+"*min(el_pt,25.)"
 
 if stage == "Id":
     ID = "el_abseta<2.5&&(tag_Ele_q*el_q)==-1"
-    #PASS = "passingCutBasedVeto94XV2"
-    PASS = "passingCutBasedVetoNoIso94XV2"
+    PASS = "passingCutBasedVeto94XV2"
+    # PASS = "passingCutBasedVetoNoIso94XV2"
 elif stage == "IpIso":
     #ID = "el_abseta<2.5&&passingCutBasedVeto94XV2"
     ID = "el_abseta<2.5&&passingCutBasedVetoNoIso94XV2"
@@ -101,20 +101,6 @@ if year == "2016":
 	if mode =="Data":
 	    #legacy 2016:
 	    t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2016/legacy/data/TnPTree_data_Run2016B_17Jul18.root")
-	    t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2016/legacy/data/TnPTree_data_Run2016C_17Jul18.root")
-	    t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2016/legacy/data/TnPTree_data_Run2016D_17Jul18.root")
-	    t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2016/legacy/data/TnPTree_data_Run2016E_17Jul18.root")
-	    t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2016/legacy/data/TnPTree_data_Run2016F_17Jul18.root")
-	    t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2016/legacy/data/TnPTree_data_Run2016G_17Jul18.root")
-	    t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2016/legacy/data/TnPTree_data_Run2016H_17Jul18.root")
-	    #new Egamma TnP tuples w/o SUSY IDs
-	    #t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2016/electrons/merged/Run2016B.root")
-	    #t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2016/electrons/merged/Run2016C.root")
-	    #t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2016/electrons/merged/Run2016D.root")
-	    #t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2016/electrons/merged/Run2016E.root")
-	    #t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2016/electrons/merged/Run2016F.root")
-	    #t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2016/electrons/merged/Run2016G.root")
-	    #t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2016/electrons/merged/Run2016H.root")
 	else:
 	    #legacy MC tuples including :
 	    t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2016/legacy/mc/TnPTree_mc_DYJetsToLL_M-50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8_allExt.root")
@@ -123,32 +109,15 @@ if year == "2016":
 	    #t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2016/electrons/merged/DY_LO.root")
 elif year == "2017":
 	if mode =="Data":
-	    #t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2017/electrons/merged/Run2017B.root")
-	    #t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2017/electrons/merged/Run2017C.root")
-	    #t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2017/electrons/merged/Run2017D.root")
-	    #t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2017/electrons/merged/Run2017E.root")
-	    #t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2017/electrons/merged/Run2017F.root")
 	    #Moriond18
-	    t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2017/moriond18/data/TnPTree_31Mar18_RunB.root")
-	    t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2017/moriond18/data/TnPTree_31Mar18_RunC.root")
-	    t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2017/moriond18/data/TnPTree_31Mar18_RunD.root")
-	    t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2017/moriond18/data/TnPTree_31Mar18_RunE.root")
-	    t.Add("//groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2017/moriond18/data/TnPTree_31Mar18_RunF.root")
+	    t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2017_MINIAOD_Nm1/SingleEle_RunBCDEF.root.root")
 	else:
 	    #t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2017/electrons/merged/DY1_LO.root")
-	    t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2017/moriond18/mc/TnPTree_DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8_all.root")
+	    t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2017_MINIAOD_Nm1/DYJetsToLL_madgraphMLM.root")
 elif year == "2018":
 	if mode =="Data":
-	    #t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2018/electrons/merged/Run2018A.root")
-	    #t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2018/electrons/merged/Run2018B.root")
-	    #t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2018/electrons/merged/Run2018C.root")
-	    #t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2018/electrons/merged/Run2018D.root")
-	    t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2018/v1/data/TnPTree_data_Run2018A_17Sep18.root")
-	    t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2018/v1/data/TnPTree_data_Run2018B_17Sep18.root")
-	    t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2018/v1/data/TnPTree_data_Run2018C_17Sep18.root")
 	    t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2018/v1/data/TnPTree_data_Run2018D_PromptReco-v2.root")
 	else:
-	    #t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2018/electrons/merged/DY.root")
 	    t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2018/v1/mc/TnPTree_mc_DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8.root")
 
 makeDir("/groups/hephy/cms/priya.hussain/StopsCompressed/results/%s/hists/noIso"%datatag)
@@ -167,7 +136,7 @@ for ipt in range(len(binning)-1):
         cut = "&&".join([TRIGZ,ID,EXTRZ,PTCUT,etacut])
         hlist.append(gethist(t,"&&".join([cut,PASS]),ptlow,pthigh,"pass",etabin))
         hlist.append(gethist(t,"&&".join([cut,FAIL]),ptlow,pthigh,"fail",etabin))
-    
+
 
 fout.Write()
 fout.Close()
