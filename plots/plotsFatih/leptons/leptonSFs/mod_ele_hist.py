@@ -55,11 +55,11 @@ def gethist(t,cut,lowedge,highedge,tag,etabin):
     t.Draw("mass>>"+histname,cut,"goff")
     return hz
 if year == "2016":
-	datatag = "2016_80X_v5"
+    datatag = "2016_80X_v5"
 elif year == "2017":
-	datatag ="2017_94X"
+    datatag ="2017_94X"
 elif year == "2018":
-	datatag ="2018_94_pre3"
+    datatag ="2018_94_pre3"
 #old 2016 Effective Area
 #EAval = [0.1752,0.1862,0.1411,0.1534,0.1903,0.2243,0.2687]
 #EAeta = [0.,1.,1.479,2.,2.2,2.3,2.4,2.5]
@@ -98,27 +98,27 @@ t = TChain("tnpEleIDs/fitter_tree")
 #t = TChain("GsfElectronToEleID/fitter_tree")
 
 if year == "2016":
-	if mode =="Data":
-	    #legacy 2016:
-	    t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2016/legacy/data/TnPTree_data_Run2016B_17Jul18.root")
-	else:
-	    #legacy MC tuples including :
-	    t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2016/legacy/mc/TnPTree_mc_DYJetsToLL_M-50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8_allExt.root")
+    if mode =="Data":
+        #legacy 2016:
+        t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2016/legacy/data/TnPTree_data_Run2016B_17Jul18.root")
+    else:
+        #legacy MC tuples including :
+        t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2016/legacy/mc/TnPTree_mc_DYJetsToLL_M-50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8_allExt.root")
 
-	    #new TnP tuples w/o SUSY IDs
-	    #t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2016/electrons/merged/DY_LO.root")
+        #new TnP tuples w/o SUSY IDs
+        #t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2016/electrons/merged/DY_LO.root")
 elif year == "2017":
-	if mode =="Data":
-	    #Moriond18
-	    t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2017_MINIAOD_Nm1/SingleEle_RunBCDEF.root")
-	else:
-	    #t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2017/electrons/merged/DY1_LO.root")
-	    t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2017_MINIAOD_Nm1/DYJetsToLL_madgraphMLM.root")
+    if mode =="Data":
+        #Moriond18
+        t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2017_MINIAOD_Nm1/SingleEle_RunBCDEF.root")
+    else:
+        #t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2017/electrons/merged/DY1_LO.root")
+        t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2017_MINIAOD_Nm1/DYJetsToLL_madgraphMLM.root")
 elif year == "2018":
-	if mode =="Data":
-	    t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2018/v1/data/TnPTree_data_Run2018D_PromptReco-v2.root")
-	else:
-	    t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2018/v1/mc/TnPTree_mc_DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8.root")
+    if mode =="Data":
+        t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2018/v1/data/TnPTree_data_Run2018D_PromptReco-v2.root")
+    else:
+        t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2018/v1/mc/TnPTree_mc_DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8.root")
 
 makeDir("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/hists/noIso"%datatag)
 fout = TFile("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/hists/noIso/ele_histos_%s_%s.root"%(datatag,mode,stage),"recreate")
@@ -132,7 +132,7 @@ for ipt in range(len(binning)-1):
     print ptlow,pthigh
 
     for etabin,etacut in etabins.items():
-	    print "eta dict: ", etabin, etacut
+        print "eta dict: ", etabin, etacut
         cut = "&&".join([TRIGZ,ID,EXTRZ,PTCUT,etacut])
         hlist.append(gethist(t,"&&".join([cut,PASS]),ptlow,pthigh,"pass",etabin))
         hlist.append(gethist(t,"&&".join([cut,FAIL]),ptlow,pthigh,"fail",etabin))
