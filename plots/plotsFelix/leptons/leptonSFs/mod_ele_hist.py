@@ -138,7 +138,7 @@ for ipt in range(len(binning)-1):
     print ptlow,pthigh
 
     for etabin,etacut in etabins.items():
-    print "eta dict: ", etabin, etacut
+        print "eta dict: ", etabin, etacut
         cut = "&&".join([TRIGZ,ID,EXTRZ,PTCUT,etacut])
         hlist.append(gethist(t,"&&".join([cut,PASS]),ptlow,pthigh,"pass",etabin))
         hlist.append(gethist(t,"&&".join([cut,FAIL]),ptlow,pthigh,"fail",etabin))
