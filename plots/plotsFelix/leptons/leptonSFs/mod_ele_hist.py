@@ -100,13 +100,13 @@ t = TChain("tnpEleIDs/fitter_tree")
 if year == "2016":
 	if mode =="Data":
         # legacy 2016:
-        t.Add("/scratch/priya.hussain/StopsCompressed/TnP/Run2016/legacy/data/TnPTree_data_Run2016B_17Jul18.root")
-        t.Add("/scratch/priya.hussain/StopsCompressed/TnP/Run2016/legacy/data/TnPTree_data_Run2016C_17Jul18.root")
-        t.Add("/scratch/priya.hussain/StopsCompressed/TnP/Run2016/legacy/data/TnPTree_data_Run2016D_17Jul18.root")
-        t.Add("/scratch/priya.hussain/StopsCompressed/TnP/Run2016/legacy/data/TnPTree_data_Run2016E_17Jul18.root")
-        t.Add("/scratch/priya.hussain/StopsCompressed/TnP/Run2016/legacy/data/TnPTree_data_Run2016F_17Jul18.root")
-        t.Add("/scratch/priya.hussain/StopsCompressed/TnP/Run2016/legacy/data/TnPTree_data_Run2016G_17Jul18.root")
-        t.Add("/scratch/priya.hussain/StopsCompressed/TnP/Run2016/legacy/data/TnPTree_data_Run2016H_17Jul18.root")
+        t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2016/legacy/data/TnPTree_data_Run2016B_17Jul18.root")
+        t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2016/legacy/data/TnPTree_data_Run2016C_17Jul18.root")
+        t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2016/legacy/data/TnPTree_data_Run2016D_17Jul18.root")
+        t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2016/legacy/data/TnPTree_data_Run2016E_17Jul18.root")
+        t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2016/legacy/data/TnPTree_data_Run2016F_17Jul18.root")
+        t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2016/legacy/data/TnPTree_data_Run2016G_17Jul18.root")
+        t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2016/legacy/data/TnPTree_data_Run2016H_17Jul18.root")
 	else:
 	    #legacy MC tuples including :
 	    t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2016/legacy/mc/TnPTree_mc_DYJetsToLL_M-50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8_allExt.root")
