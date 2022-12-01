@@ -80,13 +80,13 @@ if stage == "Id":
     # PASS = "passingCutBasedVetoNoIso94XV2"
 elif stage == "IpIso":
     #ID = "el_abseta<2.5&&passingCutBasedVeto94XV2"
-    ID = "el_abseta<2.5&&passingCutBasedVetoNoIso94XV2"
+    ID = "el_abseta<2.5&&passingVetoNoIso94XV2"
     PASS = "abs(el_dxy)<0.02&&abs(el_dz)<0.1&&"+HISO+"<5."
 elif stage == "IdSpec":
     ID = "el_abseta<2.5&&(tag_Ele_q*el_q)==-1&&el_dr03TkSumPt<4"
     #PASS = "passingCutBasedVeto94XV2"
     #legacy TnP with SUSY IDs No Iso
-    PASS = "passingCutBasedVetoNoIso94XV2"
+    PASS = "passingVetoNoIso94XV2"
     #PASS = "passingVeto"
 
 FAIL = "!("+PASS+")"
@@ -110,7 +110,7 @@ if year == "2016":
 elif year == "2017":
 	if mode =="Data":
 	    #Moriond18
-	    t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2017_MINIAOD_Nm1/SingleEle_RunBCDEF.root.root")
+	    t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2017_MINIAOD_Nm1/SingleEle_RunBCDEF.root")
 	else:
 	    #t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2017/electrons/merged/DY1_LO.root")
 	    t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2017_MINIAOD_Nm1/DYJetsToLL_madgraphMLM.root")
@@ -132,7 +132,7 @@ for ipt in range(len(binning)-1):
     print ptlow,pthigh
 
     for etabin,etacut in etabins.items():
-	print "eta dict: ", etabin, etacut
+	    print "eta dict: ", etabin, etacut
         cut = "&&".join([TRIGZ,ID,EXTRZ,PTCUT,etacut])
         hlist.append(gethist(t,"&&".join([cut,PASS]),ptlow,pthigh,"pass",etabin))
         hlist.append(gethist(t,"&&".join([cut,FAIL]),ptlow,pthigh,"fail",etabin))
