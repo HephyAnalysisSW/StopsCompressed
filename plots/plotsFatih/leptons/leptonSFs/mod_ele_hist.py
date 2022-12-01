@@ -76,7 +76,7 @@ HISO = relISO+"*min(el_pt,25.)"
 
 if stage == "Id":
     ID = "el_abseta<2.5&&(tag_Ele_q*el_q)==-1"
-    PASS = "passingCutBasedVeto94XV2"
+    PASS = "passingVeto94XV2"
     # PASS = "passingCutBasedVetoNoIso94XV2"
 elif stage == "IpIso":
     #ID = "el_abseta<2.5&&passingCutBasedVeto94XV2"
