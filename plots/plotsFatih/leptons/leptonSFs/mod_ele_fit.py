@@ -56,17 +56,17 @@ def makeDir(path):
     else:
             os.makedirs(path)
 
-makeDir("/scratch/priya.hussain/StopsCompressed/results/%s/fits/noIso"%datatag)
+makeDir("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/fits/noIso"%datatag)
 
 pout = ["lowedge","pthigh","mean","sigma","alpha","n","sigma2","gaus1f","a","signal","bkg"]
 
-fpout = open("/scratch/priya.hussain/StopsCompressed/results/%s/fits/noIso/el_%s_%s.params"%(datatag,mode,stage),"w")
+fpout = open("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/fits/noIso/el_%s_%s.params"%(datatag,mode,stage),"w")
 sout = "\t".join(pout)
 fpout.write(sout+"\n")
 #2017&2018 noISo hists location
 #fin = TFile("/scratch/priya.hussain/StopsCompressed/results/%s/hists/noIso/ele_histos_%s_%s.root"%(datatag,mode,stage))
 #2016 legacy hists location
-fin = TFile("/scratch/priya.hussain/StopsCompressed/results/%s/legacy/hists/ele_histos_%s_%s.root"%(datatag,mode,stage))
+fin = TFile("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/hists/noIso/ele_histos_%s_%s.root"%(datatag,mode,stage))
 print fin
 
 def getsigZ(hz,lowedge,pl=False):
@@ -74,8 +74,8 @@ def getsigZ(hz,lowedge,pl=False):
 #    hz = TH1F("hz","",55,75,130)
     x = RooRealVar("x","Mass (GeV/c^{2})", 60.,130.)
     rdh = RooDataHist("rdh","",RooArgList(x),hz)
-    x.setRange("R1",86,96)    
-#    x.setRange("R1",60,120)    
+    x.setRange("R1",86,96)
+#    x.setRange("R1",60,120)
 
     meang = RooRealVar("meang", "meang", 91., 88, 94)
     sigma1 = RooRealVar("sigma1", "sigma1", 2., 1.5, 2.5)
@@ -88,29 +88,29 @@ def getsigZ(hz,lowedge,pl=False):
     gaus1f = RooRealVar("gaus1f","gaus1f",0.8,0.4,1.)
 #    gaus1f = RooRealVar("gaus1f","gaus1f",1.)
     dgaus = RooAddPdf("dgaus","dgaus",gaus1,gaus2,gaus1f)
-    
+
     amin = -0.08 if lowedge<50. else -0.035
     a = RooRealVar("a", "a",max(-0.06,amin), amin,-0.03)
 #    a = RooRealVar("a", "", -10.,10.)
 
     expo = RooExponential("expo","exponential",x,a)
-    
+
 #    a0 = RooRealVar("a0", "", 1., -10.,10.)
 #    a1 = RooRealVar("a1", "", 0., -1.,1.)
 #    a2 = RooRealVar("a2", "", 0., -.1,.1)
 #    a3 = RooRealVar("a3", "", 0., -.01,.01)
 #    expo = RooChebychev("expo","exponential",x,RooArgList(a0,a1,a2,a3))
- 
+
 #    a0 = RooRealVar("a0", "", 115,90.,120.)
 #    a1 = RooRealVar("a1", "", -20,-100.,100.)
 #    expo = RooArgusBG("expo","exponential",x,a0,a1)
-    
-    
+
+
     signal = RooRealVar("signal", "signal", 1000, 0., 1.e9)
     bkg = RooRealVar("bkg", "", 100,0., 1.e9)
 
     dgex = RooAddPdf("dgex","dgex",RooArgList(dgaus,expo),RooArgList(signal,bkg))
-    
+
     lowedgefit = 60
     if lowedge == 30: lowedgefit = 80
     if lowedge == 25: lowedgefit = 78
@@ -127,7 +127,7 @@ def getsigZ(hz,lowedge,pl=False):
         dgex.plotOn(xframe,RooFit.Components("dgaus"),RooFit.LineStyle(kDotted))
         dgex.plotOn(xframe,RooFit.Components("expo"),RooFit.LineStyle(kDashed))
         xframe.Draw()
-    
+
     soutlist = [lowedge,pthigh,meang.getVal(),sigma1.getVal(),sigma2.getVal(),gaus1f.getVal(),a.getVal(),signal.getVal(),bkg.getVal()]
     sout = "\t".join(str(x) for x in soutlist)
     fpout.write(sout+"\n")
@@ -136,12 +136,12 @@ def getsigZ(hz,lowedge,pl=False):
 #    fpout.write(sout+"\n")
 
     return fitres.floatParsFinal().find("signal"),rdh.sumEntries("1","R1")
-               
+
 def getsigCB(hz,lowedge,pl=False):
 
     x = RooRealVar("x","Mass (GeV/c^{2})", 60.,120.)
     rdh = RooDataHist("rdh","",RooArgList(x),hz)
-    x.setRange("R1",86,96)    
+    x.setRange("R1",86,96)
 
     amin = -0.08 if lowedge<45. else 0.
     amax = -0.02 if lowedge<45. else 0.
@@ -150,18 +150,18 @@ def getsigCB(hz,lowedge,pl=False):
 
     mean = RooRealVar("meang", "meang", 90., 88, 92.)
     sigmamax = 5. #if lowedge>20. else 3.
-    if '0p8' in etabin  and lowedge<6.: 
+    if '0p8' in etabin  and lowedge<6.:
     	sigmamax = 3.5
 	print "?????", etabin, "!!!!!"
     sigma = RooRealVar("sigma", "sigma", 2.5, 2., sigmamax)
-    
+
     ncent = 40. if lowedge<30 else 50.
     n = RooRealVar("n", "", ncent, ncent, ncent)
     alphacent = 0.5 + max(0.,lowedge-5.)/35.
     alphacent = min(1.5,alphacent)
     alpha = RooRealVar("alpha", "", alphacent,alphacent,alphacent)
     cball = RooCBShape("cball","crystal ball",x,mean,sigma,alpha,n)
-    
+
     s2min = 5. if lowedge>6. else 7.5
     sigma2 = RooRealVar("sigma2", "sigma2", s2min+0.2, s2min, 8.)
     gaus2 = RooGaussian("gaus2","gaus2",x,mean,sigma2)
@@ -205,7 +205,7 @@ def getsigCB(hz,lowedge,pl=False):
         xframe.Draw()
 	#chi2 = xframe.chiSquare(7)
 	#chi2 = xframe.chiSquare()
-        #print "chi square: ", chi2 
+        #print "chi square: ", chi2
     print "mean:", mean.getVal()
     print "sigma:", sigma.getVal()
     print "alpha:", alpha.getVal()
@@ -218,15 +218,15 @@ def getsigCB(hz,lowedge,pl=False):
 #    print "d:", d.getVal()
     print "signal:", signal.getVal()
     print "bkg:", bkg.getVal()
-    
+
     soutlist = [lowedge,pthigh,mean.getVal(),sigma.getVal(),alpha.getVal(),n.getVal(),sigma2.getVal(),gaus1f.getVal(),a.getVal(),signal.getVal(),bkg.getVal()]
     sout = "\t".join(str(x) for x in soutlist)
     fpout.write(sout+"\n")
-    
-    return fitres.floatParsFinal().find("signal"),rdh.sumEntries("1","R1")
-    
 
-fout = TFile("/scratch/priya.hussain/StopsCompressed/results/%s/fits/noIso/ele_result_%s_%s_%s.root"%(datatag,mode,stage,etabin),"recreate")
+    return fitres.floatParsFinal().find("signal"),rdh.sumEntries("1","R1")
+
+
+fout = TFile("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/fits/noIso/ele_result_%s_%s_%s.root"%(datatag,mode,stage,etabin),"recreate")
 
 hpassfit = TH1F("hpassfit","",nb,x1)
 hpassfit.Sumw2()
@@ -240,7 +240,7 @@ for ipt in range(len(binning)-1):
     aux_ptlow = binning[ipt]
     pthigh = binning[ipt+1]
     print aux_ptlow,pthigh
-    savedir = "/mnt/hephy/cms/priya.hussain/www/StopsCompressed/TnP/%s/fits/noIso/%s/%s"%(datatag,mode,stage)
+    savedir = "/groups/hephy/cms/fatih.okcu/www/StopsCompressed/TnP/%s/fits/noIso/%s/%s"%(datatag,mode,stage)
     makeDir(savedir)
     namestring = "{0:.1f}_{1:.1f}_{2}".format(aux_ptlow,pthigh,etabin)
     namestring = namestring.replace(".","p")
@@ -266,7 +266,7 @@ hhh = TH1F("hhh","",nb,x1)
 hhh.SetMinimum(0.7)
 hhh.SetMaximum(1.1)
 hhh.Draw()
- 
+
 hallcnt = hpasscnt.Clone("hallcnt")
 hallcnt.Add(hfailcnt)
 effcnt = TEfficiency(hpasscnt,hallcnt)
