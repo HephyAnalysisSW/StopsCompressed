@@ -56,17 +56,17 @@ def makeDir(path):
     else:
             os.makedirs(path)
 
-makeDir("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/fits/noIso"%datatag)
+makeDir("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/fits"%datatag)
 
 pout = ["lowedge","pthigh","mean","sigma","alpha","n","sigma2","gaus1f","a","signal","bkg"]
 
-fpout = open("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/fits/noIso/el_%s_%s.params"%(datatag,mode,stage),"w")
+fpout = open("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/fits/el_%s_%s.params"%(datatag,mode,stage),"w")
 sout = "\t".join(pout)
 fpout.write(sout+"\n")
 #2017&2018 noISo hists location
 #fin = TFile("/scratch/priya.hussain/StopsCompressed/results/%s/hists/noIso/ele_histos_%s_%s.root"%(datatag,mode,stage))
 #2016 legacy hists location
-fin = TFile("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/hists/noIso/ele_histos_%s_%s.root"%(datatag,mode,stage))
+fin = TFile("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/hists/ele_histos_%s_%s.root"%(datatag,mode,stage))
 print fin
 
 def getsigZ(hz,lowedge,pl=False):
@@ -226,7 +226,7 @@ def getsigCB(hz,lowedge,pl=False):
     return fitres.floatParsFinal().find("signal"),rdh.sumEntries("1","R1")
 
 
-fout = TFile("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/fits/noIso/ele_result_%s_%s_%s.root"%(datatag,mode,stage,etabin),"recreate")
+fout = TFile("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/fits/ele_result_%s_%s_%s.root"%(datatag,mode,stage,etabin),"recreate")
 
 hpassfit = TH1F("hpassfit","",nb,x1)
 hpassfit.Sumw2()
@@ -240,7 +240,7 @@ for ipt in range(len(binning)-1):
     aux_ptlow = binning[ipt]
     pthigh = binning[ipt+1]
     print aux_ptlow,pthigh
-    savedir = "/groups/hephy/cms/fatih.okcu/www/StopsCompressed/TnP/%s/fits/noIso/%s/%s"%(datatag,mode,stage)
+    savedir = "/groups/hephy/cms/fatih.okcu/www/StopsCompressed/TnP/%s/fits/%s/%s"%(datatag,mode,stage)
     makeDir(savedir)
     namestring = "{0:.1f}_{1:.1f}_{2}".format(aux_ptlow,pthigh,etabin)
     namestring = namestring.replace(".","p")

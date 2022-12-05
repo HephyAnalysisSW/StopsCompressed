@@ -120,8 +120,8 @@ elif year == "2018":
     else:
         t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2018/v1/mc/TnPTree_mc_DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8.root")
 
-makeDir("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/hists/noIso"%datatag)
-fout = TFile("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/hists/noIso/ele_histos_%s_%s.root"%(datatag,mode,stage),"recreate")
+makeDir("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/hists"%datatag)
+fout = TFile("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/hists/ele_histos_%s_%s.root"%(datatag,mode,stage),"recreate")
 
 hlist = []
 
