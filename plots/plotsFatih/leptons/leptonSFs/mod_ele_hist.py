@@ -80,13 +80,13 @@ if stage == "Id":
     # PASS = "passingCutBasedVetoNoIso94XV2"
 elif stage == "IpIso":
     #ID = "el_abseta<2.5&&passingCutBasedVeto94XV2"
-    ID = "el_abseta<2.5&&passingVetoNoIso94XV2"
+    ID = "el_abseta<2.5&&passingVeto94XV2"
     PASS = "abs(el_dxy)<0.02&&abs(el_dz)<0.1&&"+HISO+"<5."
 elif stage == "IdSpec":
     ID = "el_abseta<2.5&&(tag_Ele_q*el_q)==-1&&el_dr03TkSumPt<4"
     #PASS = "passingCutBasedVeto94XV2"
     #legacy TnP with SUSY IDs No Iso
-    PASS = "passingVetoNoIso94XV2"
+    PASS = "passingVeto94XV2"
     #PASS = "passingVeto"
 
 FAIL = "!("+PASS+")"
