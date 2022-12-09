@@ -43,6 +43,7 @@ def makeDir(path):
     if "." in path[-5:]:
         path = path.replace(os.path.basename(path),"")
     if os.path.isdir(path):
+		print('im here!')
         return
     else:
         os.makedirs(path)
