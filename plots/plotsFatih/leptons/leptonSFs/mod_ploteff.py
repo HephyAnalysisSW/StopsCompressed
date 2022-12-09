@@ -154,11 +154,11 @@ else:
     suffix = "_" + etabin
 
 # makeDir("/groups/fatih.okcu/StopsCompressed/results/%s/fits/noIso/%s_result_MC_%s%s.root" % (datatag, flavor, stage, suffix))
-f = TFile("/groups/fatih.okcu/StopsCompressed/results/%s/fits/%s_result_MC_%s%s.root" % (datatag, flavor, stage, suffix))
+f = TFile("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/fits/%s_result_MC_%s%s.root" % (datatag, flavor, stage, suffix))
 effcntZMC = TEfficiency(f.Get("effcnt"))
 efffitZMC = TEfficiency(f.Get("efffit"))
 f.Close()
-f = TFile("/groups/fatih.okcu/StopsCompressed/results/%s/fits/%s_result_Data_%s%s.root" % (datatag, flavor, stage, suffix))
+f = TFile("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/fits/%s_result_Data_%s%s.root" % (datatag, flavor, stage, suffix))
 effcntZData = TEfficiency(f.Get("effcnt"))
 efffitZData = TEfficiency(f.Get("efffit"))
 f.Close()
