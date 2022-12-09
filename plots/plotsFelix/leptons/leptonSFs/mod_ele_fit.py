@@ -56,11 +56,14 @@ def makeDir(path):
     else:
             os.makedirs(path)
 
-makeDir("/groups/hephy/cms/felix.lang/StopsCompressed/results/%s/fits"%datatag)
+#makeDir("/groups/hephy/cms/felix.lang/StopsCompressed/results/%s/fits"%datatag)
+makeDir("/groups/hephy/cms/felix.lang/StopsCompressed/resultsnoedge/%s/fits"%datatag)
 
 pout = ["lowedge","pthigh","mean","sigma","alpha","n","sigma2","gaus1f","a","signal","bkg"]
 
-fpout = open("/groups/hephy/cms/felix.lang/StopsCompressed/results/%s/fits/el_%s_%s.params"%(datatag,mode,stage),"w")
+#fpout = open("/groups/hephy/cms/felix.lang/StopsCompressed/results/%s/fits/el_%s_%s.params"%(datatag,mode,stage),"w")
+fpout = open("/groups/hephy/cms/felix.lang/StopsCompressed/resultsnoedge/%s/fits/el_%s_%s.params"%(datatag,mode,stage),"w")
+
 sout = "\t".join(pout)
 fpout.write(sout+"\n")
 #2017&2018 noISo hists location
@@ -181,18 +184,24 @@ def getsigCB(hz,lowedge,pl=False):
 
     lowedgefit = 60
     #if lowedge == 30: lowedgefit = 80
-    if lowedge == 25: lowedgefit = 70
-    if lowedge == 20: lowedgefit = 68
+
+    #if lowedge == 25: lowedgefit = 70
+    #if lowedge == 20: lowedgefit = 68
+
     #if lowedge == 25: lowedgefit = 78
     #if lowedge == 20: lowedgefit = 75
     #0p8:
     #if lowedge == 20: lowedgefit = 84
-    if lowedge == 35: lowedgefit = 70
-    if lowedge >= 45: lowedgefit = 79
-    if lowedge == 50: lowedgefit = 82
+
+    #if lowedge == 35: lowedgefit = 70
+    #if lowedge >= 45: lowedgefit = 79
+    #if lowedge == 50: lowedgefit = 82
+
     #2p02p5:
     #if lowedge == 50: lowedgefit = 78
-    if lowedge >= 60: lowedgefit = 81
+
+    #if lowedge >= 60: lowedgefit = 81
+
     #if lowedge >= 200: lowedgefit = 80
     fitres = cbex.fitTo(rdh,RooFit.Save(),RooFit.Range(lowedgefit,120),RooFit.PrintLevel(-1),RooFit.Extended())
 
@@ -226,7 +235,8 @@ def getsigCB(hz,lowedge,pl=False):
     return fitres.floatParsFinal().find("signal"),rdh.sumEntries("1","R1")
     
 
-fout = TFile("/groups/hephy/cms/felix.lang/StopsCompressed/results/%s/fits/ele_result_%s_%s_%s.root"%(datatag,mode,stage,etabin),"recreate")
+#fout = TFile("/groups/hephy/cms/felix.lang/StopsCompressed/results/%s/fits/ele_result_%s_%s_%s.root"%(datatag,mode,stage,etabin),"recreate")
+fout = TFile("/groups/hephy/cms/felix.lang/StopsCompressed/resultsnoedge/%s/fits/ele_result_%s_%s_%s.root"%(datatag,mode,stage,etabin),"recreate")
 
 hpassfit = TH1F("hpassfit","",nb,x1)
 hpassfit.Sumw2()
@@ -240,7 +250,8 @@ for ipt in range(len(binning)-1):
     aux_ptlow = binning[ipt]
     pthigh = binning[ipt+1]
     print aux_ptlow,pthigh
-    savedir = "/groups/hephy/cms/felix.lang/www/StopsCompressed/TnP/%s/fits/%s/%s"%(datatag,mode,stage)
+    #savedir = "/groups/hephy/cms/felix.lang/www/StopsCompressed/TnP/%s/fits/%s/%s"%(datatag,mode,stage)
+    savedir = "/groups/hephy/cms/felix.lang/wwwnoedge/StopsCompressed/TnP/%s/fits/%s/%s"%(datatag,mode,stage)
     makeDir(savedir)
     namestring = "{0:.1f}_{1:.1f}_{2}".format(aux_ptlow,pthigh,etabin)
     namestring = namestring.replace(".","p")
