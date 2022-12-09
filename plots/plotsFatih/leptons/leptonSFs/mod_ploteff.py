@@ -153,15 +153,12 @@ if flavor == "ele":
 else:
     suffix = "_" + etabin
 
-makeDir("/groups/fatih.okcu/StopsCompressed/results/%s/fits/noIso/%s_result_MC_%s%s.root" % (
-datatag, flavor, stage, suffix))
-f = TFile("/groups/fatih.okcu/StopsCompressed/results/%s/fits/noIso/%s_result_MC_%s%s.root" % (
-datatag, flavor, stage, suffix))
+makeDir("/groups/fatih.okcu/StopsCompressed/results/%s/fits/noIso/%s_result_MC_%s%s.root" % (datatag, flavor, stage, suffix))
+f = TFile("/groups/fatih.okcu/StopsCompressed/results/%s/fits/noIso/%s_result_MC_%s%s.root" % (datatag, flavor, stage, suffix))
 effcntZMC = TEfficiency(f.Get("effcnt"))
 efffitZMC = TEfficiency(f.Get("efffit"))
 f.Close()
-f = TFile("/groups/fatih.okcu/StopsCompressed/results/%s/fits/noIso/%s_result_Data_%s%s.root" % (
-datatag, flavor, stage, suffix))
+f = TFile("/groups/fatih.okcu/StopsCompressed/results/%s/fits/noIso/%s_result_Data_%s%s.root" % (datatag, flavor, stage, suffix))
 effcntZData = TEfficiency(f.Get("effcnt"))
 efffitZData = TEfficiency(f.Get("efffit"))
 f.Close()
@@ -198,11 +195,9 @@ savedir = "/groups/hephy/cms/fatih.okcu/www/StopsCompressed/TnP/%s/finalplots/no
 makeDir(savedir)
 makeDir("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/finalplots/noIso" % datatag)
 
-c1.SaveAs("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/finalplots/noIso/%s_eff_%s_%s.png" % (
-datatag, flavor, stage, etabin))
+c1.SaveAs("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/finalplots/noIso/%s_eff_%s_%s.png" % (datatag, flavor, stage, etabin))
 c1.SaveAs("%s/%s_eff_%s_%s.png" % (savedir, flavor, stage, etabin))
-fout = TFile("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/finalplots/noIso/%s_eff_%s_%s.root" % (
-datatag, flavor, stage, etabin), "RECREATE")
+fout = TFile("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/finalplots/noIso/%s_eff_%s_%s.root" % (datatag, flavor, stage, etabin), "RECREATE")
 c1c = c1.Clone()
 c1c.Write()
 fout.Close()
@@ -244,9 +239,7 @@ c2c = c2.Clone()
 c2c.Write()
 fout.Close()
 
-fsfout = TFile(
-    "/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/finalplots/noIso/hephy_scale_factors.root" % datatag,
-    "update")
+fsfout = TFile("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/finalplots/noIso/hephy_scale_factors.root" % datatag, "update")
 H_SFfitZ_name = "{0}_SF_{1}_{2}".format(flavor, stage, etabin)
 fsfout.Delete(H_SFfitZ_name + ";*")
 
