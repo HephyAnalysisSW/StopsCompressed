@@ -7,7 +7,7 @@ ROOT.gStyle.SetOptStat(0) #1111 adds histogram statistics box #Name, Entries, Me
 inputFileName = "hephy_scale_factors"
 if len(sys.argv)>1: inputFileName = sys.argv[1]
 #inputFile = "/scratch/priya.hussain/StopsCompressed/results/2017_94X/finalplots/noIso/%s.root"%inputFileName
-inputFile = "/groups/hephy/cms/felix.lang/StopsCompressed/results/2017_94X/fits/%s"%inputFileName
+inputFile = "/groups/hephy/cms/felix.lang/StopsCompressed/results/2017_94X/finalplots/%s.root"%inputFileName
 #inputFile = "/scratch/priya.hussain/StopsCompressed/results/2018_94_pre3/finalplots/noIso/%s.root"%inputFileName
 #inputFile = "/scratch/priya.hussain/StopsCompressed/results/2016_80X_v5/finalplots/cent/%s.root"%inputFileName
 #inputFile = "/scratch/priya.hussain/StopsCompressed/results/2016_80X_v5/finalplots/legacy/%s.root"%inputFileName
@@ -178,7 +178,7 @@ c.Modified()
 c.Update()
 
 #Save canvas
-savedir = "/groups/hephy/cms/felix.lang/StopsCompressed/results/2017_94X/2DleptonSF"
+savedir = "/groups/hephy/cms/felix.lang/www/StopsCompressed/TnP/final/2017_94X/2DleptonSF"
 #savedir = "/mnt/hephy/cms/priya.hussain/www/StopsCompressed/TnP/final/2017_94X/2DleptonSF"
 #savedir = "/mnt/hephy/cms/priya.hussain/www/StopsCompressed/TnP/final/2018_94_pre3/2DleptonSF/noIso"
 #savedir = "/mnt/hephy/cms/priya.hussain/www/StopsCompressed/TnP/final/2016_80X_v5/2DleptonSF/legacy/comp"
