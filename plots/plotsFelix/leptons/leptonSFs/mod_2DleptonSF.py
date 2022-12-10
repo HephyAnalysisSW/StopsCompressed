@@ -119,6 +119,7 @@ else:
 
 	for i in range(nx):
 		i+=1
+		print nx
 		SF.SetBinContent(1, i, h['m2p0_m2p5'].GetBinContent(i))
 		print "value for 1st", h['m2p0_m2p5'].GetBinContent(i)
 		SF.SetBinError(1,   i, h['m2p0_m2p5'].GetBinError(i))
