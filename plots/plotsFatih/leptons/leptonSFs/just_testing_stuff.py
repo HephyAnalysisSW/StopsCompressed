@@ -1,3 +1,0 @@
-import ROOT
-
-print('hey')

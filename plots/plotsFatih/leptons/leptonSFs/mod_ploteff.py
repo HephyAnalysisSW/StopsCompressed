@@ -3,6 +3,9 @@ from math import *
 import os, sys
 import array
 
+import time
+start_time = time.time()
+
 # binning = [3.5, 5., 10., 20., 30., 45., 60., 100., 200.]
 
 mineff = 0.3
@@ -247,3 +250,5 @@ H_SFfitZ = converttohist(SFfitZ, H_SFfitZ_name)
 
 fsfout.Write()
 fsfout.Close()
+
+print(time.time()-start_time)
