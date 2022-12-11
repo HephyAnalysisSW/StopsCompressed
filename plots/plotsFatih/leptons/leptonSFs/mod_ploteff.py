@@ -4,7 +4,8 @@ import os, sys
 import array
 
 import time
-start_time = time.time()
+import numpy as np
+from itertools import product
 
 # binning = [3.5, 5., 10., 20., 30., 45., 60., 100., 200.]
 
@@ -241,6 +242,16 @@ datatag, flavor, stage, etabin), "RECREATE")
 c2c = c2.Clone()
 c2c.Write()
 fout.Close()
+
+flavors = ['ele', 'muon']
+stages = ['Id', 'IpIso', 'IdSpec']
+etabins = ['all', '0p8', '0p8_1p4', '1p4_1p5', '1p5_2p0', '2p0_2p5', 'm0p8', 'm0p8_m1p4', 'm1pm4_m1p5', 'm1p5_m2p0', 'm2p0_m2p5']
+time_interval = 4
+unique_times = np.arange(0, len(flavors)*len(stages)*len(etabins)*time_interval, time_interval)
+unique_times_dict = {fl: {st: {et: 0 for et in etabins} for st in stages} for fl in flavors}
+for i, (fl, st, et) in enumerate(product(flavors, stages, etabins)):
+    unique_times_dict[fl][st][et] = unique_times[i]
+time.sleep(unique_times_dict[flavor][stage][etabin])
 
 fsfout = TFile("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/finalplots/noIso/hephy_scale_factors.root" % datatag, "update")
 H_SFfitZ_name = "{0}_SF_{1}_{2}".format(flavor, stage, etabin)
