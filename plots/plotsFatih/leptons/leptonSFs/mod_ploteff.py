@@ -230,7 +230,7 @@ leg2.AddEntry(SFfitZ, "Z fit T&P", "lpe")
 leg2.Draw()
 gPad.Update()
 
-c2.SaveAs("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/finalplots/noIso%s_SF_%s_%s.png" % (
+c2.SaveAs("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/finalplots/noIso/%s_SF_%s_%s.png" % (
 datatag, flavor, stage, etabin))
 c2.SaveAs("%s/%s_SF_%s_%s.png" % (savedir, flavor, stage, etabin))
 fout = TFile("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/finalplots/noIso/%s_SF_%s_%s.root" % (
