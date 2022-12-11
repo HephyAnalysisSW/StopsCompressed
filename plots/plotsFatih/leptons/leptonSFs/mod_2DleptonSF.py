@@ -2,6 +2,10 @@ import ROOT
 import os, sys
 import array
 
+import time
+import numpy as np
+from itertools import product
+
 ROOT.gStyle.SetOptStat(0) #1111 adds histogram statistics box #Name, Entries, Mean, RMS, Underflow, Overflow, Integral, Skewness, Kurtosis
 
 inputFileName = "hephy_scale_factors"
@@ -185,6 +189,15 @@ savedir = '/groups/hephy/cms/fatih.okcu/StopsCompressed/results/2017_94X/2Dlepto
 #savedir = "/mnt/hephy/cms/priya.hussain/www/StopsCompressed/TnP/final/2018_94_pre3/2DleptonSF/noIso"
 #savedir = "/mnt/hephy/cms/priya.hussain/www/StopsCompressed/TnP/final/2016_80X_v5/2DleptonSF/legacy/comp"
 #savedir = "/mnt/hephy/cms/priya.hussain/www/StopsCompressed/TnP/final/2016_80X_v5/2DleptonSF/mod"
+
+flavors = ['ele', 'muon']
+stages = ['Id', 'IpIso', 'IdSpec']
+time_interval = 4
+unique_times = np.arange(0, len(flavors)*len(stages)*time_interval, time_interval)
+unique_times_dict = {fl: {st: 0 for st in stages} for fl in flavors}
+for i, (fl, st) in enumerate(product(flavors, stages)):
+    unique_times_dict[fl][st] = unique_times[i]
+time.sleep(unique_times_dict[flavor][stage])
 
 makeDir(savedir)
 makeDir(savedir + '/root')
