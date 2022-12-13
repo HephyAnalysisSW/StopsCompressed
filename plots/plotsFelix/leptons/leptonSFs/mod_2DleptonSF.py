@@ -128,10 +128,9 @@ else:
         print "value for 2nd", h['m1p5_m2p0'].GetBinContent(i)
         SF.SetBinError(2,   i, h['m1p5_m2p0'].GetBinError(i))
 
-        # uncommented
-        SF.SetBinContent(3, i, h['m1pm4_m1p5'].GetBinContent(i))
-        print "value for 3rd", h['m1pm4_m1p5'].GetBinContent(i)
-        SF.SetBinError(3,   i, h['m1pm4_m1p5'].GetBinError(i))
+        # SF.SetBinContent(3, i, h['m1pm4_m1p5'].GetBinContent(i))
+        # print "value for 3rd", h['m1pm4_m1p5'].GetBinContent(i)
+        # SF.SetBinError(3,   i, h['m1pm4_m1p5'].GetBinError(i))
 
         SF.SetBinContent(3, i, 0)
         print "value for 3rd", 0
@@ -153,10 +152,9 @@ else:
         print "value for 7th", h['0p8_1p4'].GetBinContent(i)
         SF.SetBinError(7,   i, h['0p8_1p4'].GetBinError(i))
 
-        # uncommented
-        SF.SetBinContent(8, i, h['1p4_1p5'].GetBinContent(i))
-        print "value for 8th", h['1p4_1p5'].GetBinContent(i)
-        SF.SetBinError(8,   i, h['1p4_1p5'].GetBinError(i))
+        # SF.SetBinContent(8, i, h['1p4_1p5'].GetBinContent(i))
+        # print "value for 8th", h['1p4_1p5'].GetBinContent(i)
+        # SF.SetBinError(8,   i, h['1p4_1p5'].GetBinError(i))
 
         SF.SetBinContent(8, i, 0)
         print "value for 8th", 0
