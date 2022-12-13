@@ -1,12 +1,12 @@
 # mod_ele_fit
 
 #python  mod_ele_hist.py Data Id 2017
-#python  mod_ele_hist.py Data IdSpec 2017
-#python  mod_ele_hist.py Data IpIso 2017
+python  mod_ele_hist.py Data IdSpec 2017
+python  mod_ele_hist.py Data IpIso 2017
 #
 #python  mod_ele_hist.py MC Id 2017
-#python  mod_ele_hist.py MC IdSpec 2017
-#python  mod_ele_hist.py MC IpIso 2017
+python  mod_ele_hist.py MC IdSpec 2017
+python  mod_ele_hist.py MC IpIso 2017
 
 # mod_ele_fit
 
@@ -80,17 +80,17 @@
 
 # mod_ploteff
 
-python mod_ploteff.py ele Id  all 2017
-python mod_ploteff.py ele Id  2p0_2p5 2017
-python mod_ploteff.py ele Id  1p5_2p0 2017
-python mod_ploteff.py ele Id  1p4_1p5 2017
-python mod_ploteff.py ele Id  0p8_1p4 2017
-python mod_ploteff.py ele Id  0p8 2017
-python mod_ploteff.py ele Id  m2p0_m2p5 2017
-python mod_ploteff.py ele Id  m1p5_m2p0 2017
-python mod_ploteff.py ele Id  m1pm4_m1p5 2017
-python mod_ploteff.py ele Id  m0p8_m1p4 2017
-python mod_ploteff.py ele Id  m0p8 2017
+#python mod_ploteff.py ele Id  all 2017
+#python mod_ploteff.py ele Id  2p0_2p5 2017
+#python mod_ploteff.py ele Id  1p5_2p0 2017
+#python mod_ploteff.py ele Id  1p4_1p5 2017
+#python mod_ploteff.py ele Id  0p8_1p4 2017
+#python mod_ploteff.py ele Id  0p8 2017
+#python mod_ploteff.py ele Id  m2p0_m2p5 2017
+#python mod_ploteff.py ele Id  m1p5_m2p0 2017
+#python mod_ploteff.py ele Id  m1pm4_m1p5 2017
+#python mod_ploteff.py ele Id  m0p8_m1p4 2017
+#python mod_ploteff.py ele Id  m0p8 2017
 #
 #python mod_ploteff.py ele  IdSpec  all 2017
 #python mod_ploteff.py ele  IdSpec  2p0_2p5 2017
