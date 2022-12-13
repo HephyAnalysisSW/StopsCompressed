@@ -175,7 +175,7 @@ else:
 
 #c = ROOT.TCanvas("c", "Canvas", 1800, 1500)
 c = ROOT.TCanvas("c", "Canvas", 1800, 1500)
-ROOT.gStyle.SetPalette(1)
+ROOT.gStyle.SetPalette(0.94, 1.06)
 SF.Draw("COLZ TEXT89E") #CONT1-5 #plots the graph with axes and points
 
 #if logy: ROOT.gPad.SetLogz()
