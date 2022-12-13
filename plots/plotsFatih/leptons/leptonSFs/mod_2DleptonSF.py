@@ -118,7 +118,7 @@ else:
     SF.GetXaxis().SetTitleOffset(1.2)
     SF.GetYaxis().SetTitleOffset(1.2)
     SF.GetZaxis().SetTitleOffset(1.2)
-    SF.GetZaxis().SetRangeUser(0.5,1.)
+    SF.GetZaxis().SetRangeUser(0.94, 1.06)
     #keeping same z scale for comparison
     #SF.GetZaxis().SetRangeUser(0.75,1.25)
     SF.SetMarkerSize(0.8)
@@ -175,7 +175,7 @@ else:
 
 #c = ROOT.TCanvas("c", "Canvas", 1800, 1500)
 c = ROOT.TCanvas("c", "Canvas", 1800, 1500)
-ROOT.gStyle.SetPalette(0.94, 1.06)
+ROOT.gStyle.SetPalette(1)
 SF.Draw("COLZ TEXT89E") #CONT1-5 #plots the graph with axes and points
 
 #if logy: ROOT.gPad.SetLogz()
