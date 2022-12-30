@@ -39,6 +39,12 @@ if year != "2016" and year != "2017" and year != "2018":
     print "wrong year"
     sys.exit()
 
+vfp  = ""
+if len(sys.argv)>4: vfp = sys.argv[4]
+if vfp != "preVFP" and year != "postVFP":
+    print "wrong vfp"
+    sys.exit()
+
 def makeDir(path):
     if "." in path[-5:]:
             path = path.replace(os.path.basename(path),"")
@@ -98,29 +104,27 @@ t = TChain("tnpEleIDs/fitter_tree")
 #t = TChain("GsfElectronToEleID/fitter_tree")
 
 if year == "2016":
-    if mode =="DataPreVFP":
-        # legacy 2016 pre VFP:
-        t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2016_ntuples/UL2016_SingleEle_Run2016B_ver2.root")
-        t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2016_ntuples/UL2016_SingleEle_Run2016C.root")
-        t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2016_ntuples/UL2016_SingleEle_Run2016D.root")
-        t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2016_ntuples/UL2016_SingleEle_Run2016E.root")
-        t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2016_ntuples/UL2016_SingleEle_Run2016F.root")
-
-    elif mode == "DataPostVFP":
-        # legacy 2016 post VFP:
-        t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2016_ntuples/UL2016_SingleEle_Run2016F_postVFP.root")
-        t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2016_ntuples/UL2016_SingleEle_Run2016G.root")
-        t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2016_ntuples/UL2016_SingleEle_Run2016H.root")
-
-    elif mode == "MCPreVFP":
-        #legacy MC tuples including (Pre VFP):
-        t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2016_ntuples/DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8_preVFP_UL2016.root")
-
-        #new TnP tuples w/o SUSY IDs
-        #t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2016/electrons/merged/DY_LO.root")
+    if mode == "Data":
+        if vfp == "preVFP":
+            # legacy 2016 pre VFP:
+            t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2016_ntuples/UL2016_SingleEle_Run2016B.root")
+            t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2016_ntuples/UL2016_SingleEle_Run2016B_ver2.root")
+            t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2016_ntuples/UL2016_SingleEle_Run2016C.root")
+            t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2016_ntuples/UL2016_SingleEle_Run2016D.root")
+            t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2016_ntuples/UL2016_SingleEle_Run2016E.root")
+            t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2016_ntuples/UL2016_SingleEle_Run2016F.root")
+        else:
+            # post VFP
+            t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2016_ntuples/UL2016_SingleEle_Run2016F_postVFP.root")
+            t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2016_ntuples/UL2016_SingleEle_Run2016G.root")
+            t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2016_ntuples/UL2016_SingleEle_Run2016H.root")
     else:
-        # Post VFP
-        t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2016_ntuples/DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8_postVFP_UL2016.root")
+        if vfp == "preVFP":
+            #legacy MC tuples including (Pre VFP):
+            t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2016_ntuples/DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8_preVFP_UL2016.root")
+        else:
+            # post VFP
+            t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2016_ntuples/DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8_postVFP_UL2016.root")
 
 elif year == "2017":
     if mode =="Data":
