@@ -1,11 +1,19 @@
 # JOBS FOR HIST
-python  mod_ele_hist.py Data Id 2016
-python  mod_ele_hist.py Data IdSpec 2016
-python  mod_ele_hist.py Data IpIso 2016
+python  mod_ele_hist.py Data Id 2016 preVFP
+python  mod_ele_hist.py Data IdSpec 2016 preVFP
+python  mod_ele_hist.py Data IpIso 2016 preVFP
 
-python  mod_ele_hist.py MC Id 2016
-python  mod_ele_hist.py MC IdSpec 2016
-python  mod_ele_hist.py MC IpIso 2016
+python  mod_ele_hist.py MC Id 2016 preVFP
+python  mod_ele_hist.py MC IdSpec 2016 preVFP
+python  mod_ele_hist.py MC IpIso 2016 preVFP
+
+#python  mod_ele_hist.py Data Id 2016 postVFP
+#python  mod_ele_hist.py Data IdSpec 2016 postVFP
+#python  mod_ele_hist.py Data IpIso 2016 postVFP
+#
+#python  mod_ele_hist.py MC Id 2016 postVFP
+#python  mod_ele_hist.py MC IdSpec 2016 postVFP
+#python  mod_ele_hist.py MC IpIso 2016 postVFP
 
 
 # JOBS FOR ELE FIT
