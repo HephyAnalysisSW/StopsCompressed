@@ -39,7 +39,7 @@ if year != "2016" and year != "2017" and year != "2018":
     print "wrong year"
     sys.exit()
 
-vfp  = ""
+vfp  = "postVFP"
 if len(sys.argv)>4: vfp = sys.argv[4]
 if vfp != "preVFP" and vfp != "postVFP":
     print "wrong vfp"
