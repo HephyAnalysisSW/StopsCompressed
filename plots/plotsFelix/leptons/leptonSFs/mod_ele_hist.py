@@ -136,9 +136,9 @@ elif year == "2017":
 
 elif year == "2018":
     if mode =="Data":
-        t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2018/v1/data/TnPTree_data_Run2018D_PromptReco-v2.root")
+        t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2018_MINIAOD_Nm1/EGamma_RunABCD.root")
     else:
-        t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/Run2018/v1/mc/TnPTree_mc_DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8.root")
+        t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2018_MINIAOD_Nm1/DYJetsToLL_madgraphMLM.root")
 
 makeDir("/groups/hephy/cms/felix.lang/StopsCompressed/results/%s/hists"%datatag)
 fout = TFile("/groups/hephy/cms/felix.lang/StopsCompressed/results/%s/hists/ele_histos_%s_%s.root"%(datatag,mode,stage),"recreate")
