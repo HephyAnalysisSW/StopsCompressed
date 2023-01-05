@@ -4,10 +4,17 @@ import array
 
 ROOT.gStyle.SetOptStat(0) #1111 adds histogram statistics box #Name, Entries, Mean, RMS, Underflow, Overflow, Integral, Skewness, Kurtosis
 
+if year == "2016":
+	datatag = "2016_80X_v5"
+elif year == "2017":
+	datatag ="2017_94X"
+elif year == "2018":
+	datatag ="2018_94_pre3"
+
 inputFileName = "hephy_scale_factors"
 if len(sys.argv)>1: inputFileName = sys.argv[1]
 #inputFile = "/scratch/priya.hussain/StopsCompressed/results/2017_94X/finalplots/noIso/%s.root"%inputFileName
-inputFile = "/groups/hephy/cms/felix.lang/StopsCompressed/results/2017_94X/finalplots/%s.root"%inputFileName
+inputFile = "/groups/hephy/cms/felix.lang/StopsCompressed/results/%s/finalplots/%s.root"%(datatag,inputFileName)
 #inputFile = "/scratch/priya.hussain/StopsCompressed/results/2018_94_pre3/finalplots/noIso/%s.root"%inputFileName
 #inputFile = "/scratch/priya.hussain/StopsCompressed/results/2016_80X_v5/finalplots/cent/%s.root"%inputFileName
 #inputFile = "/scratch/priya.hussain/StopsCompressed/results/2016_80X_v5/finalplots/legacy/%s.root"%inputFileName
