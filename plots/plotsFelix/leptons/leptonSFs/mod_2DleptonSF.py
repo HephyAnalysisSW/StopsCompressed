@@ -23,6 +23,7 @@ if flavor != "muon" and flavor != "ele":
 
 stage = "Id"
 if len(sys.argv)>3: stage = sys.argv[3]
+print(stage)
 if stage != "IpIso" and stage != "Id" and stage != "IdSpec" and stage != "IpIsoSpec":
     print "wrong stage"
     sys.exit()
