@@ -394,16 +394,16 @@
 # JOBS mod_2DleptonSF
 
 #   2016
-#python mod_2DleptonSF.py hephy_scale_factors ele Id
-#python mod_2DleptonSF.py hephy_scale_factors ele IdSpec
-#python mod_2DleptonSF.py hephy_scale_factors ele IpIso
+#python mod_2DleptonSF.py hephy_scale_factors ele Id 2016
+#python mod_2DleptonSF.py hephy_scale_factors ele IdSpec 2016
+#python mod_2DleptonSF.py hephy_scale_factors ele IpIso 2016
 
 #   2017
-python mod_2DleptonSF.py hephy_scale_factors ele Id
-python mod_2DleptonSF.py hephy_scale_factors ele IdSpec
-python mod_2DleptonSF.py hephy_scale_factors ele IpIso
+python mod_2DleptonSF.py hephy_scale_factors ele Id 2017
+python mod_2DleptonSF.py hephy_scale_factors ele IdSpec 2017
+python mod_2DleptonSF.py hephy_scale_factors ele IpIso 2017
 
 #   2018
-#python mod_2DleptonSF.py hephy_scale_factors ele Id
-#python mod_2DleptonSF.py hephy_scale_factors ele IdSpec
-#python mod_2DleptonSF.py hephy_scale_factors ele IpIso
+#python mod_2DleptonSF.py hephy_scale_factors ele Id 2018
+#python mod_2DleptonSF.py hephy_scale_factors ele IdSpec 2018
+#python mod_2DleptonSF.py hephy_scale_factors ele IpIso 2018
