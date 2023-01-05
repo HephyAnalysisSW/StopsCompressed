@@ -30,8 +30,8 @@ if stage != "IpIso" and stage != "Id" and stage != "IdSpec" and stage != "IpIsoS
 
 year = "2017"
 if len(sys.argv)>4: year = sys.argv[4]
-if stage != "2016" and stage != "2017" and stage != "2018":
-    print "wrong stage"
+if year != "2016" and year != "2017" and year != "2018":
+    print "wrong year"
     sys.exit()
 
 if year == "2016":
