@@ -180,10 +180,10 @@ c.Update()
 
 #Save canvas
 #savedir = "/groups/hephy/cms/felix.lang/www/StopsCompressed/TnP/final/2017_94X/2DleptonSF"
-#savedir = "/mnt/hephy/cms/felix.lang/www/StopsCompressed/TnP/final/2017_94X/2DleptonSF"
-savedir = "/mnt/hephy/cms/felix.lang/www/StopsCompressed/TnP/final/2018_94_pre3/2DleptonSF/noIso"
-#savedir = "/mnt/hephy/cms/felix.lang/www/StopsCompressed/TnP/final/2016_80X_v5/2DleptonSF/legacy/comp"
-#savedir = "/mnt/hephy/cms/felix.lang/www/StopsCompressed/TnP/final/2016_80X_v5/2DleptonSF/mod"
+#savedir = "/groups/hephy/cms/felix.lang/www/StopsCompressed/TnP/final/2017_94X/2DleptonSF"
+savedir = "/groups/hephy/cms/felix.lang/www/StopsCompressed/TnP/final/2018_94_pre3/2DleptonSF/noIso"
+#savedir = "/groups/hephy/cms/felix.lang/www/StopsCompressed/TnP/final/2016_80X_v5/2DleptonSF/legacy/comp"
+#savedir = "/groups/hephy/cms/felix.lang/www/StopsCompressed/TnP/final/2016_80X_v5/2DleptonSF/mod"
 
 makeDir(savedir)
 makeDir(savedir + '/root')
