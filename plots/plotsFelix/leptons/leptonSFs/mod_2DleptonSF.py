@@ -23,7 +23,6 @@ if flavor != "muon" and flavor != "ele":
 
 stage = "Id"
 if len(sys.argv)>3: stage = sys.argv[3]
-print(stage)
 if stage != "IpIso" and stage != "Id" and stage != "IdSpec" and stage != "IpIsoSpec":
     print "wrong stage"
     sys.exit()
@@ -198,9 +197,9 @@ c.Modified()
 c.Update()
 
 #Save canvas
+savedir = "/groups/hephy/cms/felix.lang/www/StopsCompressed/TnP/final/2017_94X/2DleptonSF"
 #savedir = "/groups/hephy/cms/felix.lang/www/StopsCompressed/TnP/final/2017_94X/2DleptonSF"
-#savedir = "/groups/hephy/cms/felix.lang/www/StopsCompressed/TnP/final/2017_94X/2DleptonSF"
-savedir = "/groups/hephy/cms/felix.lang/www/StopsCompressed/TnP/final/2018_94_pre3/2DleptonSF/noIso"
+#savedir = "/groups/hephy/cms/felix.lang/www/StopsCompressed/TnP/final/2018_94_pre3/2DleptonSF/noIso"
 #savedir = "/groups/hephy/cms/felix.lang/www/StopsCompressed/TnP/final/2016_80X_v5/2DleptonSF/legacy/comp"
 #savedir = "/groups/hephy/cms/felix.lang/www/StopsCompressed/TnP/final/2016_80X_v5/2DleptonSF/mod"
 
