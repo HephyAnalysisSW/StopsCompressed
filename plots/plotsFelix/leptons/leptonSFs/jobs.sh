@@ -1,19 +1,19 @@
 # JOBS mod_ele_fit
 
 #   2016
-#python  mod_ele_hist.py Data Id 2016 preVFP
-#python  mod_ele_hist.py Data IdSpec 2016 preVFP
-#python  mod_ele_hist.py Data IpIso 2016 preVFP
-#python  mod_ele_hist.py Data Id 2016 postVFP
-#python  mod_ele_hist.py Data IdSpec 2016 postVFP
-#python  mod_ele_hist.py Data IpIso 2016 postVFP
-#
-#python  mod_ele_hist.py MC Id 2016 preVFP
-#python  mod_ele_hist.py MC IdSpec 2016 preVFP
-#python  mod_ele_hist.py MC IpIso 2016 preVFP
-#python  mod_ele_hist.py MC Id 2016 postVFP
-#python  mod_ele_hist.py MC IdSpec 2016 postVFP
-#python  mod_ele_hist.py MC IpIso 2016 postVFP
+python  mod_ele_hist.py Data Id 2016 preVFP
+python  mod_ele_hist.py Data IdSpec 2016 preVFP
+python  mod_ele_hist.py Data IpIso 2016 preVFP
+python  mod_ele_hist.py Data Id 2016 postVFP
+python  mod_ele_hist.py Data IdSpec 2016 postVFP
+python  mod_ele_hist.py Data IpIso 2016 postVFP
+
+python  mod_ele_hist.py MC Id 2016 preVFP
+python  mod_ele_hist.py MC IdSpec 2016 preVFP
+python  mod_ele_hist.py MC IpIso 2016 preVFP
+python  mod_ele_hist.py MC Id 2016 postVFP
+python  mod_ele_hist.py MC IdSpec 2016 postVFP
+python  mod_ele_hist.py MC IpIso 2016 postVFP
 
 #   2017
 #python  mod_ele_hist.py Data Id 2017
@@ -393,6 +393,6 @@
 
 # JOBS mod_2DleptonSF
 
-python mod_2DleptonSF.py hephy_scale_factors ele Id
-python mod_2DleptonSF.py hephy_scale_factors ele IdSpec
-python mod_2DleptonSF.py hephy_scale_factors ele IpIso
+#python mod_2DleptonSF.py hephy_scale_factors ele Id
+#python mod_2DleptonSF.py hephy_scale_factors ele IdSpec
+#python mod_2DleptonSF.py hephy_scale_factors ele IpIso
