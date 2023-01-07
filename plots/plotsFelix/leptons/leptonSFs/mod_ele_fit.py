@@ -36,13 +36,23 @@ if len(sys.argv)>4: year = sys.argv[4]
 if year != "2016" and year != "2017" and year != "2018":
     print "wrong year"
     sys.exit()
+
+vfp  = "postVFP"
+if len(sys.argv)>5: vfp = sys.argv[5]
+if vfp != "preVFP" and vfp != "postVFP":
+    print "wrong vfp"
+    sys.exit()
+
 #etabin = "all"
 #if len(sys.argv)>3: etabin = sys.argv[3]
 #if etabin != "barrel" and etabin != "endcap" and etabin != "all":
 #    print "wrong etabin"
 #    sys.exit()
 if year == "2016":
-	datatag = "2016_80X_v5"
+    if vfp == "preVFP":
+        datatag = "2016_80X_v5_preVFP"
+    if vfp == "postVFP":
+        datatag = "2016_80X_v5_postVFP"
 elif year == "2017":
 	datatag ="2017_94X"
 elif year == "2018":
