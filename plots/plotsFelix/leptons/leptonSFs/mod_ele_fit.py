@@ -51,7 +51,7 @@ if vfp != "preVFP" and vfp != "postVFP":
 if year == "2016":
     if vfp == "preVFP":
         datatag = "2016_80X_v5_preVFP"
-    if vfp == "postVFP":
+    else:
         datatag = "2016_80X_v5_postVFP"
 elif year == "2017":
 	datatag ="2017_94X"

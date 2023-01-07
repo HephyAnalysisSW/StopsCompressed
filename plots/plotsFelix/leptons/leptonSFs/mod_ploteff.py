@@ -44,10 +44,19 @@ if year not in [ "2016" ,"2017" ,"2018"]:
 	print "wrong year"
 	sys.exit()
 
+vfp  = "postVFP"
+if len(sys.argv)>5: vfp = sys.argv[5]
+if vfp != "preVFP" and vfp != "postVFP":
+    print "wrong vfp"
+    sys.exit()
+
 plotcount = 1
 #if len(sys.argv)>5: plotcount = int(sys.argv[5])
 if year == "2016":
-	datatag = "2016_80X_v5"
+    if vfp == "preVFP":
+        datatag = "2016_80X_v5_preVFP"
+    else:
+        datatag = "2016_80X_v5_postVFP"
 elif year == "2017":
 	datatag ="2017_94X"
 elif year == "2018":
