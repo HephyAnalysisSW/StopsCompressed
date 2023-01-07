@@ -28,25 +28,35 @@ if stage != "IpIso" and stage != "Id" and stage != "IdSpec":
 etabin = 'all'
 if len(sys.argv)>3: etabin = sys.argv[3]
 if etabin not in ['all', '0p8', '0p8_1p4', '1p4_1p5', '1p5_2p0', '2p0_2p5', 'm0p8', 'm0p8_m1p4', 'm1pm4_m1p5', 'm1p5_m2p0', 'm2p0_m2p5']:
-	print "wrong etabin"
-	sys.exit()
+    print "wrong etabin"
+    sys.exit()
 
 year = "2016"
 if len(sys.argv)>4: year = sys.argv[4]
 if year != "2016" and year != "2017" and year != "2018":
     print "wrong year"
     sys.exit()
+
+vfp = "postVFP"
+if len(sys.argv)>5: vfp = sys.argv[5]
+if vfp != "preVFP" and vfp != "postVFP":
+    print "wrong vfp"
+    sys.exit()
+
 #etabin = "all"
 #if len(sys.argv)>3: etabin = sys.argv[3]
 #if etabin != "barrel" and etabin != "endcap" and etabin != "all":
 #    print "wrong etabin"
 #    sys.exit()
 if year == "2016":
-	datatag = "2016_80X_v5"
+    if vfp == "preVFP":
+        datatag = "2016_80X_v5_preVFP"
+    else:
+        datatag = "2016_80X_v5_postVFP"
 elif year == "2017":
-	datatag ="2017_94X"
+    datatag ="2017_94X"
 elif year == "2018":
-	datatag ="2018_94_pre3"
+    datatag ="2018_94_pre3"
 def makeDir(path):
     if "." in path[-5:]:
             path = path.replace(os.path.basename(path),"")
@@ -151,8 +161,8 @@ def getsigCB(hz,lowedge,pl=False):
     mean = RooRealVar("meang", "meang", 90., 88, 92.)
     sigmamax = 5. #if lowedge>20. else 3.
     if '0p8' in etabin  and lowedge<6.:
-    	sigmamax = 3.5
-	print "?????", etabin, "!!!!!"
+        sigmamax = 3.5
+    print "?????", etabin, "!!!!!"
     sigma = RooRealVar("sigma", "sigma", 2.5, 2., sigmamax)
 
     ncent = 40. if lowedge<30 else 50.
@@ -203,7 +213,7 @@ def getsigCB(hz,lowedge,pl=False):
         cbex.plotOn(xframe,RooFit.Components("cbgaus"),RooFit.LineStyle(kDotted))
         cbex.plotOn(xframe,RooFit.Components("expo"),RooFit.LineStyle(kDashed))
         xframe.Draw()
-	#chi2 = xframe.chiSquare(7)
+    #chi2 = xframe.chiSquare(7)
 	#chi2 = xframe.chiSquare()
         #print "chi square: ", chi2
     print "mean:", mean.getVal()

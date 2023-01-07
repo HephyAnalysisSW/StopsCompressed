@@ -11,13 +11,13 @@ ROOT.gStyle.SetOptStat(0) #1111 adds histogram statistics box #Name, Entries, Me
 inputFileName = "hephy_scale_factors"
 if len(sys.argv)>1: inputFileName = sys.argv[1]
 #inputFile = "/scratch/priya.hussain/StopsCompressed/results/2017_94X/finalplots/noIso/%s.root"%inputFileName
-inputFile = "/groups/hephy/cms/fatih.okcu/StopsCompressed/results/2017_94X/finalplots/noIso/%s.root"%inputFileName
+# inputFile = "/groups/hephy/cms/fatih.okcu/StopsCompressed/results/2017_94X/finalplots/noIso/%s.root"%inputFileName
 #inputFile = "/scratch/priya.hussain/StopsCompressed/results/2018_94_pre3/finalplots/noIso/%s.root"%inputFileName
 #inputFile = "/scratch/priya.hussain/StopsCompressed/results/2016_80X_v5/finalplots/cent/%s.root"%inputFileName
 #inputFile = "/scratch/priya.hussain/StopsCompressed/results/2016_80X_v5/finalplots/legacy/%s.root"%inputFileName
-if not os.path.isfile(inputFile):
-    print "input file %s does not exist"%inputFile
-    sys.exit()
+# if not os.path.isfile(inputFile):
+#     print "input file %s does not exist"%inputFile
+#     sys.exit()
 
 flavor = "ele"
 if len(sys.argv)>2: flavor = sys.argv[2]
@@ -29,6 +29,24 @@ stage = "Id"
 if len(sys.argv)>3: stage = sys.argv[3]
 if stage != "IpIso" and stage != "Id" and stage != "IdSpec" and stage != "IpIsoSpec":
     print "wrong stage"
+    sys.exit()
+
+year = "2017"
+if len(sys.argv)>4: year = sys.argv[4]
+if year != "2016" and year != "2017" and year != "2018":
+    print "wrong year"
+    sys.exit()
+
+if year == "2016":
+    datatag = "2016_80X_v5"
+elif year == "2017":
+    datatag = "2017_94X"
+elif year == "2018":
+    datatag = "2018_94_pre3"
+
+inputFile = "/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/finalplots/%s.root"%(datatag,inputFileName)
+if not os.path.isfile(inputFile):
+    print "input file %s does not exist"%inputFile
     sys.exit()
 
 suffix = "_%s_%s_%s"%(inputFileName, flavor, stage)
@@ -184,7 +202,15 @@ c.Modified()
 c.Update()
 
 #Save canvas
-savedir = '/groups/hephy/cms/fatih.okcu/StopsCompressed/results/2017_94X/2DleptonSF'
+if year == "2016":
+    savedir = "/groups/hephy/cms/fatih.okcu/www/StopsCompressed/TnP/final/2016_80X_v5/2DleptonSF"
+elif year == "2017":
+    savedir = "/groups/hephy/cms/fatih.okcu/www/StopsCompressed/TnP/final/2017_94X/2DleptonSF"
+elif year == "2018":
+    savedir = "/groups/hephy/cms/fatih.okcu/www/StopsCompressed/TnP/final/2018_94_pre3/2DleptonSF"
+
+
+# savedir = '/groups/hephy/cms/fatih.okcu/StopsCompressed/results/2017_94X/2DleptonSF'
 #savedir = "/mnt/hephy/cms/priya.hussain/www/StopsCompressed/TnP/final/2017_94X/2DleptonSF"
 #savedir = "/mnt/hephy/cms/priya.hussain/www/StopsCompressed/TnP/final/2018_94_pre3/2DleptonSF/noIso"
 #savedir = "/mnt/hephy/cms/priya.hussain/www/StopsCompressed/TnP/final/2016_80X_v5/2DleptonSF/legacy/comp"

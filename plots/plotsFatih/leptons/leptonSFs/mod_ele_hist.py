@@ -33,13 +33,13 @@ if stage != "IpIso" and stage != "Id" and stage != "IdSpec":
     print "wrong stage"
     sys.exit()
 
-year  = "2016"
+year = "2016"
 if len(sys.argv)>3: year = sys.argv[3]
 if year != "2016" and year != "2017" and year != "2018":
     print "wrong year"
     sys.exit()
 
-vfp  = ""
+vfp = "postVFP"
 if len(sys.argv)>4: vfp = sys.argv[4]
 if vfp != "preVFP" and vfp != "postVFP":
     print "wrong vfp"
@@ -55,14 +55,20 @@ def makeDir(path):
     else:
             os.makedirs(path)
 
+
 def gethist(t,cut,lowedge,highedge,tag,etabin):
     histname = "h_{0:.1f}_{1:.1f}_{3}_{2}".format(lowedge,highedge,tag,etabin)
     histname = histname.replace(".","p")
     hz = TH1F(histname,"",60,60,120)
     t.Draw("mass>>"+histname,cut,"goff")
     return hz
+
+
 if year == "2016":
-    datatag = "2016_80X_v5"
+    if vfp == "preVFP":
+        datatag = "2016_80X_v5_preVFP"
+    else:
+        datatag = "2016_80X_v5_postVFP"
 elif year == "2017":
     datatag ="2017_94X"
 elif year == "2018":
