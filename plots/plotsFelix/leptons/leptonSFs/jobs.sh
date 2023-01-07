@@ -330,93 +330,93 @@
 # JOBS mod_ploteff
 
 #   2016
-python mod_ploteff.py ele IpIso all 2016 preVFP
-python mod_ploteff.py ele Id all 2016 preVFP
-python mod_ploteff.py ele IdSpec all 2016 preVFP
-
-python mod_ploteff.py ele IpIso 0p8 2016 preVFP
-python mod_ploteff.py ele Id 0p8 2016 preVFP
-python mod_ploteff.py ele IdSpec 0p8 2016 preVFP
-
-python mod_ploteff.py ele IpIso 0p8_1p4 2016 preVFP
-python mod_ploteff.py ele Id 0p8_1p4 2016 preVFP
-python mod_ploteff.py ele IdSpec 0p8_1p4 2016 preVFP
-
-python mod_ploteff.py ele IpIso 1p4_1p5 2016 preVFP
-python mod_ploteff.py ele Id 1p4_1p5 2016 preVFP
-python mod_ploteff.py ele IdSpec 1p4_1p5 2016 preVFP
-
-python mod_ploteff.py ele IpIso 1p5_2p0 2016 preVFP
-python mod_ploteff.py ele Id 1p5_2p0 2016 preVFP
-python mod_ploteff.py ele IdSpec 1p5_2p0 2016 preVFP
-
-python mod_ploteff.py ele IpIso 2p0_2p5 2016 preVFP
-python mod_ploteff.py ele Id 2p0_2p5 2016 preVFP
-python mod_ploteff.py ele IdSpec 2p0_2p5 2016 preVFP
-
-python mod_ploteff.py ele IpIso m0p8 2016 preVFP
-python mod_ploteff.py ele Id m0p8 2016 preVFP
-python mod_ploteff.py ele IdSpec m0p8 2016 preVFP
-
-python mod_ploteff.py ele IpIso m0p8_m1p4 2016 preVFP
-python mod_ploteff.py ele Id m0p8_m1p4 2016 preVFP
-python mod_ploteff.py ele IdSpec m0p8_m1p4 2016 preVFP
-
-python mod_ploteff.py ele IpIso m1pm4_m1p5 2016 preVFP
-python mod_ploteff.py ele Id m1pm4_m1p5 2016 preVFP
-python mod_ploteff.py ele IdSpec m1pm4_m1p5 2016 preVFP
-
-python mod_ploteff.py ele IpIso m1p5_m2p0 2016 preVFP
-python mod_ploteff.py ele Id m1p5_m2p0 2016 preVFP
-python mod_ploteff.py ele IdSpec m1p5_m2p0 2016 preVFP
-
-python mod_ploteff.py ele IpIso m2p0_m2p5 2016 preVFP
-python mod_ploteff.py ele Id m2p0_m2p5 2016 preVFP
-python mod_ploteff.py ele IdSpec m2p0_m2p5 2016 preVFP
-
-python mod_ploteff.py ele IpIso all 2016 postVFP
-python mod_ploteff.py ele Id all 2016 postVFP
-python mod_ploteff.py ele IdSpec all 2016 postVFP
-
-python mod_ploteff.py ele IpIso 0p8 2016 postVFP
-python mod_ploteff.py ele Id 0p8 2016 postVFP
-python mod_ploteff.py ele IdSpec 0p8 2016 postVFP
-
-python mod_ploteff.py ele IpIso 0p8_1p4 2016 postVFP
-python mod_ploteff.py ele Id 0p8_1p4 2016 postVFP
-python mod_ploteff.py ele IdSpec 0p8_1p4 2016 postVFP
-
-python mod_ploteff.py ele IpIso 1p4_1p5 2016 postVFP
-python mod_ploteff.py ele Id 1p4_1p5 2016 postVFP
-python mod_ploteff.py ele IdSpec 1p4_1p5 2016 postVFP
-
-python mod_ploteff.py ele IpIso 1p5_2p0 2016 postVFP
-python mod_ploteff.py ele Id 1p5_2p0 2016 postVFP
-python mod_ploteff.py ele IdSpec 1p5_2p0 2016 postVFP
-
-python mod_ploteff.py ele IpIso 2p0_2p5 2016 postVFP
-python mod_ploteff.py ele Id 2p0_2p5 2016 postVFP
-python mod_ploteff.py ele IdSpec 2p0_2p5 2016 postVFP
-
-python mod_ploteff.py ele IpIso m0p8 2016 postVFP
-python mod_ploteff.py ele Id m0p8 2016 postVFP
-python mod_ploteff.py ele IdSpec m0p8 2016 postVFP
-
-python mod_ploteff.py ele IpIso m0p8_m1p4 2016 postVFP
-python mod_ploteff.py ele Id m0p8_m1p4 2016 postVFP
-python mod_ploteff.py ele IdSpec m0p8_m1p4 2016 postVFP
-
-python mod_ploteff.py ele IpIso m1pm4_m1p5 2016 postVFP
-python mod_ploteff.py ele Id m1pm4_m1p5 2016 postVFP
-python mod_ploteff.py ele IdSpec m1pm4_m1p5 2016 postVFP
-
-python mod_ploteff.py ele IpIso m1p5_m2p0 2016 postVFP
-python mod_ploteff.py ele Id m1p5_m2p0 2016 postVFP
-python mod_ploteff.py ele IdSpec m1p5_m2p0 2016 postVFP
-
-python mod_ploteff.py ele IpIso m2p0_m2p5 2016 postVFP
-python mod_ploteff.py ele Id m2p0_m2p5 2016 postVFP
-python mod_ploteff.py ele IdSpec m2p0_m2p5 2016 postVFP
+#python mod_ploteff.py ele IpIso all 2016 preVFP
+#python mod_ploteff.py ele Id all 2016 preVFP
+#python mod_ploteff.py ele IdSpec all 2016 preVFP
+#
+#python mod_ploteff.py ele IpIso 0p8 2016 preVFP
+#python mod_ploteff.py ele Id 0p8 2016 preVFP
+#python mod_ploteff.py ele IdSpec 0p8 2016 preVFP
+#
+#python mod_ploteff.py ele IpIso 0p8_1p4 2016 preVFP
+#python mod_ploteff.py ele Id 0p8_1p4 2016 preVFP
+#python mod_ploteff.py ele IdSpec 0p8_1p4 2016 preVFP
+#
+#python mod_ploteff.py ele IpIso 1p4_1p5 2016 preVFP
+#python mod_ploteff.py ele Id 1p4_1p5 2016 preVFP
+#python mod_ploteff.py ele IdSpec 1p4_1p5 2016 preVFP
+#
+#python mod_ploteff.py ele IpIso 1p5_2p0 2016 preVFP
+#python mod_ploteff.py ele Id 1p5_2p0 2016 preVFP
+#python mod_ploteff.py ele IdSpec 1p5_2p0 2016 preVFP
+#
+#python mod_ploteff.py ele IpIso 2p0_2p5 2016 preVFP
+#python mod_ploteff.py ele Id 2p0_2p5 2016 preVFP
+#python mod_ploteff.py ele IdSpec 2p0_2p5 2016 preVFP
+#
+#python mod_ploteff.py ele IpIso m0p8 2016 preVFP
+#python mod_ploteff.py ele Id m0p8 2016 preVFP
+#python mod_ploteff.py ele IdSpec m0p8 2016 preVFP
+#
+#python mod_ploteff.py ele IpIso m0p8_m1p4 2016 preVFP
+#python mod_ploteff.py ele Id m0p8_m1p4 2016 preVFP
+#python mod_ploteff.py ele IdSpec m0p8_m1p4 2016 preVFP
+#
+#python mod_ploteff.py ele IpIso m1pm4_m1p5 2016 preVFP
+#python mod_ploteff.py ele Id m1pm4_m1p5 2016 preVFP
+#python mod_ploteff.py ele IdSpec m1pm4_m1p5 2016 preVFP
+#
+#python mod_ploteff.py ele IpIso m1p5_m2p0 2016 preVFP
+#python mod_ploteff.py ele Id m1p5_m2p0 2016 preVFP
+#python mod_ploteff.py ele IdSpec m1p5_m2p0 2016 preVFP
+#
+#python mod_ploteff.py ele IpIso m2p0_m2p5 2016 preVFP
+#python mod_ploteff.py ele Id m2p0_m2p5 2016 preVFP
+#python mod_ploteff.py ele IdSpec m2p0_m2p5 2016 preVFP
+#
+#python mod_ploteff.py ele IpIso all 2016 postVFP
+#python mod_ploteff.py ele Id all 2016 postVFP
+#python mod_ploteff.py ele IdSpec all 2016 postVFP
+#
+#python mod_ploteff.py ele IpIso 0p8 2016 postVFP
+#python mod_ploteff.py ele Id 0p8 2016 postVFP
+#python mod_ploteff.py ele IdSpec 0p8 2016 postVFP
+#
+#python mod_ploteff.py ele IpIso 0p8_1p4 2016 postVFP
+#python mod_ploteff.py ele Id 0p8_1p4 2016 postVFP
+#python mod_ploteff.py ele IdSpec 0p8_1p4 2016 postVFP
+#
+#python mod_ploteff.py ele IpIso 1p4_1p5 2016 postVFP
+#python mod_ploteff.py ele Id 1p4_1p5 2016 postVFP
+#python mod_ploteff.py ele IdSpec 1p4_1p5 2016 postVFP
+#
+#python mod_ploteff.py ele IpIso 1p5_2p0 2016 postVFP
+#python mod_ploteff.py ele Id 1p5_2p0 2016 postVFP
+#python mod_ploteff.py ele IdSpec 1p5_2p0 2016 postVFP
+#
+#python mod_ploteff.py ele IpIso 2p0_2p5 2016 postVFP
+#python mod_ploteff.py ele Id 2p0_2p5 2016 postVFP
+#python mod_ploteff.py ele IdSpec 2p0_2p5 2016 postVFP
+#
+#python mod_ploteff.py ele IpIso m0p8 2016 postVFP
+#python mod_ploteff.py ele Id m0p8 2016 postVFP
+#python mod_ploteff.py ele IdSpec m0p8 2016 postVFP
+#
+#python mod_ploteff.py ele IpIso m0p8_m1p4 2016 postVFP
+#python mod_ploteff.py ele Id m0p8_m1p4 2016 postVFP
+#python mod_ploteff.py ele IdSpec m0p8_m1p4 2016 postVFP
+#
+#python mod_ploteff.py ele IpIso m1pm4_m1p5 2016 postVFP
+#python mod_ploteff.py ele Id m1pm4_m1p5 2016 postVFP
+#python mod_ploteff.py ele IdSpec m1pm4_m1p5 2016 postVFP
+#
+#python mod_ploteff.py ele IpIso m1p5_m2p0 2016 postVFP
+#python mod_ploteff.py ele Id m1p5_m2p0 2016 postVFP
+#python mod_ploteff.py ele IdSpec m1p5_m2p0 2016 postVFP
+#
+#python mod_ploteff.py ele IpIso m2p0_m2p5 2016 postVFP
+#python mod_ploteff.py ele Id m2p0_m2p5 2016 postVFP
+#python mod_ploteff.py ele IdSpec m2p0_m2p5 2016 postVFP
 #
 ##   2017
 #python mod_ploteff.py ele IpIso all 2017
@@ -511,9 +511,9 @@ python mod_ploteff.py ele IdSpec m2p0_m2p5 2016 postVFP
 # JOBS mod_2DleptonSF
 
 #   2016
-#python mod_2DleptonSF.py hephy_scale_factors ele Id 2016 preVFP
-#python mod_2DleptonSF.py hephy_scale_factors ele IdSpec 2016 preVFP
-#python mod_2DleptonSF.py hephy_scale_factors ele IpIso 2016 preVFP
+python mod_2DleptonSF.py hephy_scale_factors ele Id 2016 preVFP
+python mod_2DleptonSF.py hephy_scale_factors ele IdSpec 2016 preVFP
+python mod_2DleptonSF.py hephy_scale_factors ele IpIso 2016 preVFP
 
 #python mod_2DleptonSF.py hephy_scale_factors ele Id 2016 postVFP
 #python mod_2DleptonSF.py hephy_scale_factors ele IdSpec 2016 postVFP
