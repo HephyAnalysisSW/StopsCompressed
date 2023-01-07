@@ -45,10 +45,19 @@ if year not in ["2016", "2017", "2018"]:
     print "wrong year"
     sys.exit()
 
+vfp = "postVFP"
+if len(sys.argv)>5: vfp = sys.argv[5]
+if vfp != "preVFP" and vfp != "postVFP":
+    print "wrong vfp"
+    sys.exit()
+
 plotcount = 1
 # if len(sys.argv)>5: plotcount = int(sys.argv[5])
 if year == "2016":
-    datatag = "2016_80X_v5"
+    if vfp == "preVFP":
+        datatag = "2016_80X_v5_preVFP"
+    else:
+        datatag = "2016_80X_v5_postVFP"
 elif year == "2017":
     datatag = "2017_94X"
 elif year == "2018":
@@ -157,7 +166,7 @@ if flavor == "ele":
 else:
     suffix = "_" + etabin
 
-# makeDir("/groups/fatih.okcu/StopsCompressed/results/%s/fits/noIso/%s_result_MC_%s%s.root" % (datatag, flavor, stage, suffix))
+# makeDir("/groups/fatih.okcu/StopsCompressed/results/%s/fits/%s_result_MC_%s%s.root" % (datatag, flavor, stage, suffix))
 f = TFile("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/fits/%s_result_MC_%s%s.root" % (datatag, flavor, stage, suffix))
 effcntZMC = TEfficiency(f.Get("effcnt"))
 efffitZMC = TEfficiency(f.Get("efffit"))
@@ -195,13 +204,13 @@ leg.AddEntry(efffitZData, "Z Data fit T&P", "lpe")
 leg.Draw()
 gPad.Update()
 
-savedir = "/groups/hephy/cms/fatih.okcu/www/StopsCompressed/TnP/%s/finalplots/noIso/%s" % (datatag, stage)
+savedir = "/groups/hephy/cms/fatih.okcu/www/StopsCompressed/TnP/%s/finalplots/%s" % (datatag, stage)
 makeDir(savedir)
-makeDir("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/finalplots/noIso" % datatag)
+makeDir("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/finalplots" % datatag)
 
-c1.SaveAs("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/finalplots/noIso/%s_eff_%s_%s.png" % (datatag, flavor, stage, etabin))
+c1.SaveAs("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/finalplots/%s_eff_%s_%s.png" % (datatag, flavor, stage, etabin))
 c1.SaveAs("%s/%s_eff_%s_%s.png" % (savedir, flavor, stage, etabin))
-fout = TFile("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/finalplots/noIso/%s_eff_%s_%s.root" % (datatag, flavor, stage, etabin), "RECREATE")
+fout = TFile("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/finalplots/%s_eff_%s_%s.root" % (datatag, flavor, stage, etabin), "RECREATE")
 c1c = c1.Clone()
 c1c.Write()
 fout.Close()
@@ -234,9 +243,9 @@ leg2.AddEntry(SFfitZ, "Z fit T&P", "lpe")
 leg2.Draw()
 gPad.Update()
 
-c2.SaveAs("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/finalplots/noIso/%s_SF_%s_%s.png" % (datatag, flavor, stage, etabin))
+c2.SaveAs("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/finalplots/%s_SF_%s_%s.png" % (datatag, flavor, stage, etabin))
 c2.SaveAs("%s/%s_SF_%s_%s.png" % (savedir, flavor, stage, etabin))
-fout = TFile("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/finalplots/noIso/%s_SF_%s_%s.root" % (datatag, flavor, stage, etabin), "RECREATE")
+fout = TFile("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/finalplots/%s_SF_%s_%s.root" % (datatag, flavor, stage, etabin), "RECREATE")
 c2c = c2.Clone()
 c2c.Write()
 fout.Close()
@@ -251,7 +260,7 @@ for i, (fl, st, et) in enumerate(product(flavors, stages, etabins)):
     unique_times_dict[fl][st][et] = unique_times[i]
 time.sleep(unique_times_dict[flavor][stage][etabin])
 
-fsfout = TFile("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/finalplots/noIso/hephy_scale_factors.root" % datatag, "update")
+fsfout = TFile("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/finalplots/hephy_scale_factors.root" % datatag, "update")
 H_SFfitZ_name = "{0}_SF_{1}_{2}".format(flavor, stage, etabin)
 fsfout.Delete(H_SFfitZ_name + ";*")
 

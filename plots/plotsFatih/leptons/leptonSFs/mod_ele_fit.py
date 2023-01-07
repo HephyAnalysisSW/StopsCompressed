@@ -57,6 +57,8 @@ elif year == "2017":
     datatag ="2017_94X"
 elif year == "2018":
     datatag ="2018_94_pre3"
+
+
 def makeDir(path):
     if "." in path[-5:]:
             path = path.replace(os.path.basename(path),"")
@@ -66,7 +68,7 @@ def makeDir(path):
     else:
             os.makedirs(path)
 
-# makeDir("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/fits"%datatag)
+makeDir("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/fits"%datatag)
 
 pout = ["lowedge","pthigh","mean","sigma","alpha","n","sigma2","gaus1f","a","signal","bkg"]
 
