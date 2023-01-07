@@ -210,6 +210,15 @@ elif year == "2018":
 #savedir = "/groups/hephy/cms/felix.lang/www/StopsCompressed/TnP/final/2016_80X_v5/2DleptonSF/legacy/comp"
 #savedir = "/groups/hephy/cms/felix.lang/www/StopsCompressed/TnP/final/2016_80X_v5/2DleptonSF/mod"
 
+flavors = ['ele', 'muon']
+stages = ['Id', 'IpIso', 'IdSpec']
+time_interval = 4
+unique_times = np.arange(0, len(flavors)*len(stages)*time_interval, time_interval)
+unique_times_dict = {fl: {st: 0 for st in stages} for fl in flavors}
+for i, (fl, st) in enumerate(product(flavors, stages)):
+    unique_times_dict[fl][st] = unique_times[i]
+time.sleep(unique_times_dict[flavor][stage])
+
 makeDir(savedir)
 makeDir(savedir + '/root')
 makeDir(savedir + '/pdf')
