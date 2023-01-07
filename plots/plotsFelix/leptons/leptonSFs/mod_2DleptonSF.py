@@ -2,6 +2,10 @@ import ROOT
 import os, sys
 import array
 
+import time
+import numpy as np
+from itertools import product
+
 ROOT.gStyle.SetOptStat(0) #1111 adds histogram statistics box #Name, Entries, Mean, RMS, Underflow, Overflow, Integral, Skewness, Kurtosis
 
 inputFileName = "hephy_scale_factors"
