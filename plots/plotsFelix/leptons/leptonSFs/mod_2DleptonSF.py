@@ -210,7 +210,10 @@ c.Modified()
 c.Update()
 
 if year == "2016":
-    savedir = "/groups/hephy/cms/felix.lang/www/StopsCompressed/TnP/final/2016_80X_v5/2DleptonSF"
+    if vfp == "preVFP":
+        savedir = "/groups/hephy/cms/felix.lang/www/StopsCompressed/TnP/final/2016_80X_v5_preVFP/2DleptonSF"
+    else:
+        savedir = "/groups/hephy/cms/felix.lang/www/StopsCompressed/TnP/final/2016_80X_v5_postVFP/2DleptonSF"
 elif year == "2017":
     savedir = "/groups/hephy/cms/felix.lang/www/StopsCompressed/TnP/final/2017_94X/2DleptonSF"
 elif year == "2018":
