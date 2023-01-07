@@ -417,7 +417,6 @@ python mod_ploteff.py ele IdSpec m1p5_m2p0 2016 postVFP
 python mod_ploteff.py ele IpIso m2p0_m2p5 2016 postVFP
 python mod_ploteff.py ele Id m2p0_m2p5 2016 postVFP
 python mod_ploteff.py ele IdSpec m2p0_m2p5 2016 postVFP
-
 #
 ##   2017
 #python mod_ploteff.py ele IpIso all 2017
