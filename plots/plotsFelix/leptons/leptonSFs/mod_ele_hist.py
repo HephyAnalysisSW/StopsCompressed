@@ -9,12 +9,14 @@ binning = [5., 10., 20., 35., 50., 100., 200., 500]
 etabins = {
 "0p8"	 : "el_sc_eta>=0&&el_sc_eta<0.8",
 "0p8_1p4": "el_sc_eta>=0.8&&el_sc_eta<1.442",
+"1p4_1p5": "el_sc_eta>=1.442&&el_sc_eta<1.566",
 #"1p4_1p5": "el_sc_eta>=1.442&&el_sc_eta<1.566",
 "1p5_2p0": "el_sc_eta>=1.566&&el_sc_eta<2.0",
 "2p0_2p5": "el_sc_eta>=2.0&&el_sc_eta<2.5",
 "m0p8"	 : "el_sc_eta>=-0.8&&el_sc_eta<0",
 "m0p8_m1p4": "el_sc_eta>=-1.442&&el_sc_eta<-0.8",
 #"m1pm4_m1p5": "el_sc_eta>=-1.566&&el_sc_eta<-1.442",
+"m1pm4_m1p5": "el_sc_eta>=-1.566&&el_sc_eta<-1.442",
 "m1p5_m2p0": "el_sc_eta>=-2.0&&el_sc_eta<-1.566",
 "m2p0_m2p5": "el_sc_eta>=-2.5&&el_sc_eta<-2.0",
 "all"	 : "el_sc_eta>=-2.5&&el_sc_eta<=2.5"
