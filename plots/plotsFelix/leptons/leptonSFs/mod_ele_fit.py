@@ -86,7 +86,7 @@ def getsigZ(hz,lowedge,pl=False):
 #    x = RooRealVar("x","Mass (GeV/c^{2})", 75.,130.)
 #    hz = TH1F("hz","",55,75,130)
     x = RooRealVar("x","Mass (GeV/c^{2})", 60.,130.)
-    rdh = RooDataHist("rdh","",RooArgList(x),hz)
+    rdh = RooDataHist("rdh",RooArgList(x),hz)
     x.setRange("R1",86,96)    
 #    x.setRange("R1",60,120)    
 
@@ -268,10 +268,10 @@ for ipt in range(len(binning)-1):
 
     histname = "h_"+namestring+"_pass"
 
-    fitp,cntp = getsigCB(fin.Get(histname),aux_ptlow,True)
+    fitp,cntp = getsigZ(fin.Get(histname),aux_ptlow,True)
     gPad.SaveAs("%s/ele_passing_%s_%s_%s.png"%(savedir,namestring,mode,stage))
     histname = "h_"+namestring+"_fail"
-    fitf,cntf = getsigCB(fin.Get(histname),aux_ptlow,True)
+    fitf,cntf = getsigZ(fin.Get(histname),aux_ptlow,True)
     gPad.SaveAs("%s/ele_failing_%s_%s_%s.png"%(savedir,namestring,mode,stage))
 
     hpassfit.SetBinContent(ipt+1,fitp.getVal())
