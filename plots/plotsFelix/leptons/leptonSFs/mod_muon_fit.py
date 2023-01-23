@@ -257,10 +257,10 @@ for ipt in range(len(binning)-1):
     print 'histname', histname
     
 
-    fitp,cntp = getsigCB(fin.Get(histname),aux_ptlow,True)
+    fitp,cntp = getsigZ(fin.Get(histname),aux_ptlow,True)
     gPad.SaveAs("%s/muon_passing_%s_%s_%s.png"%(savedir,namestring,mode,stage))
     histname = "h_"+namestring+"_fail"
-    fitf,cntf = getsigCB(fin.Get(histname),aux_ptlow,True)
+    fitf,cntf = getsigZ(fin.Get(histname),aux_ptlow,True)
     gPad.SaveAs("%s/muon_failing_%s_%s_%s.png"%(savedir,namestring,mode,stage))
     
 
