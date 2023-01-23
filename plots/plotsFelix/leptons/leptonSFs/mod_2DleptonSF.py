@@ -116,7 +116,7 @@ if flavor == "muon":
     SF.GetXaxis().SetTitleOffset(1.2)
     SF.GetYaxis().SetTitleOffset(1.2)
     SF.GetZaxis().SetTitleOffset(1.2)
-    SF.GetZaxis().SetRangeUser(0.5,1)
+    SF.GetZaxis().SetRangeUser(0.94, 1.06)
     SF.SetMarkerSize(0.8)
     for i in range(nx):
         i+=1
@@ -144,7 +144,7 @@ else:
     SF.GetXaxis().SetTitleOffset(1.2)
     SF.GetYaxis().SetTitleOffset(1.2)
     SF.GetZaxis().SetTitleOffset(1.2)
-    SF.GetZaxis().SetRangeUser(0.5,1.)
+    SF.GetZaxis().SetRangeUser(0.94, 1.06)
     #keeping same z scale for comparison
     #SF.GetZaxis().SetRangeUser(0.75,1.25)
     SF.SetMarkerSize(0.8)

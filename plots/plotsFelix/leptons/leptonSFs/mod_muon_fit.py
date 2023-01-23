@@ -58,13 +58,13 @@ elif year == "2018":
 
 pout = ["lowedge","pthigh","mean","sigma","sigma2","gaus1f","a","signal","bkg"]
 
-makeDir("/scratch/priya.hussain/StopsCompressed/results/%s/fits/final"%datatag)
+makeDir("/groups/hephy/cms/felix.lang/StopsCompressed/results/%s/fits/final"%datatag)
 
-fpout = open("/scratch/priya.hussain/StopsCompressed/results/%s/fits/final/mu_%s_%s.params"%(datatag,mode,stage),"w")
+fpout = open("/groups/hephy/cms/felix.lang/StopsCompressed/results/%s/fits/final/mu_%s_%s.params"%(datatag,mode,stage),"w")
 sout = "\t".join(pout)
 fpout.write(sout+"\n")
 
-fin = TFile("/scratch/priya.hussain/StopsCompressed/results/%s/mod/hists/mu_hists_%s_%s.root"%(datatag,mode,stage))
+fin = TFile("/groups/hephy/cms/felix.lang/StopsCompressed/results/%s/hists/mu_hists_%s_%s.root"%(datatag,mode,stage))
 print fin
 
 def getsigZ(hz,lowedge,pl=False):
@@ -139,7 +139,100 @@ def getsigZ(hz,lowedge,pl=False):
 
     return fitres.floatParsFinal().find("signal"),rdh.sumEntries("1","R1")
 
-fout = TFile("/scratch/priya.hussain/StopsCompressed/results/%s/fits/final/muon_result_%s_%s_%s.root"%(datatag,mode,stage,etabin),"recreate")
+
+def getsigCB(hz, lowedge, pl=False):
+    x = RooRealVar("x", "Mass (GeV/c^{2})", 60., 120.)
+    rdh = RooDataHist("rdh", "", RooArgList(x), hz)
+    x.setRange("R1", 86, 96)
+
+    amin = -0.08 if lowedge < 45. else 0.
+    amax = -0.02 if lowedge < 45. else 0.
+    a = RooRealVar("a", "a", max(-0.06, amin), amin, amax)
+    expo = RooExponential("expo", "exponential", x, a)
+
+    mean = RooRealVar("meang", "meang", 90., 88, 92.)
+    sigmamax = 5.  # if lowedge>20. else 3.
+    if '0p8' in etabin and lowedge < 6.:
+        sigmamax = 3.5
+        print
+        "?????", etabin, "!!!!!"
+    sigma = RooRealVar("sigma", "sigma", 2.5, 2., sigmamax)
+
+    ncent = 40. if lowedge < 30 else 50.
+    n = RooRealVar("n", "", ncent, ncent, ncent)
+    alphacent = 0.5 + max(0., lowedge - 5.) / 35.
+    alphacent = min(1.5, alphacent)
+    alpha = RooRealVar("alpha", "", alphacent, alphacent, alphacent)
+    cball = RooCBShape("cball", "crystal ball", x, mean, sigma, alpha, n)
+
+    s2min = 5. if lowedge > 6. else 7.5
+    sigma2 = RooRealVar("sigma2", "sigma2", s2min + 0.2, s2min, 8.)
+    gaus2 = RooGaussian("gaus2", "gaus2", x, mean, sigma2)
+    gaus1f = RooRealVar("gaus1f", "gaus1f", 0.7, 0.6, 0.9)
+    cbgaus = RooAddPdf("cbgaus", "cbgaus", cball, gaus2, gaus1f)
+
+    #    a = RooRealVar("a", "a", 0.,0.,1000.)
+    #    b = RooRealVar("b", "b", 0.,-1000.,1000.)
+    #    c = RooRealVar("c", "c", 0.,-1000.,1000.)
+    #    d = RooRealVar("d", "d", 0.,-1000.,1000.)
+    #    expo = RooChebychev("cheb","chebychev",x,RooArgList(a,b,c))
+
+    signal = RooRealVar("signal", "signal", 100, 0., 1.e9)
+    bkg = RooRealVar("bkg", "", 1, 0., 1.e9)
+    cbex = RooAddPdf("cbex", "", RooArgList(cbgaus, expo), RooArgList(signal, bkg))
+
+    lowedgefit = 62
+    if lowedge == 30: lowedgefit = 80
+    if lowedge == 25: lowedgefit = 78
+    if lowedge == 20: lowedgefit = 70
+    # if lowedge == 20: lowedgefit = 75
+    if lowedge >= 35: lowedgefit = 82
+    if lowedge >= 45: lowedgefit = 85
+    if lowedge >= 50: lowedgefit = 80
+    # if lowedge >= 50: lowedgefit = 82
+    fitres = dgex.fitTo(rdh, RooFit.Save(), RooFit.Range(lowedgefit, 120), RooFit.Extended())
+    #fitres = cbex.fitTo(rdh, RooFit.Save(), RooFit.Range(lowedgefit, 120), RooFit.PrintLevel(-1), RooFit.Extended())
+
+    if pl:
+        xframe = x.frame()
+        rdh.plotOn(xframe)
+        cbex.plotOn(xframe)
+        cbex.plotOn(xframe, RooFit.Components("cbgaus"), RooFit.LineStyle(kDotted))
+        cbex.plotOn(xframe, RooFit.Components("expo"), RooFit.LineStyle(kDashed))
+        xframe.Draw()
+    # chi2 = xframe.chiSquare(7)
+    # chi2 = xframe.chiSquare()
+    # print "chi square: ", chi2
+    print
+    "mean:", mean.getVal()
+    print
+    "sigma:", sigma.getVal()
+    print
+    "alpha:", alpha.getVal()
+    print
+    "n:", n.getVal()
+    print
+    "sigma2:", sigma2.getVal()
+    print
+    "gaus1f:", gaus1f.getVal()
+    print
+    "a:", a.getVal()
+    #    print "b:", b.getVal()
+    #    print "c:", c.getVal()
+    #    print "d:", d.getVal()
+    print
+    "signal:", signal.getVal()
+    print
+    "bkg:", bkg.getVal()
+
+    soutlist = [lowedge, pthigh, mean.getVal(), sigma.getVal(), alpha.getVal(), n.getVal(), sigma2.getVal(),
+                gaus1f.getVal(), a.getVal(), signal.getVal(), bkg.getVal()]
+    sout = "\t".join(str(x) for x in soutlist)
+    fpout.write(sout + "\n")
+
+    return fitres.floatParsFinal().find("signal"), rdh.sumEntries("1", "R1")
+
+fout = TFile("/groups/hephy/cms/felix.lang/StopsCompressed/results/%s/fits/final/muon_result_%s_%s_%s.root"%(datatag,mode,stage,etabin),"recreate")
 
 hpassfit = TH1F("hpassfit","",nb,x1)
 hpassfit.Sumw2()
@@ -154,7 +247,7 @@ for ipt in range(len(binning)-1):
     pthigh = binning[ipt+1]
     print aux_ptlow,pthigh
     
-    savedir = "/mnt/hephy/cms/priya.hussain/www/StopsCompressed/TnP/%s/fits/final/%s/%s"%(datatag,mode,stage)
+    savedir = "/groups/hephy/cms/felix.lang/www/StopsCompressed/TnP/%s/fits/final/%s/%s"%(datatag,mode,stage)
     makeDir(savedir)
     namestring = "{0:.1f}_{1:.1f}".format(aux_ptlow,pthigh)
     namestring = namestring.replace(".","p")
