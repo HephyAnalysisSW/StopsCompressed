@@ -58,13 +58,13 @@ elif year == "2018":
 
 pout = ["lowedge","pthigh","mean","sigma","sigma2","gaus1f","a","signal","bkg"]
 
-makeDir("/scratch/priya.hussain/StopsCompressed/results/%s/fits/final"%datatag)
+makeDir("/groups/hephy/cms/felix.lang/StopsCompressed/results/%s/fits/final"%datatag)
 
-fpout = open("/scratch/priya.hussain/StopsCompressed/results/%s/fits/final/mu_%s_%s.params"%(datatag,mode,stage),"w")
+fpout = open("/groups/hephy/cms/felix.lang/StopsCompressed/results/%s/fits/final/mu_%s_%s.params"%(datatag,mode,stage),"w")
 sout = "\t".join(pout)
 fpout.write(sout+"\n")
 
-fin = TFile("/scratch/priya.hussain/StopsCompressed/results/%s/mod/hists/mu_hists_%s_%s.root"%(datatag,mode,stage))
+fin = TFile("/groups/hephy/cms/felix.lang/StopsCompressed/results/%s/hists/mu_hists_%s_%s.root"%(datatag,mode,stage))
 print fin
 
 def getsigZ(hz,lowedge,pl=False):
@@ -139,7 +139,7 @@ def getsigZ(hz,lowedge,pl=False):
 
     return fitres.floatParsFinal().find("signal"),rdh.sumEntries("1","R1")
 
-fout = TFile("/scratch/priya.hussain/StopsCompressed/results/%s/fits/final/muon_result_%s_%s_%s.root"%(datatag,mode,stage,etabin),"recreate")
+fout = TFile("/groups/hephy/cms/felix.lang/StopsCompressed/results/%s/fits/final/muon_result_%s_%s_%s.root"%(datatag,mode,stage,etabin),"recreate")
 
 hpassfit = TH1F("hpassfit","",nb,x1)
 hpassfit.Sumw2()
@@ -154,7 +154,7 @@ for ipt in range(len(binning)-1):
     pthigh = binning[ipt+1]
     print aux_ptlow,pthigh
     
-    savedir = "/mnt/hephy/cms/priya.hussain/www/StopsCompressed/TnP/%s/fits/final/%s/%s"%(datatag,mode,stage)
+    savedir = "/groups/hephy/cms/felix.lang/www/StopsCompressed/TnP/%s/fits/final/%s/%s"%(datatag,mode,stage)
     makeDir(savedir)
     namestring = "{0:.1f}_{1:.1f}".format(aux_ptlow,pthigh)
     namestring = namestring.replace(".","p")
