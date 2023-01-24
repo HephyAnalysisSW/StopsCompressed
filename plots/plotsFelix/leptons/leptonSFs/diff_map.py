@@ -65,4 +65,65 @@ if flavor == 'muon':
 else:
     for etabin in ['0p8', '0p8_1p4', '1p4_1p5', '1p5_2p0','2p0_2p5', 'm0p8', 'm0p8_m1p4', 'm1pm4_m1p5','m1p5_m2p0','m2p0_m2p5']:
         h[etabin] = f.Get("%s_SF_%s_%s"%(flavor,stage,etabin))
-        print h[etabin]
+
+if flavor == "muon":
+    nx = h['0p9'].GetNbinsX()
+    ptbins = h['0p9'].GetXaxis().GetXbins().GetArray()
+    etabins = array.array("d", [0., 0.9, 1.2, 2.1, 2.4])
+
+else:
+    nx = h['0p8'].GetNbinsX()
+    ptbins = h['0p8'].GetXaxis().GetXbins().GetArray()
+    #ptbins = array.array("d", [10., 20., 35., 50., 100., 200., 500])
+    #print ptbins
+    etabins = array.array("d", [-2.5, -2.0, -1.566, -1.422, -0.8, 0., 0.8, 1.442, 1.566, 2.0, 2.5])
+
+for i in range(nx):
+    i+=1
+    SF.SetBinContent(1, i, h['m2p0_m2p5'].GetBinContent(i))
+    print "value for 1st", h['m2p0_m2p5'].GetBinContent(i)
+    SF.SetBinError(1,   i, h['m2p0_m2p5'].GetBinError(i))
+
+    SF.SetBinContent(2, i, h['m1p5_m2p0'].GetBinContent(i))
+    print "value for 2nd", h['m1p5_m2p0'].GetBinContent(i)
+    SF.SetBinError(2,   i, h['m1p5_m2p0'].GetBinError(i))
+
+    # SF.SetBinContent(3, i, h['m1pm4_m1p5'].GetBinContent(i))
+    # print "value for 3rd", h['m1pm4_m1p5'].GetBinContent(i)
+    # SF.SetBinError(3,   i, h['m1pm4_m1p5'].GetBinError(i))
+
+    SF.SetBinContent(3, i, 0)
+    print "value for 3rd", 0
+    SF.SetBinError(3,   i, 0)
+
+    SF.SetBinContent(4, i, h['m0p8_m1p4'].GetBinContent(i))
+    print "value for 4th", h['m0p8_m1p4'].GetBinContent(i)
+    SF.SetBinError(4,   i, h['m0p8_m1p4'].GetBinError(i))
+
+    SF.SetBinContent(5, i, h['m0p8'].GetBinContent(i))
+    print "value for 5th", h['m0p8'].GetBinContent(i)
+    SF.SetBinError(5,   i, h['m0p8'].GetBinError(i))
+
+    SF.SetBinContent(6, i, h['0p8'].GetBinContent(i))
+    print "value for 6th", h['0p8'].GetBinContent(i)
+    SF.SetBinError(6,   i, h['0p8'].GetBinError(i))
+
+    SF.SetBinContent(7, i, h['0p8_1p4'].GetBinContent(i))
+    print "value for 7th", h['0p8_1p4'].GetBinContent(i)
+    SF.SetBinError(7,   i, h['0p8_1p4'].GetBinError(i))
+
+    # SF.SetBinContent(8, i, h['1p4_1p5'].GetBinContent(i))
+    # print "value for 8th", h['1p4_1p5'].GetBinContent(i)
+    # SF.SetBinError(8,   i, h['1p4_1p5'].GetBinError(i))
+
+    SF.SetBinContent(8, i, 0)
+    print "value for 8th", 0
+    SF.SetBinError(8,   i, 0)
+
+    SF.SetBinContent(9, i, h['1p5_2p0'].GetBinContent(i))
+    print "value for 9th", h['1p5_2p0'].GetBinContent(i)
+    SF.SetBinError(9,   i, h['1p5_2p0'].GetBinError(i))
+
+    SF.SetBinContent(10, i, h['2p0_2p5'].GetBinContent(i))
+    print "value for 10th", h['2p0_2p5'].GetBinContent(i)
+    SF.SetBinError(10,   i, h['2p0_2p5'].GetBinError(i))
