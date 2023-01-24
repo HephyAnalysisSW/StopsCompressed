@@ -6,6 +6,8 @@ import time
 import numpy as np
 from itertools import product
 
+matrix = np.array([[0. for i in range(10)] for i in range(7)])
+
 ROOT.gStyle.SetOptStat(0) #1111 adds histogram statistics box #Name, Entries, Mean, RMS, Underflow, Overflow, Integral, Skewness, Kurtosis
 
 inputFileName = "hephy_scale_factors"
@@ -149,16 +151,17 @@ else:
     #keeping same z scale for comparison
     #SF.GetZaxis().SetRangeUser(0.75,1.25)
     SF.SetMarkerSize(0.8)
-
     for i in range(nx):
         i+=1
         SF.SetBinContent(1, i, h['m2p0_m2p5'].GetBinContent(i))
         print "value for 1st", h['m2p0_m2p5'].GetBinContent(i)
         SF.SetBinError(1,   i, h['m2p0_m2p5'].GetBinError(i))
+        matrix[7-i][0] = h['m2p0_m2p5'].GetBinContent(i)
 
         SF.SetBinContent(2, i, h['m1p5_m2p0'].GetBinContent(i))
         print "value for 2nd", h['m1p5_m2p0'].GetBinContent(i)
         SF.SetBinError(2,   i, h['m1p5_m2p0'].GetBinError(i))
+        matrix[7-i][1] = h['m1p5_m2p0'].GetBinContent(i)
 
         #SF.SetBinContent(3, i, h['m1pm4_m1p5'].GetBinContent(i))
         #print "value for 3rd", h['m1pm4_m1p5'].GetBinContent(i)
@@ -167,22 +170,27 @@ else:
         SF.SetBinContent(3, i, 0)
         print "value for 3rd", 0
         SF.SetBinError(3,   i, 0)
+        matrix[7-i][2] = 0
 
         SF.SetBinContent(4, i, h['m0p8_m1p4'].GetBinContent(i))
         print "value for 4th", h['m0p8_m1p4'].GetBinContent(i)
         SF.SetBinError(4,   i, h['m0p8_m1p4'].GetBinError(i))
+        matrix[7-i][3] = h['m0p8_m1p4'].GetBinContent(i)
 
         SF.SetBinContent(5, i, h['m0p8'].GetBinContent(i))
         print "value for 5th", h['m0p8'].GetBinContent(i)
         SF.SetBinError(5,   i, h['m0p8'].GetBinError(i))
+        matrix[7-i][4] = h['m0p8'].GetBinContent(i)
 
         SF.SetBinContent(6, i, h['0p8'].GetBinContent(i))
         print "value for 6th", h['0p8'].GetBinContent(i)
         SF.SetBinError(6,   i, h['0p8'].GetBinError(i))
+        matrix[7-i][5] = h['0p8'].GetBinContent(i)
 
         SF.SetBinContent(7, i, h['0p8_1p4'].GetBinContent(i))
         print "value for 7th", h['0p8_1p4'].GetBinContent(i)
         SF.SetBinError(7,   i, h['0p8_1p4'].GetBinError(i))
+        matrix[7-i][6] = h['0p8_1p4'].GetBinContent(i)
 
         #SF.SetBinContent(8, i, h['1p4_1p5'].GetBinContent(i))
         #print "value for 8th", h['1p4_1p5'].GetBinContent(i)
@@ -191,11 +199,17 @@ else:
         SF.SetBinContent(8, i, 0)
         print "value for 8th", 0
         SF.SetBinError(8,   i, 0)
+        matrix[7-i][7] = 0
 
         SF.SetBinContent(9, i, h['1p5_2p0'].GetBinContent(i))
         print "value for 9th", h['1p5_2p0'].GetBinContent(i)
         SF.SetBinError(9,   i, h['1p5_2p0'].GetBinError(i))
+        matrix[7-i][8] = h['1p5_2p0'].GetBinContent(i)
 
         SF.SetBinContent(10, i, h['2p0_2p5'].GetBinContent(i))
         print "value for 10th", h['2p0_2p5'].GetBinContent(i)
         SF.SetBinError(10,   i, h['2p0_2p5'].GetBinError(i))
+        matrix[7-i][9] = h['2p0_2p5'].GetBinContent(i)
+
+print(matrix)
+np.save('2dSF_ele_Id_2018.npy', matrix)
