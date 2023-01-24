@@ -121,7 +121,7 @@ elif year == "2018":
 	    t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2018_Muon/DY_M50_Madgraph_STA/DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8_UL18MC.root")
 
 makeDir("/groups/hephy/cms/felix.lang/StopsCompressed/results/%s/hists"%datatag)
-#fout = TFile("/scratch/priya.hussain/StopsCompressed/results/%s/hists/mu_hists_%s_%s.root"%(datatag,mode,stage),"recreate")
+#fout = TFile("/groups/hephy/cms/felix.lang/StopsCompressed/results/%s/hists/mu_hists_%s_%s.root"%(datatag,mode,stage),"recreate")
 fout = TFile("/groups/hephy/cms/felix.lang/StopsCompressed/results/%s/hists/mu_hists_%s_%s.root"%(datatag,mode,stage),"update")
 
 hlist = []
