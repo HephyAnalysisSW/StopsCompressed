@@ -12,7 +12,7 @@ etabins = {
 "0p9_1p2": "abseta>=0.9&&abseta<1.2",
 "1p2_2p1": "abseta>=1.2&&abseta<2.1",
 "2p1_2p4": "abseta>=2.1&&abseta<2.4",
-#"all": "abseta<2.4"
+"all": "abseta<2.4"
 }
 
 mode = "MC"
@@ -20,7 +20,7 @@ if len(sys.argv)>1: mode = sys.argv[1]
 if mode != "Data" and mode != "MC":
     print "wrong mode"
     sys.exit()
-    
+
 stage = "IpIsoSpec"
 if len(sys.argv)>2: stage = sys.argv[2]
 if stage != "IpIso" and stage != "Id" and stage != "IpIsoSpec":
@@ -65,7 +65,7 @@ elif stage == "IpIso":
     PASS = "((combRelIsoPF03dBeta*pt)<5||combRelIsoPF03dBeta<0.2)&&dB<0.02&&dzPV<0.1"
 elif stage == "IpIsoSpec":
     ID = "Loose&&dzPV<0.5&&dB<0.2&&abseta<2.4&&JetPtRatio>0.4&&JetBTagCSV<0.4&&segmentCompatibility>0.4"
-    PASS = "((combRelIsoPF03dBeta*pt)<5||combRelIsoPF03dBeta<0.2)&&dB<0.02&&dzPV<0.1"    
+    PASS = "((combRelIsoPF03dBeta*pt)<5||combRelIsoPF03dBeta<0.2)&&dB<0.02&&dzPV<0.1"
 
 FAIL = "!("+PASS+")"
 
@@ -79,7 +79,7 @@ t = TChain("tpTree/fitter_tree")
 #t.Add("/data/tnp/tnpJPsi_Run2012D.root")
 #t.Add("/data/tnp/tnpJPsi_MC53X.root")
 
-if year == "2016": 
+if year == "2016":
 
 	if mode =="Data":
 	    t.Add("/scratch/priya.hussain/StopsCompressed/TnP/Run2016/80x_v5/data/TnPTree_80XRereco_Run2016B_GoldenJSON_Run276098to276384.root")
@@ -113,16 +113,16 @@ elif year =="2017":
 	    t.Add("/scratch/priya.hussain/StopsCompressed/TnP/Run2017/94X/MC/TnPTree_94X_DYJetsToLL_M50_Madgraph.root")
 elif year == "2018":
 	if mode == "Data":
-	    t.Add("/scratch/priya.hussain/StopsCompressed/TnP/Run2018/94_pre3/TnPTreeZ_17Sep2018_SingleMuon_Run2018Av2_GoldenJSON.root")
-	    t.Add("/scratch/priya.hussain/StopsCompressed/TnP/Run2018/94_pre3/TnPTreeZ_17Sep2018_SingleMuon_Run2018Bv1_GoldenJSON.root")
-	    t.Add("/scratch/priya.hussain/StopsCompressed/TnP/Run2018/94_pre3/TnPTreeZ_17Sep2018_SingleMuon_Run2018Cv1_GoldenJSON.root")
-	    t.Add("/scratch/priya.hussain/StopsCompressed/TnP/Run2018/94_pre3/TnPTreeZ_SingleMuon_Run2018Dv2_GoldenJSON_Upto323523.root")
+	    t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2018_Muon/SingleMuon_Run2018A/tnpZ_Data_hadded.root")
+	    t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2018_Muon/SingleMuon_Run2018B/tnpZ_Data_hadded.root")
+	    t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2018_Muon/SingleMuon_Run2018C/tnpZ_Data_hadded.root")
+	    t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2018_Muon/SingleMuon_Run2018D/tnpZ_Data_hadded.root")
 	else:
-	    t.Add("/scratch/priya.hussain/StopsCompressed/TnP/Run2018/94_pre3/TnPTreeZ_102XAutumn18_DYJetsToLL_M50_MadgraphMLM.root")
+	    t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2018_Muon/DY_M50_Madgraph_STA/DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8_UL18MC.root")
 
-makeDir("/scratch/priya.hussain/StopsCompressed/results/%s/hists"%datatag) 
-#fout = TFile("/scratch/priya.hussain/StopsCompressed/results/%s/hists/mu_hists_%s_%s.root"%(datatag,mode,stage),"recreate")
-fout = TFile("/scratch/priya.hussain/StopsCompressed/results/%s/hists/mu_hists_%s_%s.root"%(datatag,mode,stage),"update")
+makeDir("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/hists"%datatag)
+#fout = TFile("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/hists/mu_hists_%s_%s.root"%(datatag,mode,stage),"recreate")
+fout = TFile("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/hists/mu_hists_%s_%s.root"%(datatag,mode,stage),"update")
 
 hlist = []
 
@@ -138,7 +138,7 @@ for ipt in range(len(binning)-1):
 	print etabin, cut
         hlist.append(gethist(t,"&&".join([cut,PASS]),ptlow,pthigh,"pass",etabin))
         hlist.append(gethist(t,"&&".join([cut,FAIL]),ptlow,pthigh,"fail",etabin))
-    
+
 
 fout.Write()
 fout.Close()
