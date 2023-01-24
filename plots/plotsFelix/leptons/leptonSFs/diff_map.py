@@ -65,4 +65,4 @@ if flavor == 'muon':
 else:
     for etabin in ['0p8', '0p8_1p4', '1p4_1p5', '1p5_2p0','2p0_2p5', 'm0p8', 'm0p8_m1p4', 'm1pm4_m1p5','m1p5_m2p0','m2p0_m2p5']:
         h[etabin] = f.Get("%s_SF_%s_%s"%(flavor,stage,etabin))
-        print *h[etabin]
+        print h[etabin]
