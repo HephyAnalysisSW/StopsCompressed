@@ -12,7 +12,7 @@ etabins = {
 "0p9_1p2": "abseta>=0.9&&abseta<1.2",
 "1p2_2p1": "abseta>=1.2&&abseta<2.1",
 "2p1_2p4": "abseta>=2.1&&abseta<2.4",
-"all": "abseta<2.4"
+#"all": "abseta<2.4"
 }
 
 mode = "MC"
