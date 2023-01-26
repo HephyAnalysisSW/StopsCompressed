@@ -55,6 +55,16 @@ if not os.path.isfile(inputFile):
     print "input file %s does not exist"%inputFile
     sys.exit()
 
+def makeDir(path):
+    if "." in path[-5:]:
+        path = path.replace(os.path.basename(path),"")
+    if os.path.isdir(path):
+        return
+    else:
+        os.makedirs(path)
+
+histName = "%s_SF_%s_2D"%(flavor,stage)
+
 suffix = "_%s_%s_%s"%(inputFileName, flavor, stage)
 
 f = ROOT.TFile(inputFile, "update")
@@ -69,123 +79,120 @@ else:
 
 if flavor == "muon":
     nx = h['0p9'].GetNbinsX()
-    ptbins = h['0p9'].GetXaxis().GetXbins().GetArray()
+    #ptbins = h['0p9'].GetXaxis().GetXbins().GetArray()
+    ptbins = array.array("d", [10., 20., 35., 50., 100., 200., 500])
     etabins = array.array("d", [0., 0.9, 1.2, 2.1, 2.4])
 
 else:
     nx = h['0p8'].GetNbinsX()
-    ptbins = h['0p8'].GetXaxis().GetXbins().GetArray()
-    #ptbins = array.array("d", [10., 20., 35., 50., 100., 200., 500])
+    #ptbins = h['0p8'].GetXaxis().GetXbins().GetArray()
+    ptbins = array.array("d", [10., 20., 35., 50., 100., 200., 500])
     #print ptbins
     etabins = array.array("d", [-2.5, -2.0, -1.566, -1.422, -0.8, 0., 0.8, 1.442, 1.566, 2.0, 2.5])
 
-# if flavor == "muon":
-#     SF = ROOT.TH2F(histName, histName, nx, ptbins, len(etabins)-1, etabins)
-#     SF.SetTitle(histName)
-#     SF.GetXaxis().SetTitle("p_{T} (GeV)")
-#     SF.GetYaxis().SetTitle("|#eta|")
-#     SF.GetZaxis().SetTitle("SF")
-#     SF.GetXaxis().SetTitleOffset(1.2)
-#     SF.GetYaxis().SetTitleOffset(1.2)
-#     SF.GetZaxis().SetTitleOffset(1.2)
-#     SF.GetZaxis().SetRangeUser(0.94, 1.06)
-#     SF.SetMarkerSize(0.8)
-#     for i in range(nx):
-#         i+=1
-#         SF.SetBinContent(i, 1, h['0p9'].GetBinContent(i))
-#         print "value for 1st", h['0p9'].GetBinContent(i)
-#         SF.SetBinError(i,   1, h['0p9'].GetBinError(i))
-#
-#         SF.SetBinContent(i, 2, h['0p9_1p2'].GetBinContent(i))
-#         print "value for 2nd", h['0p9_1p2'].GetBinContent(i)
-#         SF.SetBinError(i,   2, h['0p9_1p2'].GetBinError(i))
-#
-#         SF.SetBinContent(i, 3, h['1p2_2p1'].GetBinContent(i))
-#         print "value for 3rd", h['1p2_2p1'].GetBinContent(i)
-#         SF.SetBinError(i,   3, h['1p2_2p1'].GetBinError(i))
-#
-#         SF.SetBinContent(i, 4, h['2p1_2p4'].GetBinContent(i))
-#         print "value for 4th", h['2p1_2p4'].GetBinContent(i)
-#         SF.SetBinError(i,   4, h['2p1_2p4'].GetBinError(i))
-# else:
-#     SF = ROOT.TH2F(histName, histName , len(etabins)-1, etabins, nx, ptbins)
-#     SF.SetTitle(histName)
-#     SF.GetYaxis().SetTitle("p_{T} (GeV)")
-#     SF.GetXaxis().SetTitle("|#eta|")
-#     SF.GetZaxis().SetTitle("SF")
-#     SF.GetXaxis().SetTitleOffset(1.2)
-#     SF.GetYaxis().SetTitleOffset(1.2)
-#     SF.GetZaxis().SetTitleOffset(1.2)
-#     SF.GetZaxis().SetRangeUser(0.94, 1.06)
-#     #keeping same z scale for comparison
-#     #SF.GetZaxis().SetRangeUser(0.75,1.25)
-#     SF.SetMarkerSize(0.8)
-#
-#     for i in range(nx):
-#         i+=1
-#         SF.SetBinContent(1, i, h['m2p0_m2p5'].GetBinContent(i))
-#         print "value for 1st", h['m2p0_m2p5'].GetBinContent(i)
-#         a =
-#         SF.SetBinError(1,   i, h['m2p0_m2p5'].GetBinError(i))
-#
-#         SF.SetBinContent(2, i, h['m1p5_m2p0'].GetBinContent(i))
-#         print "value for 2nd", h['m1p5_m2p0'].GetBinContent(i)
-#         SF.SetBinError(2,   i, h['m1p5_m2p0'].GetBinError(i))
-#
-#         # SF.SetBinContent(3, i, h['m1pm4_m1p5'].GetBinContent(i))
-#         # print "value for 3rd", h['m1pm4_m1p5'].GetBinContent(i)
-#         # SF.SetBinError(3,   i, h['m1pm4_m1p5'].GetBinError(i))
-#
-#         SF.SetBinContent(3, i, 0)
-#         print "value for 3rd", 0
-#         SF.SetBinError(3,   i, 0)
-#
-#         SF.SetBinContent(4, i, h['m0p8_m1p4'].GetBinContent(i))
-#         print "value for 4th", h['m0p8_m1p4'].GetBinContent(i)
-#         SF.SetBinError(4,   i, h['m0p8_m1p4'].GetBinError(i))
-#
-#         SF.SetBinContent(5, i, h['m0p8'].GetBinContent(i))
-#         print "value for 5th", h['m0p8'].GetBinContent(i)
-#         SF.SetBinError(5,   i, h['m0p8'].GetBinError(i))
-#
-#         SF.SetBinContent(6, i, h['0p8'].GetBinContent(i))
-#         print "value for 6th", h['0p8'].GetBinContent(i)
-#         SF.SetBinError(6,   i, h['0p8'].GetBinError(i))
-#
-#         SF.SetBinContent(7, i, h['0p8_1p4'].GetBinContent(i))
-#         print "value for 7th", h['0p8_1p4'].GetBinContent(i)
-#         SF.SetBinError(7,   i, h['0p8_1p4'].GetBinError(i))
-#
-#         # SF.SetBinContent(8, i, h['1p4_1p5'].GetBinContent(i))
-#         # print "value for 8th", h['1p4_1p5'].GetBinContent(i)
-#         # SF.SetBinError(8,   i, h['1p4_1p5'].GetBinError(i))
-#
-#         SF.SetBinContent(8, i, 0)
-#         print "value for 8th", 0
-#         SF.SetBinError(8,   i, 0)
-#
-#         SF.SetBinContent(9, i, h['1p5_2p0'].GetBinContent(i))
-#         print "value for 9th", h['1p5_2p0'].GetBinContent(i)
-#         SF.SetBinError(9,   i, h['1p5_2p0'].GetBinError(i))
-#
-#         SF.SetBinContent(10, i, h['2p0_2p5'].GetBinContent(i))
-#         print "value for 10th", h['2p0_2p5'].GetBinContent(i)
-#         SF.SetBinError(10,   i, h['2p0_2p5'].GetBinError(i))
-
 if flavor == "muon":
-    matrix = np.array([[h['m2p0_m2p5'].GetBinContent(i+1) for i in range(nx)] for j in ['0p9', '0p9_1p2', ' 1p2_2p1', '2p1_2p4']])
+    matrix = np.array([[h[i].GetBinContent(nx-j) for i in ['0p9', '0p9_1p2', ' 1p2_2p1', '2p1_2p4']] for j in range(nx)])
 else:
-    matrix = np.array([[h['m2p0_m2p5'].GetBinContent(i+1) for i in range(nx)] for j in ['0p8', '0p8_1p4', '1p4_1p5', '1p5_2p0','2p0_2p5', 'm0p8', 'm0p8_m1p4', 'm1pm4_m1p5','m1p5_m2p0','m2p0_m2p5']])
-    if year == 2018:
+    matrix = np.array([[h[i].GetBinContent(nx-j) for i in ['m2p0_m2p5','m1p5_m2p0','m1pm4_m1p5','m0p8_m1p4','m0p8','0p8','0p8_1p4','1p4_1p5','1p5_2p0','2p0_2p5']] for j in range(nx)])
+    if year == "2016":
+        if vfp == "preVFP":
+            lit = np.array([[1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000],
+                            [1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000],
+                            [1.001, 1.000, 1.000, 0.990, 0.983, 0.990, 0.994, 1.000, 1.001, 0.988],
+                            [1.000, 1.001, 1.000, 0.993, 0.984, 0.990, 0.995, 1.000, 1.001, 0.996],
+                            [1.003, 1.000, 1.000, 0.992, 0.985, 0.988, 0.998, 1.000, 0.998, 0.998],
+                            [1.036, 1.032, 1.000, 1.024, 0.980, 0.967, 1.052, 1.000, 1.024, 1.051]])
+            factors = (matrix[:-1] / lit - 1) * 100
+        else:
+            lit = np.array([[1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000],
+                            [1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000, 1.000],
+                            [0.987, 1.001, 1.000, 0.989, 0.989, 0.992, 0.990, 1.000, 0.994, 0.983],
+                            [0.992, 0.997, 1.000, 0.990, 0.989, 0.991, 0.992, 1.000, 0.994, 0.989],
+                            [0.993, 0.992, 1.000, 0.988, 0.983, 0.987, 0.986, 1.000, 0.981, 0.991],
+                            [1.022, 1.015, 1.000, 1.005, 0.970, 0.976, 1.014, 1.000, 1.029, 1.015]])
+            factors = (matrix[:-1] / lit - 1) * 100
+    elif year == "2017":
+        lit = np.array([[1.051, 1.019, 1.000, 1.009, 1.020, 1.010, 1.026, 1.000, 0.989, 1.040],
+                        [0.996, 1.001, 1.000, 1.006, 1.003, 1.003, 1.001, 1.000, 1.006, 1.003],
+                        [0.997, 0.997, 1.000, 0.988, 0.988, 0.992, 0.990, 1.000, 0.997, 0.991],
+                        [0.997, 0.994, 1.000, 0.989, 0.989, 0.991, 0.990, 1.000, 0.993, 1.000],
+                        [0.991, 0.996, 1.000, 0.985, 0.981, 0.987, 0.990, 1.000, 0.993, 0.993],
+                        [1.024, 1.036, 1.000, 1.029, 0.986, 0.990, 1.018, 1.000, 1.030, 1.060]])
+        factors = (matrix[:-1] / lit - 1) * 100
+    elif year == "2018":
         lit = np.array([[1.006, 1.018, 1.000, 1.013, 1.000, 1.005, 1.007, 1.000, 0.996, 0.980],
                        [1.007, 1.002, 1.000, 1.010, 1.001, 1.007, 1.008, 1.000, 1.001, 0.995],
                        [0.994, 0.994, 1.000, 0.984, 0.989, 0.990, 0.983, 1.000, 0.994, 0.987],
                        [0.998, 0.994, 1.000, 0.984, 0.988, 0.989, 0.984, 1.000, 0.992, 0.992],
                        [1.000, 0.990, 1.000, 0.975, 0.982, 0.984, 0.977, 1.000, 0.984, 0.994],
                        [1.038, 1.027, 1.000, 1.013, 0.985, 0.968, 1.014, 1.000, 1.018, 1.027]])
+        factors = (matrix[:-1]/lit - 1) * 100
 
-print(year)
+if flavor == "muon":
+    SF = ROOT.TH2F(histName, histName, nx, ptbins, len(etabins)-1, etabins)
+    SF.SetTitle(histName)
+    SF.GetXaxis().SetTitle("p_{T} (GeV)")
+    SF.GetYaxis().SetTitle("|#eta|")
+    SF.GetZaxis().SetTitle("difference (%)")
+    SF.GetXaxis().SetTitleOffset(1.2)
+    SF.GetYaxis().SetTitleOffset(1.2)
+    SF.GetZaxis().SetTitleOffset(1.2)
+    #SF.GetZaxis().SetRangeUser(-5, 15)
+    SF.SetMarkerSize(0.8)
+    for i in range(nx-1):
+        for j in range(4):
+            SF.SetBinContent(j+1, i+1, factors[i][j])
 
-print (matrix)
-print (lit)
+else:
+    SF = ROOT.TH2F(histName, histName , len(etabins)-1, etabins, nx-1, ptbins)
+    SF.SetTitle(histName)
+    SF.GetYaxis().SetTitle("p_{T} (GeV)")
+    SF.GetXaxis().SetTitle("|#eta|")
+    SF.GetZaxis().SetTitle("SF")
+    SF.GetXaxis().SetTitleOffset(1.2)
+    SF.GetYaxis().SetTitleOffset(1.2)
+    SF.GetZaxis().SetTitleOffset(1.2)
+    #SF.GetZaxis().SetRangeUser(0.94, 1.06)
+    #keeping same z scale for comparison
+    SF.SetMarkerSize(0.8)
 
+    for i in range(nx-1):
+        for j in range(10):
+            if j == 2 or j == 7:
+                SF.SetBinContent(j+1, i+1, 1)
+                continue
+            SF.SetBinContent(j+1, i+1, factors[i][j])
+            print(factors[i][j])
+            #SF.SetBinError(j+1, i+1, 0)
+
+
+c = ROOT.TCanvas("c", "Canvas", 1800, 1500)
+
+c = ROOT.TCanvas("c", "Canvas", 1800, 1500)
+ROOT.gStyle.SetPalette(1)
+SF.Draw("COLZ TEXT89") #CONT1-5 #plots the graph with axes and points
+
+#if logy: ROOT.gPad.SetLogz()
+ROOT.gPad.SetLogy()
+c.Modified()
+c.Update()
+
+if year == "2016":
+    if vfp == "preVFP":
+        savedir = "/groups/hephy/cms/felix.lang/www/StopsCompressed/TnP/final/2016_80X_v5_preVFP/2DleptonSF_diff"
+    else:
+        savedir = "/groups/hephy/cms/felix.lang/www/StopsCompressed/TnP/final/2016_80X_v5_postVFP/2DleptonSF_diff"
+elif year == "2017":
+    savedir = "/groups/hephy/cms/felix.lang/www/StopsCompressed/TnP/final/2017_94X/2DleptonSF_diff"
+elif year == "2018":
+    savedir = "/groups/hephy/cms/felix.lang/www/StopsCompressed/TnP/final/2018_94_pre3/2DleptonSF_diff"
+
+makeDir(savedir)
+makeDir(savedir + '/root')
+makeDir(savedir + '/pdf')
+
+c.SaveAs("%s/2DleptonSF%s.png"      %(savedir, suffix))
+c.SaveAs("%s/pdf/2DleptonSF%s.pdf"  %(savedir, suffix))
+c.SaveAs("%s/root/2DleptonSF%s.root"%(savedir, suffix))
+
+f.Close()
