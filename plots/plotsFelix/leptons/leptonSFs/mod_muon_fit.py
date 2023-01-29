@@ -232,7 +232,7 @@ def getsigCB(hz, lowedge, pl=False):
 
     return fitres.floatParsFinal().find("signal"), rdh.sumEntries("1", "R1")
 
-fout = TFile("/groups/hephy/cms/felix.lang/StopsCompressed/results/%s/fits/final/muon_result_%s_%s_%s.root"%(datatag,mode,stage,etabin),"recreate")
+fout = TFile("/groups/hephy/cms/felix.lang/StopsCompressed/results/%s/fits/muon_result_%s_%s_%s.root"%(datatag,mode,stage,etabin),"recreate")
 
 hpassfit = TH1F("hpassfit","",nb,x1)
 hpassfit.Sumw2()
@@ -247,7 +247,7 @@ for ipt in range(len(binning)-1):
     pthigh = binning[ipt+1]
     print aux_ptlow,pthigh
     
-    savedir = "/groups/hephy/cms/felix.lang/www/StopsCompressed/TnP/%s/fits/final/%s/%s"%(datatag,mode,stage)
+    savedir = "/groups/hephy/cms/felix.lang/www/StopsCompressed/TnP/%s/fits/%s/%s"%(datatag,mode,stage)
     makeDir(savedir)
     namestring = "{0:.1f}_{1:.1f}".format(aux_ptlow,pthigh)
     namestring = namestring.replace(".","p")
