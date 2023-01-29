@@ -53,7 +53,7 @@ elif year == "2017":
 elif year == "2018":
     datatag = "2018_94_pre3"
 
-inputFile = "/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/finalplots/%s.root"%(datatag, inputFileName)
+inputFile = "/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/finalplots/%s_%s.root"%(datatag,inputFileName,flavor)
 if not os.path.isfile(inputFile):
     print "input file %s does not exist"%inputFile
     sys.exit()
@@ -229,13 +229,20 @@ elif year == "2018":
 #savedir = "/mnt/hephy/cms/priya.hussain/www/StopsCompressed/TnP/final/2016_80X_v5/2DleptonSF/mod"
 
 flavors = ['ele', 'muon']
-stages = ['Id', 'IpIso', 'IdSpec']
+if flavor == "ele":
+    etabins = ['all', '0p8', '0p8_1p4', '1p4_1p5', '1p5_2p0', '2p0_2p5', 'm0p8', 'm0p8_m1p4', 'm1pm4_m1p5', 'm1p5_m2p0', 'm2p0_m2p5']
+    stages = ['Id', 'IpIso', 'IdSpec']
+else:
+    etabins = ['all', '0p9', '0p9_1p2', '1p2_2p1', '2p1_2p4']
+    stages = ['Id', 'IpIso', 'IpIsoSpec']
+    flavors = flavors[::-1]
+
 time_interval = 4
-unique_times = np.arange(0, len(flavors)*len(stages)*time_interval, time_interval)
-unique_times_dict = {fl: {st: 0 for st in stages} for fl in flavors}
-for i, (fl, st) in enumerate(product(flavors, stages)):
-    unique_times_dict[fl][st] = unique_times[i]
-time.sleep(unique_times_dict[flavor][stage])
+unique_times = np.arange(0, len(flavors)*len(stages)*len(etabins)*time_interval, time_interval)
+unique_times_dict = {fl: {st: {et: 0 for et in etabins} for st in stages} for fl in flavors}
+for i, (fl, st, et) in enumerate(product(flavors, stages, etabins)):
+    unique_times_dict[fl][st][et] = unique_times[i]
+time.sleep(unique_times_dict[flavor][stage][etabin])
 
 makeDir(savedir)
 makeDir(savedir + '/root')
