@@ -62,6 +62,7 @@ def gethist(t,cut,lowedge,highedge,tag,etabin):
     hz = TH1F(histname,"",60,60,120)
     t.Draw("mass>>"+histname,cut,"goff")
     return hz
+
 if year == "2016":
     if vfp == "preVFP":
         datatag = "2016_80X_v5_preVFP"
