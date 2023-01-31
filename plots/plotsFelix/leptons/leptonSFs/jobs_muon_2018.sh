@@ -3,9 +3,9 @@
 #python mod_muon_hist.py Data Id 2018
 #python mod_muon_hist.py Data IpIso 2018
 #python mod_muon_hist.py Data IpIsoSpec 2018
-#python mod_muon_hist.py MC  Id 2018
-#python mod_muon_hist.py MC  IpIso 2018
-#python mod_muon_hist.py MC  IpIsoSpec 2018
+#python mod_muon_hist.py MC Id 2018
+#python mod_muon_hist.py MC IpIso 2018
+#python mod_muon_hist.py MC IpIsoSpec 2018
 
 # JOBS mod_muon_fit
 
@@ -85,6 +85,6 @@
 
 # JOBS mod2DleptonsSF
 
-python mod_2DleptonSF.py hephy_scale_factors muon Id 2018
-python mod_2DleptonSF.py hephy_scale_factors muon IpIso 2018
-python mod_2DleptonSF.py hephy_scale_factors muon IpIsoSpec 2018
+#python mod_2DleptonSF.py hephy_scale_factors muon Id 2018
+#python mod_2DleptonSF.py hephy_scale_factors muon IpIso 2018
+#python mod_2DleptonSF.py hephy_scale_factors muon IpIsoSpec 2018

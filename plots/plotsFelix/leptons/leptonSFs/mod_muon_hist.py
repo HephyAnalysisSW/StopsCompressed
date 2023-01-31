@@ -33,12 +33,21 @@ if year != "2016" and year != "2017" and year!= "2018":
 	print "wrong year"
 	sys.exit()
 
+vfp  = "postVFP"
+if len(sys.argv)>4: vfp = sys.argv[4]
+if vfp != "preVFP" and vfp != "postVFP":
+    print "wrong vfp"
+    sys.exit()
+
 if year == "2016":
-	datatag = "2016_80X_v5"
-elif year =="2017":
-	datatag = "2017_94X"
-elif year =="2018":
-	datatag = "2018_94_pre3"
+    if vfp == "preVFP":
+        datatag = "2016_80X_v5_preVFP"
+    else:
+        datatag = "2016_80X_v5_postVFP"
+elif year == "2017":
+    datatag ="2017_94X"
+elif year == "2018":
+    datatag ="2018_94_pre3"
 
 def makeDir(path):
     if "." in path[-5:]:
@@ -79,29 +88,27 @@ t = TChain("tpTree/fitter_tree")
 #t.Add("/data/tnp/tnpJPsi_Run2012D.root")
 #t.Add("/data/tnp/tnpJPsi_MC53X.root")
 
-if year == "2016": 
-
-	if mode =="Data":
-	    t.Add("/scratch/priya.hussain/StopsCompressed/TnP/Run2016/80x_v5/data/TnPTree_80XRereco_Run2016B_GoldenJSON_Run276098to276384.root")
-	    t.Add("/scratch/priya.hussain/StopsCompressed/TnP/Run2016/80x_v5/data/TnPTree_80XRereco_Run2016C_GoldenJSON_Run276098to276384.root")
-	    t.Add("/scratch/priya.hussain/StopsCompressed/TnP/Run2016/80x_v5/data/TnPTree_80XRereco_Run2016D_GoldenJSON_Run276098to276384.root")
-	    t.Add("/scratch/priya.hussain/StopsCompressed/TnP/Run2016/80x_v5/data/TnPTree_80XRereco_Run2016E_GoldenJSON_Run276098to276384.root")
-	    t.Add("/scratch/priya.hussain/StopsCompressed/TnP/Run2016/80x_v5/data/TnPTree_80XRereco_Run2016F_GoldenJSON_Run276098to276384.root")
-	    t.Add("/scratch/priya.hussain/StopsCompressed/TnP/Run2016/80x_v5/data/TnPTree_80XRereco_Run2016G_GoldenJSON_Run278819to280384.root")
-	    t.Add("/scratch/priya.hussain/StopsCompressed/TnP/Run2016/80x_v5/data/TnPTree_80XRereco_Run2016H_GoldenJSON_Run284036to284044.root")
-	    t.Add("/scratch/priya.hussain/StopsCompressed/TnP/Run2016/80x_v5/data/TnPTree_80XRereco_Run2016H_v2_GoldenJSON_Run281613to284035.root")
+if year == "2016":
+	if mode == "Data":
+		if vfp == "preVFP":
+			# legacy 2016 pre VFP:
+			t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2016_Muon/SingleMuon_Run2016Bver2_HIPM/tnpZ_Data_hadd.root")
+			t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2016_Muon/SingleMuon_Run2016C_HIPM/tnpZ_Data_hadd.root")
+			t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2016_Muon/SingleMuon_Run2016D_HIPM/tnpZ_Data_hadd.root")
+			t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2016_Muon/SingleMuon_Run2016E_HIPM/tnpZ_Data_hadd.root")
+			t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2016_Muon/SingleMuon_Run2016F_HIPM/tnpZ_Data_hadd.root")
+		else:
+			# post VFP
+			t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2016_Muon/SingleMuon_Run2016F/tnpZ_Data_hadd.root")
+			t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2016_Muon/SingleMuon_Run2016G/tnpZ_Data_hadd.root")
+			t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2016_Muon/SingleMuon_Run2016H/tnpZ_Data_hadd.root")
 	else:
-	    t.Add("/scratch/priya.hussain/StopsCompressed/TnP/Run2016/80x_v5/mc/MC_Moriond17_DY_tranch4Premix_part1.root")
-	    t.Add("/scratch/priya.hussain/StopsCompressed/TnP/Run2016/80x_v5/mc/MC_Moriond17_DY_tranch4Premix_part2.root")
-	    t.Add("/scratch/priya.hussain/StopsCompressed/TnP/Run2016/80x_v5/mc/MC_Moriond17_DY_tranch4Premix_part3.root")
-	    t.Add("/scratch/priya.hussain/StopsCompressed/TnP/Run2016/80x_v5/mc/MC_Moriond17_DY_tranch4Premix_part4.root")
-	    t.Add("/scratch/priya.hussain/StopsCompressed/TnP/Run2016/80x_v5/mc/MC_Moriond17_DY_tranch4Premix_part5.root")
-	    t.Add("/scratch/priya.hussain/StopsCompressed/TnP/Run2016/80x_v5/mc/MC_Moriond17_DY_tranch4Premix_part6.root")
-	    t.Add("/scratch/priya.hussain/StopsCompressed/TnP/Run2016/80x_v5/mc/MC_Moriond17_DY_tranch4Premix_part7.root")
-	    t.Add("/scratch/priya.hussain/StopsCompressed/TnP/Run2016/80x_v5/mc/MC_Moriond17_DY_tranch4Premix_part8.root")
-	    t.Add("/scratch/priya.hussain/StopsCompressed/TnP/Run2016/80x_v5/mc/MC_Moriond17_DY_tranch4Premix_part9.root")
-	    t.Add("/scratch/priya.hussain/StopsCompressed/TnP/Run2016/80x_v5/mc/MC_Moriond17_DY_tranch4Premix_part10.root")
-	    t.Add("/scratch/priya.hussain/StopsCompressed/TnP/Run2016/80x_v5/mc/MC_Moriond17_DY_tranch4Premix_part11.root")
+		if vfp == "preVFP":
+			# legacy MC tuples including (Pre VFP):
+			t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2016_Muon/DY_M50_Madgraph_preVFP/tnpZ_MC_hadd.root")
+		else:
+			# post VFP
+			t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2016_Muon/DY_M50_Madgraph/tnpZ_MC_hadd.root")
 elif year =="2017":
 	if mode == "Data":
 	    t.Add("/scratch/priya.hussain/StopsCompressed/TnP/Run2017/94X/Data/TnPTree_17Nov2017_SingleMuon_Run2017Bv1_Full_GoldenJSON.root")
