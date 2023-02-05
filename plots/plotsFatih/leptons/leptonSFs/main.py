@@ -975,7 +975,6 @@ class ScalingFactor:  # TODO: possible optimizations: time.sleep functions from 
         fsfout.Write()
         fsfout.Close()
 
-        print(time.time()-start_time)
         return
 
     def leptonsf2d(self, inputFileName="hephy_scale_factors", stage="Id", year="2016", vfp="postVFP"):
