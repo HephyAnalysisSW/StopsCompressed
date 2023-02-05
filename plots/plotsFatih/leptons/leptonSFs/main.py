@@ -4,6 +4,7 @@ import os, sys
 import array
 import time
 import numpy as np
+import ROOT
 from itertools import product
 
 
@@ -22,6 +23,7 @@ class ScalingFactor:  # TODO: possible optimizations: time.sleep functions from 
     def __init__(self, to_run, flavor, arg1, arg2, arg3, arg4, arg5):
         self.flavor = flavor
         if self.flavor != "ele" and self.flavor != "muon":
+            print flavor
             print "wrong flavor"
             sys.exit()
         modes = ["Data", "MC"]
@@ -166,7 +168,33 @@ class ScalingFactor:  # TODO: possible optimizations: time.sleep functions from 
 
             makeDir("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/hists"%self.datatag)
             fout = TFile("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/hists/ele_histos_%s_%s.root"%(self.datatag,mode,stage),"recreate")
+
+            hlist = []
+
+            for ipt in range(len(binning) - 1):
+                ptlow = binning[ipt]
+                pthigh = binning[ipt + 1]
+                PTCUT = "el_pt>{0:f}&&el_pt<={1:f}".format(ptlow, pthigh)
+                print ptlow, pthigh
+
+                for etabin, etacut in etabins.items():
+                    print "eta dict: ", etabin, etacut
+                    cut = "&&".join([TRIGZ, ID, EXTRZ, PTCUT, etacut])
+                    hlist.append(gethist(t, "&&".join([cut, PASS]), ptlow, pthigh, "pass", etabin))
+                    hlist.append(gethist(t, "&&".join([cut, FAIL]), ptlow, pthigh, "fail", etabin))
+
+            fout.Write()
+            fout.Close()
         else:
+            binning = [3.5, 5., 10., 20., 25., 30., 40., 50., 60., 120.]
+            # etabinning = [0., 0.9, 1.2, 2.1, 2.4]
+            etabins = {
+                "0p9": "abseta<0.9",
+                "0p9_1p2": "abseta>=0.9&&abseta<1.2",
+                "1p2_2p1": "abseta>=1.2&&abseta<2.1",
+                "2p1_2p4": "abseta>=2.1&&abseta<2.4",
+                # "all": "abseta<2.4"
+            }
 
             if stage == "Id":
                 ID = "TM&&dzPV<0.5&&dB<0.2&&abseta<2.4&&JetPtRatio>0.4&&JetBTagCSV<0.4&&segmentCompatibility>0.4"
@@ -232,22 +260,24 @@ class ScalingFactor:  # TODO: possible optimizations: time.sleep functions from 
             makeDir("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/hists"%self.datatag)
             fout = TFile("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/hists/mu_hists_%s_%s.root"%(self.datatag,mode,stage),"recreate")
             # fout = TFile("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/hists/mu_hists_%s_%s.root"%(self.datatag,mode,stage),"update")
-        hlist = []
 
-        for ipt in range(len(binning) - 1):
-            ptlow = binning[ipt]
-            pthigh = binning[ipt + 1]
-            PTCUT = "el_pt>{0:f}&&el_pt<={1:f}".format(ptlow, pthigh)
-            print ptlow, pthigh
+            hlist = []
 
-            for etabin, etacut in etabins.items():
-                print "eta dict: ", etabin, etacut
+            for ipt in range(len(binning) - 1):
+                ptlow = binning[ipt]
+                pthigh = binning[ipt + 1]
+                PTCUT = "pt>{0:f}&&pt<={1:f}".format(ptlow, pthigh)
+                print ptlow, pthigh
+
+                for etabin, etacut in etabins.items():
+                    print "eta dict: ", etabin, etacut
                 cut = "&&".join([TRIGZ, ID, EXTRZ, PTCUT, etacut])
-                hlist.append(gethist(t, "&&".join([cut, PASS]), ptlow, pthigh, "pass", etabin))
-                hlist.append(gethist(t, "&&".join([cut, FAIL]), ptlow, pthigh, "fail", etabin))
+            print etabin, cut
+            hlist.append(gethist(t, "&&".join([cut, PASS]), ptlow, pthigh, "pass", etabin))
+            hlist.append(gethist(t, "&&".join([cut, FAIL]), ptlow, pthigh, "fail", etabin))
 
-        fout.Write()
-        fout.Close()
+            fout.Write()
+            fout.Close()
         return
 
     def fit(self, mode="Data", stage="Id", etabin="all", year="2016", vfp="postVFP"):
@@ -508,14 +538,13 @@ class ScalingFactor:  # TODO: possible optimizations: time.sleep functions from 
 
             pout = ["lowedge", "pthigh", "mean", "sigma", "sigma2", "gaus1f", "a", "signal", "bkg"]
 
-            makeDir("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/fits/final" % self.datatag)
+            makeDir("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/fits" % self.datatag)
 
-            fpout = open("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/fits/final/mu_%s_%s.params" % (self.datatag, mode, stage), "w")
+            fpout = open("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/fits/mu_%s_%s.params" % (self.datatag, mode, stage), "w")
             sout = "\t".join(pout)
             fpout.write(sout + "\n")
 
-            fin = TFile(
-                "/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/hists/mu_hists_%s_%s.root" % (self.datatag, mode, stage))
+            fin = TFile("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/hists/mu_hists_%s_%s.root" % (self.datatag, mode, stage))
             print fin
 
 
@@ -966,7 +995,7 @@ class ScalingFactor:  # TODO: possible optimizations: time.sleep functions from 
             unique_times_dict[fl][st][et] = unique_times[i]
         time.sleep(unique_times_dict[self.flavor][stage][etabin])
 
-        fsfout = TFile("/groups/hephy/cms/StopsCompressed/results/%s/finalplots/hephy_scale_factors_%s.root"%(self.datatag,self.flavor),"update")
+        fsfout = TFile("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/finalplots/hephy_scale_factors_%s.root"%(self.datatag,self.flavor),"update")
         H_SFfitZ_name = "{0}_SF_{1}_{2}".format(self.flavor, stage, etabin)
         fsfout.Delete(H_SFfitZ_name + ";*")
 
@@ -987,7 +1016,7 @@ class ScalingFactor:  # TODO: possible optimizations: time.sleep functions from 
 
         ROOT.gStyle.SetOptStat(0)  # 1111 adds histogram statistics box #Name, Entries, Mean, RMS, Underflow, Overflow, Integral, Skewness, Kurtosis
 
-        inputFile = "/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/finalplots/%s_%s.root"%(datatag,inputFileName,self.flavor)
+        inputFile = "/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/finalplots/%s_%s.root"%(self.datatag,inputFileName,self.flavor)
         if not os.path.isfile(inputFile):
             print "input file %s does not exist"%inputFile
             sys.exit()
