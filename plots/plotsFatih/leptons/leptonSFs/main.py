@@ -271,10 +271,10 @@ class ScalingFactor:  # TODO: possible optimizations: time.sleep functions from 
 
                 for etabin, etacut in etabins.items():
                     print "eta dict: ", etabin, etacut
-                cut = "&&".join([TRIGZ, ID, EXTRZ, PTCUT, etacut])
-            print etabin, cut
-            hlist.append(gethist(t, "&&".join([cut, PASS]), ptlow, pthigh, "pass", etabin))
-            hlist.append(gethist(t, "&&".join([cut, FAIL]), ptlow, pthigh, "fail", etabin))
+                    cut = "&&".join([TRIGZ, ID, EXTRZ, PTCUT, etacut])
+                    print etabin, cut
+                    hlist.append(gethist(t, "&&".join([cut, PASS]), ptlow, pthigh, "pass", etabin))
+                    hlist.append(gethist(t, "&&".join([cut, FAIL]), ptlow, pthigh, "fail", etabin))
 
             fout.Write()
             fout.Close()
@@ -793,16 +793,6 @@ class ScalingFactor:  # TODO: possible optimizations: time.sleep functions from 
 
         plotcount = 1
         # if len(sys.argv)>5: plotcount = int(sys.argv[5])
-        if year == "2016":
-            if vfp == "preVFP":
-                self.datatag = "2016_80X_v5_preVFP"
-            else:
-                self.datatag = "2016_80X_v5_postVFP"
-        elif year == "2017":
-            self.datatag = "2017_94X"
-        elif year == "2018":
-            self.datatag = "2018_94_pre3"
-        print year, self.datatag
         if self.flavor == "muon":
             # binning = [3.5, 5., 10., 20., 30., 45., 60., 120.]
             binning = [3.5, 5., 10., 20., 25., 30., 40., 50., 60., 120.]
@@ -988,14 +978,14 @@ class ScalingFactor:  # TODO: possible optimizations: time.sleep functions from 
             stages = ['Id', 'IpIso', 'IpIsoSpec']
             flavors = flavors[::-1]
 
-        time_interval = 4
+        time_interval = 10
         unique_times = np.arange(0, len(flavors)*len(stages)*len(etabins)*time_interval, time_interval)
         unique_times_dict = {fl: {st: {et: 0 for et in etabins} for st in stages} for fl in flavors}
         for i, (fl, st, et) in enumerate(product(flavors, stages, etabins)):
             unique_times_dict[fl][st][et] = unique_times[i]
-        time.sleep(unique_times_dict[self.flavor][stage][etabin])
+        # time.sleep(unique_times_dict[self.flavor][stage][etabin])
 
-        fsfout = TFile("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/finalplots/hephy_scale_factors_%s.root"%(self.datatag,self.flavor),"update")
+        fsfout = TFile("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/finalplots/hephy_scale_factors_%s.root"%(self.datatag,self.flavor), "update")
         H_SFfitZ_name = "{0}_SF_{1}_{2}".format(self.flavor, stage, etabin)
         fsfout.Delete(H_SFfitZ_name + ";*")
 
@@ -1028,7 +1018,13 @@ class ScalingFactor:  # TODO: possible optimizations: time.sleep functions from 
         h = {}
         if self.flavor == 'muon':
             for etabin in ['0p9', '0p9_1p2', '1p2_2p1', '2p1_2p4']:
-                h[etabin] = f.Get("%s_SF_%s_%s"%(self.flavor,stage,etabin))
+                h[etabin] = f.Get("%s_SF_%s_%s" % (self.flavor, stage, etabin))
+                # try:
+                #     h[etabin] = f.Get("%s_SF_%s_%s"%(self.flavor,stage,etabin))
+                # except:
+                #     self.check_args = list(map(lambda x: list(x), product(stages, [etabin], years, vfps)))
+                #     self.ploteff(stage, etabin, year, vfp)
+                #     h[etabin] = f.Get("%s_SF_%s_%s" % (self.flavor, stage, etabin))
         else:
             for etabin in ['0p8', '0p8_1p4', '1p4_1p5', '1p5_2p0','2p0_2p5', 'm0p8', 'm0p8_m1p4', 'm1pm4_m1p5','m1p5_m2p0','m2p0_m2p5']:
                 h[etabin] = f.Get("%s_SF_%s_%s"%(self.flavor,stage,etabin))
@@ -1064,33 +1060,33 @@ class ScalingFactor:  # TODO: possible optimizations: time.sleep functions from 
         #SF.SetMarkerSize(0.8)
 
         if self.flavor == "muon":
-            SF = ROOT.TH2F(histName, histName, len(etabins)-1, etabins, nx, ptbins)
+            SF = ROOT.TH2F(histName, histName, len(etabins) - 1, etabins, nx, ptbins)
             SF.SetTitle(histName)
-            SF.GetXaxis().SetTitle("p_{T} (GeV)")
-            SF.GetYaxis().SetTitle("|#eta|")
+            SF.GetYaxis().SetTitle("p_{T} (GeV)")
+            SF.GetXaxis().SetTitle("|#eta|")
             SF.GetZaxis().SetTitle("SF")
             SF.GetXaxis().SetTitleOffset(1.2)
             SF.GetYaxis().SetTitleOffset(1.2)
             SF.GetZaxis().SetTitleOffset(1.2)
-            SF.GetZaxis().SetRangeUser(0.5,1)
+            SF.GetZaxis().SetRangeUser(0.94, 1.06)
             SF.SetMarkerSize(0.8)
             for i in range(nx):
-                i+=1
-                SF.SetBinContent(i, 1, h['0p9'].GetBinContent(i))
+                i += 1
+                SF.SetBinContent(1, i, h['0p9'].GetBinContent(i))
                 print "value for 1st", h['0p9'].GetBinContent(i)
-                SF.SetBinError(i,   1, h['0p9'].GetBinError(i))
+                SF.SetBinError(1, i, h['0p9'].GetBinError(i))
 
-                SF.SetBinContent(i, 2, h['0p9_1p2'].GetBinContent(i))
+                SF.SetBinContent(2, i, h['0p9_1p2'].GetBinContent(i))
                 print "value for 2nd", h['0p9_1p2'].GetBinContent(i)
-                SF.SetBinError(i,   2, h['0p9_1p2'].GetBinError(i))
+                SF.SetBinError(2, i, h['0p9_1p2'].GetBinError(i))
 
-                SF.SetBinContent(i, 3, h['1p2_2p1'].GetBinContent(i))
+                SF.SetBinContent(3, i, h['1p2_2p1'].GetBinContent(i))
                 print "value for 3rd", h['1p2_2p1'].GetBinContent(i)
-                SF.SetBinError(i,   3, h['1p2_2p1'].GetBinError(i))
+                SF.SetBinError(3, i, h['1p2_2p1'].GetBinError(i))
 
-                SF.SetBinContent(i, 4, h['2p1_2p4'].GetBinContent(i))
+                SF.SetBinContent(4, i, h['2p1_2p4'].GetBinContent(i))
                 print "value for 4th", h['2p1_2p4'].GetBinContent(i)
-                SF.SetBinError(i,   4, h['2p1_2p4'].GetBinError(i))
+                SF.SetBinError(4, i, h['2p1_2p4'].GetBinError(i))
         else:
             SF = ROOT.TH2F(histName, histName , len(etabins)-1, etabins, nx, ptbins)
             SF.SetTitle(histName)
@@ -1158,7 +1154,7 @@ class ScalingFactor:  # TODO: possible optimizations: time.sleep functions from 
         #c = ROOT.TCanvas("c", "Canvas", 1800, 1500)
         c = ROOT.TCanvas("c", "Canvas", 1800, 1500)
         ROOT.gStyle.SetPalette(1)
-        SF.Draw("COLZ TEXT89E") #CONT1-5 #plots the graph with axes and points
+        SF.Draw("COLZ TEXT45E") #CONT1-5 #plots the graph with axes and points
 
         #if logy: ROOT.gPad.SetLogz()
         ROOT.gPad.SetLogy()
@@ -1182,22 +1178,6 @@ class ScalingFactor:  # TODO: possible optimizations: time.sleep functions from 
         #savedir = "/mnt/hephy/cms/priya.hussain/www/StopsCompressed/TnP/final/2018_94_pre3/2DleptonSF/noIso"
         #savedir = "/mnt/hephy/cms/priya.hussain/www/StopsCompressed/TnP/final/2016_80X_v5/2DleptonSF/legacy/comp"
         #savedir = "/mnt/hephy/cms/priya.hussain/www/StopsCompressed/TnP/final/2016_80X_v5/2DleptonSF/mod"
-
-        flavors = ['ele', 'muon']
-        if self.flavor == "ele":
-            etabins = ['all', '0p8', '0p8_1p4', '1p4_1p5', '1p5_2p0', '2p0_2p5', 'm0p8', 'm0p8_m1p4', 'm1pm4_m1p5', 'm1p5_m2p0', 'm2p0_m2p5']
-            stages = ['Id', 'IpIso', 'IdSpec']
-        else:
-            etabins = ['all', '0p9', '0p9_1p2', '1p2_2p1', '2p1_2p4']
-            stages = ['Id', 'IpIso', 'IpIsoSpec']
-            flavors = flavors[::-1]
-
-        time_interval = 4
-        unique_times = np.arange(0, len(flavors)*len(stages)*len(etabins)*time_interval, time_interval)
-        unique_times_dict = {fl: {st: {et: 0 for et in etabins} for st in stages} for fl in flavors}
-        for i, (fl, st, et) in enumerate(product(flavors, stages, etabins)):
-            unique_times_dict[fl][st][et] = unique_times[i]
-        time.sleep(unique_times_dict[self.flavor][stage][etabin])
 
         makeDir(savedir)
         makeDir(savedir + '/root')
