@@ -109,7 +109,7 @@ histName = "%s_SF_%s_2D"%(flavor,stage)
 #SF.SetMarkerSize(0.8)
 
 if flavor == "muon":
-    SF = ROOT.TH2F(histName, histName, nx, ptbins, len(etabins)-1, etabins)
+    SF = ROOT.TH2F(histName, histName, len(etabins)-1, etabins, nx, ptbins)
     SF.SetTitle(histName)
     SF.GetXaxis().SetTitle("p_{T} (GeV)")
     SF.GetYaxis().SetTitle("|#eta|")
