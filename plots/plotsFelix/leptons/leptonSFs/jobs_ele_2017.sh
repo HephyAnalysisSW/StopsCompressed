@@ -130,6 +130,6 @@
 
 # JOBS mod_2DleptonSF
 
-#python mod_2DleptonSF.py hephy_scale_factors ele Id 2017
-#python mod_2DleptonSF.py hephy_scale_factors ele IdSpec 2017
-#python mod_2DleptonSF.py hephy_scale_factors ele IpIso 2017
+python mod_2DleptonSF.py hephy_scale_factors ele Id 2017
+python mod_2DleptonSF.py hephy_scale_factors ele IdSpec 2017
+python mod_2DleptonSF.py hephy_scale_factors ele IpIso 2017

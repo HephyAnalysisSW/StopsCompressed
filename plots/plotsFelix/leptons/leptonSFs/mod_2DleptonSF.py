@@ -66,6 +66,7 @@ h = {}
 if flavor == 'muon':
     for etabin in ['0p9', '0p9_1p2', '1p2_2p1', '2p1_2p4']:
         h[etabin] = f.Get("%s_SF_%s_%s"%(flavor,stage,etabin))
+        print h[etabin]
 else:
     for etabin in ['0p8', '0p8_1p4', '1p4_1p5', '1p5_2p0','2p0_2p5', 'm0p8', 'm0p8_m1p4', 'm1pm4_m1p5','m1p5_m2p0','m2p0_m2p5']:
         h[etabin] = f.Get("%s_SF_%s_%s"%(flavor,stage,etabin))
@@ -108,33 +109,33 @@ histName = "%s_SF_%s_2D"%(flavor,stage)
 #SF.SetMarkerSize(0.8)
 
 if flavor == "muon":
-    SF = ROOT.TH2F(histName, histName, nx, ptbins, len(etabins)-1, etabins)
+    SF = ROOT.TH2F(histName, histName, len(etabins)-1, etabins, nx, ptbins)
     SF.SetTitle(histName)
-    SF.GetXaxis().SetTitle("p_{T} (GeV)")
-    SF.GetYaxis().SetTitle("|#eta|")
+    SF.GetYaxis().SetTitle("p_{T} (GeV)")
+    SF.GetXaxis().SetTitle("|#eta|")
     SF.GetZaxis().SetTitle("SF")
     SF.GetXaxis().SetTitleOffset(1.2)
     SF.GetYaxis().SetTitleOffset(1.2)
     SF.GetZaxis().SetTitleOffset(1.2)
-    SF.GetZaxis().SetRangeUser(0.94, 1.06)
+    #SF.GetZaxis().SetRangeUser(0.94, 1.06)
     SF.SetMarkerSize(0.8)
     for i in range(nx):
         i+=1
-        SF.SetBinContent(i, 1, h['0p9'].GetBinContent(i))
+        SF.SetBinContent(1, i, h['0p9'].GetBinContent(i))
         print "value for 1st", h['0p9'].GetBinContent(i)
-        SF.SetBinError(i,   1, h['0p9'].GetBinError(i))
+        SF.SetBinError(1,   i, h['0p9'].GetBinError(i))
 
-        SF.SetBinContent(i, 2, h['0p9_1p2'].GetBinContent(i))
+        SF.SetBinContent(2, i, h['0p9_1p2'].GetBinContent(i))
         print "value for 2nd", h['0p9_1p2'].GetBinContent(i)
-        SF.SetBinError(i,   2, h['0p9_1p2'].GetBinError(i))
+        SF.SetBinError(2,   i, h['0p9_1p2'].GetBinError(i))
 
-        SF.SetBinContent(i, 3, h['1p2_2p1'].GetBinContent(i))
+        SF.SetBinContent(3, i, h['1p2_2p1'].GetBinContent(i))
         print "value for 3rd", h['1p2_2p1'].GetBinContent(i)
-        SF.SetBinError(i,   3, h['1p2_2p1'].GetBinError(i))
+        SF.SetBinError(3,   i, h['1p2_2p1'].GetBinError(i))
 
-        SF.SetBinContent(i, 4, h['2p1_2p4'].GetBinContent(i))
+        SF.SetBinContent(4, i, h['2p1_2p4'].GetBinContent(i))
         print "value for 4th", h['2p1_2p4'].GetBinContent(i)
-        SF.SetBinError(i,   4, h['2p1_2p4'].GetBinError(i))
+        SF.SetBinError(4,   i, h['2p1_2p4'].GetBinError(i))
 else:
     SF = ROOT.TH2F(histName, histName , len(etabins)-1, etabins, nx, ptbins)
     SF.SetTitle(histName)

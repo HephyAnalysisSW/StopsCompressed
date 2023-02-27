@@ -111,13 +111,13 @@ if year == "2016":
 			t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2016_Muon/DY_M50_Madgraph/tnpZ_MC_hadd.root")
 elif year =="2017":
 	if mode == "Data":
-	    t.Add("/scratch/priya.hussain/StopsCompressed/TnP/Run2017/94X/Data/TnPTree_17Nov2017_SingleMuon_Run2017Bv1_Full_GoldenJSON.root")
-	    t.Add("/scratch/priya.hussain/StopsCompressed/TnP/Run2017/94X/Data/TnPTree_17Nov2017_SingleMuon_Run2017Cv1_Full_GoldenJSON.root")
-	    t.Add("/scratch/priya.hussain/StopsCompressed/TnP/Run2017/94X/Data/TnPTree_17Nov2017_SingleMuon_Run2017Dv1_Full_GoldenJSON.root")
-	    t.Add("/scratch/priya.hussain/StopsCompressed/TnP/Run2017/94X/Data/TnPTree_17Nov2017_SingleMuon_Run2017Ev1_Full_GoldenJSON.root")
-	    t.Add("/scratch/priya.hussain/StopsCompressed/TnP/Run2017/94X/Data/TnPTree_17Nov2017_SingleMuon_Run2017Fv1_Full_GoldenJSON.root")
+	    t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2017_Muon/Run2017B/Run2017B_UL_hadd.root")
+	    t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2017_Muon/Run2017C/Run2017C_UL_hadd.root")
+	    t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2017_Muon/Run2017D/Run2017D_UL_hadd.root")
+	    t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2017_Muon/Run2017E_99Percent/Run2017E_99Percent_UL_hadd.root")
+	    t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2017_Muon/Run2017E_99Percent/Run2017F_99Percent_UL_hadd.root")
 	else:
-	    t.Add("/scratch/priya.hussain/StopsCompressed/TnP/Run2017/94X/MC/TnPTree_94X_DYJetsToLL_M50_Madgraph.root")
+	    t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2017_Muon/DY_M50/tnpZ_MC_hadd.root")
 elif year == "2018":
 	if mode == "Data":
 	    t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2018_Muon/SingleMuon_Run2018A/tnpZ_Data_hadded.root")

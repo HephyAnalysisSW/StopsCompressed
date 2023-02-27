@@ -50,7 +50,7 @@ elif year == "2017":
 elif year == "2018":
 	datatag ="2018_94_pre3"
 
-inputFile = "/groups/hephy/cms/felix.lang/StopsCompressed/results/%s/finalplots/%s.root"%(datatag,inputFileName)
+inputFile = "/groups/hephy/cms/felix.lang/StopsCompressed/results/%s/finalplots/%s_%s.root"%(datatag,inputFileName,flavor)
 if not os.path.isfile(inputFile):
     print "input file %s does not exist"%inputFile
     sys.exit()

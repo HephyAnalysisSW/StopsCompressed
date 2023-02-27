@@ -28,11 +28,18 @@ if len(sys.argv)>3: etabin = sys.argv[3]
 if etabin not in ['all', '0p9', '0p9_1p2', '1p2_2p1', '2p1_2p4']:
 	print "wrong etabin"
 	sys.exit()
+
 year = "2016"
 if len(sys.argv)>4: year = sys.argv[4]
 if year != "2016" and year != "2017" and year != "2018":
 	print "wrong year"
 	sys.exit()
+
+vfp  = "postVFP"
+if len(sys.argv)>5: vfp = sys.argv[5]
+if vfp != "preVFP" and vfp != "postVFP":
+    print "wrong vfp"
+    sys.exit()
 
 #etabin = 'all'
 #if len(sys.argv)>3: etabin = sys.argv[3]
@@ -50,17 +57,20 @@ def makeDir(path):
         os.makedirs(path)
 
 if year == "2016":
-	datatag = "2016_80X_v5"
+    if vfp == "preVFP":
+        datatag = "2016_80X_v5_preVFP"
+    else:
+        datatag = "2016_80X_v5_postVFP"
 elif year == "2017":
-	datatag ="2017_94X"
+    datatag ="2017_94X"
 elif year == "2018":
-	datatag ="2018_94_pre3"
+    datatag ="2018_94_pre3"
 
 pout = ["lowedge","pthigh","mean","sigma","sigma2","gaus1f","a","signal","bkg"]
 
-makeDir("/groups/hephy/cms/felix.lang/StopsCompressed/results/%s/fits/final"%datatag)
+makeDir("/groups/hephy/cms/felix.lang/StopsCompressed/results/%s/fits"%datatag)
 
-fpout = open("/groups/hephy/cms/felix.lang/StopsCompressed/results/%s/fits/final/mu_%s_%s.params"%(datatag,mode,stage),"w")
+fpout = open("/groups/hephy/cms/felix.lang/StopsCompressed/results/%s/fits/mu_%s_%s.params"%(datatag,mode,stage),"w")
 sout = "\t".join(pout)
 fpout.write(sout+"\n")
 
