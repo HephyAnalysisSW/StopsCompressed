@@ -166,8 +166,8 @@ class ScalingFactor:  # TODO: possible optimizations: time.sleep functions from 
                 else:
                     t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2018_MINIAOD_Nm1/DYJetsToLL_madgraphMLM.root")
 
-            makeDir("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/hists"%self.datatag)
-            fout = TFile("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/hists/ele_histos_%s_%s.root"%(self.datatag,mode,stage),"recreate")
+            makeDir("/groups/hephy/cms/felix.lang/StopsCompressed/results/%s/hists"%self.datatag)
+            fout = TFile("/groups/hephy/cms/felix.lang/StopsCompressed/results/%s/hists/ele_histos_%s_%s.root"%(self.datatag,mode,stage),"recreate")
 
             hlist = []
 
@@ -257,9 +257,9 @@ class ScalingFactor:  # TODO: possible optimizations: time.sleep functions from 
                 else:
                     t.Add("/groups/hephy/cms/priya.hussain/StopsCompressed/TnP/UL2018_Muon/DY_M50_Madgraph_STA/DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8_UL18MC.root")
 
-            makeDir("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/hists"%self.datatag)
-            fout = TFile("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/hists/mu_hists_%s_%s.root"%(self.datatag,mode,stage),"recreate")
-            # fout = TFile("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/hists/mu_hists_%s_%s.root"%(self.datatag,mode,stage),"update")
+            makeDir("/groups/hephy/cms/felix.lang/StopsCompressed/results/%s/hists"%self.datatag)
+            fout = TFile("/groups/hephy/cms/felix.lang/StopsCompressed/results/%s/hists/mu_hists_%s_%s.root"%(self.datatag,mode,stage),"recreate")
+            # fout = TFile("/groups/hephy/cms/felix.lang/StopsCompressed/results/%s/hists/mu_hists_%s_%s.root"%(self.datatag,mode,stage),"update")
 
             hlist = []
 
@@ -297,19 +297,19 @@ class ScalingFactor:  # TODO: possible optimizations: time.sleep functions from 
             nb = len(x1) - 1
             x2 = -999
 
-            makeDir("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/fits" % self.datatag)
+            makeDir("/groups/hephy/cms/felix.lang/StopsCompressed/results/%s/fits" % self.datatag)
 
             pout = ["lowedge", "pthigh", "mean", "sigma", "alpha", "n", "sigma2", "gaus1f", "a", "signal", "bkg"]
 
             fpout = open(
-                "/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/fits/el_%s_%s.params" % (self.datatag, mode, stage),
+                "/groups/hephy/cms/felix.lang/StopsCompressed/results/%s/fits/el_%s_%s.params" % (self.datatag, mode, stage),
                 "w")
             sout = "\t".join(pout)
             fpout.write(sout + "\n")
             # 2017&2018 noISo hists location
             # fin = TFile("/scratch/priya.hussain/StopsCompressed/results/%s/hists/noIso/ele_histos_%s_%s.root"%(self.datatag,mode,stage))
             # 2016 legacy hists location
-            fin = TFile("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/hists/ele_histos_%s_%s.root" % (self.datatag, mode, stage))
+            fin = TFile("/groups/hephy/cms/felix.lang/StopsCompressed/results/%s/hists/ele_histos_%s_%s.root" % (self.datatag, mode, stage))
             print fin
 
             def getsigZ(hz,lowedge,pl=False):
@@ -469,7 +469,7 @@ class ScalingFactor:  # TODO: possible optimizations: time.sleep functions from 
                 return fitres.floatParsFinal().find("signal"),rdh.sumEntries("1","R1")
 
 
-            fout = TFile("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/fits/ele_result_%s_%s_%s.root"%(self.datatag,mode,stage,etabin),"recreate")
+            fout = TFile("/groups/hephy/cms/felix.lang/StopsCompressed/results/%s/fits/ele_result_%s_%s_%s.root"%(self.datatag,mode,stage,etabin),"recreate")
 
             hpassfit = TH1F("hpassfit","",nb,x1)
             hpassfit.Sumw2()
@@ -483,7 +483,7 @@ class ScalingFactor:  # TODO: possible optimizations: time.sleep functions from 
                 aux_ptlow = binning[ipt]
                 pthigh = binning[ipt+1]
                 print aux_ptlow,pthigh
-                savedir = "/groups/hephy/cms/fatih.okcu/www/StopsCompressed/TnP/%s/fits/%s/%s"%(self.datatag,mode,stage)
+                savedir = "/groups/hephy/cms/felix.lang/www/StopsCompressed/TnP/%s/fits/%s/%s"%(self.datatag,mode,stage)
                 makeDir(savedir)
                 namestring = "{0:.1f}_{1:.1f}_{2}".format(aux_ptlow,pthigh,etabin)
                 namestring = namestring.replace(".","p")
@@ -538,13 +538,13 @@ class ScalingFactor:  # TODO: possible optimizations: time.sleep functions from 
 
             pout = ["lowedge", "pthigh", "mean", "sigma", "sigma2", "gaus1f", "a", "signal", "bkg"]
 
-            makeDir("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/fits" % self.datatag)
+            makeDir("/groups/hephy/cms/felix.lang/StopsCompressed/results/%s/fits" % self.datatag)
 
-            fpout = open("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/fits/mu_%s_%s.params" % (self.datatag, mode, stage), "w")
+            fpout = open("/groups/hephy/cms/felix.lang/StopsCompressed/results/%s/fits/mu_%s_%s.params" % (self.datatag, mode, stage), "w")
             sout = "\t".join(pout)
             fpout.write(sout + "\n")
 
-            fin = TFile("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/hists/mu_hists_%s_%s.root" % (self.datatag, mode, stage))
+            fin = TFile("/groups/hephy/cms/felix.lang/StopsCompressed/results/%s/hists/mu_hists_%s_%s.root" % (self.datatag, mode, stage))
             print fin
 
 
@@ -714,7 +714,7 @@ class ScalingFactor:  # TODO: possible optimizations: time.sleep functions from 
                 return fitres.floatParsFinal().find("signal"), rdh.sumEntries("1", "R1")
 
 
-            fout = TFile("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/fits/muon_result_%s_%s_%s.root" % (self.datatag, mode, stage, etabin), "recreate")
+            fout = TFile("/groups/hephy/cms/felix.lang/StopsCompressed/results/%s/fits/muon_result_%s_%s_%s.root" % (self.datatag, mode, stage, etabin), "recreate")
 
             hpassfit = TH1F("hpassfit", "", nb, x1)
             hpassfit.Sumw2()
@@ -729,7 +729,7 @@ class ScalingFactor:  # TODO: possible optimizations: time.sleep functions from 
                 pthigh = binning[ipt + 1]
                 print aux_ptlow, pthigh
 
-                savedir = "/groups/hephy/cms/fatih.okcu/www/StopsCompressed/TnP/%s/fits/%s/%s" % (self.datatag, mode, stage)
+                savedir = "/groups/hephy/cms/felix.lang/www/StopsCompressed/TnP/%s/fits/%s/%s" % (self.datatag, mode, stage)
                 makeDir(savedir)
                 namestring = "{0:.1f}_{1:.1f}".format(aux_ptlow, pthigh)
                 namestring = namestring.replace(".", "p")
@@ -885,12 +885,12 @@ class ScalingFactor:  # TODO: possible optimizations: time.sleep functions from 
         else:
             suffix = "_" + etabin
 
-        # makeDir("/groups/fatih.okcu/StopsCompressed/results/%s/fits/%s_result_MC_%s%s.root" % (self.datatag, self.flavor, stage, suffix))
-        f = TFile("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/fits/%s_result_MC_%s%s.root" % (self.datatag, self.flavor, stage, suffix))
+        # makeDir("/groups/felix.lang/StopsCompressed/results/%s/fits/%s_result_MC_%s%s.root" % (self.datatag, self.flavor, stage, suffix))
+        f = TFile("/groups/hephy/cms/felix.lang/StopsCompressed/results/%s/fits/%s_result_MC_%s%s.root" % (self.datatag, self.flavor, stage, suffix))
         effcntZMC = TEfficiency(f.Get("effcnt"))
         efffitZMC = TEfficiency(f.Get("efffit"))
         f.Close()
-        f = TFile("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/fits/%s_result_Data_%s%s.root" % (self.datatag, self.flavor, stage, suffix))
+        f = TFile("/groups/hephy/cms/felix.lang/StopsCompressed/results/%s/fits/%s_result_Data_%s%s.root" % (self.datatag, self.flavor, stage, suffix))
         effcntZData = TEfficiency(f.Get("effcnt"))
         efffitZData = TEfficiency(f.Get("efffit"))
         f.Close()
@@ -923,13 +923,13 @@ class ScalingFactor:  # TODO: possible optimizations: time.sleep functions from 
         leg.Draw()
         gPad.Update()
 
-        savedir = "/groups/hephy/cms/fatih.okcu/www/StopsCompressed/TnP/%s/finalplots/%s" % (self.datatag, stage)
+        savedir = "/groups/hephy/cms/felix.lang/www/StopsCompressed/TnP/%s/finalplots/%s" % (self.datatag, stage)
         makeDir(savedir)
-        makeDir("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/finalplots" % self.datatag)
+        makeDir("/groups/hephy/cms/felix.lang/StopsCompressed/results/%s/finalplots" % self.datatag)
 
-        c1.SaveAs("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/finalplots/%s_eff_%s_%s.png" % (self.datatag, self.flavor, stage, etabin))
+        c1.SaveAs("/groups/hephy/cms/felix.lang/StopsCompressed/results/%s/finalplots/%s_eff_%s_%s.png" % (self.datatag, self.flavor, stage, etabin))
         c1.SaveAs("%s/%s_eff_%s_%s.png" % (savedir, self.flavor, stage, etabin))
-        fout = TFile("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/finalplots/%s_eff_%s_%s.root" % (self.datatag, self.flavor, stage, etabin), "RECREATE")
+        fout = TFile("/groups/hephy/cms/felix.lang/StopsCompressed/results/%s/finalplots/%s_eff_%s_%s.root" % (self.datatag, self.flavor, stage, etabin), "RECREATE")
         c1c = c1.Clone()
         c1c.Write()
         fout.Close()
@@ -962,9 +962,9 @@ class ScalingFactor:  # TODO: possible optimizations: time.sleep functions from 
         leg2.Draw()
         gPad.Update()
 
-        c2.SaveAs("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/finalplots/%s_SF_%s_%s.png" % (self.datatag, self.flavor, stage, etabin))
+        c2.SaveAs("/groups/hephy/cms/felix.lang/StopsCompressed/results/%s/finalplots/%s_SF_%s_%s.png" % (self.datatag, self.flavor, stage, etabin))
         c2.SaveAs("%s/%s_SF_%s_%s.png" % (savedir, self.flavor, stage, etabin))
-        fout = TFile("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/finalplots/%s_SF_%s_%s.root" % (self.datatag, self.flavor, stage, etabin), "RECREATE")
+        fout = TFile("/groups/hephy/cms/felix.lang/StopsCompressed/results/%s/finalplots/%s_SF_%s_%s.root" % (self.datatag, self.flavor, stage, etabin), "RECREATE")
         c2c = c2.Clone()
         c2c.Write()
         fout.Close()
@@ -985,7 +985,7 @@ class ScalingFactor:  # TODO: possible optimizations: time.sleep functions from 
             unique_times_dict[fl][st][et] = unique_times[i]
         # time.sleep(unique_times_dict[self.flavor][stage][etabin])
 
-        fsfout = TFile("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/finalplots/hephy_scale_factors_%s.root"%(self.datatag,self.flavor), "update")
+        fsfout = TFile("/groups/hephy/cms/felix.lang/StopsCompressed/results/%s/finalplots/hephy_scale_factors_%s.root"%(self.datatag,self.flavor), "update")
         H_SFfitZ_name = "{0}_SF_{1}_{2}".format(self.flavor, stage, etabin)
         fsfout.Delete(H_SFfitZ_name + ";*")
 
@@ -1006,7 +1006,7 @@ class ScalingFactor:  # TODO: possible optimizations: time.sleep functions from 
 
         ROOT.gStyle.SetOptStat(0)  # 1111 adds histogram statistics box #Name, Entries, Mean, RMS, Underflow, Overflow, Integral, Skewness, Kurtosis
 
-        inputFile = "/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/finalplots/%s_%s.root"%(self.datatag,inputFileName,self.flavor)
+        inputFile = "/groups/hephy/cms/felix.lang/StopsCompressed/results/%s/finalplots/%s_%s.root"%(self.datatag,inputFileName,self.flavor)
         if not os.path.isfile(inputFile):
             print "input file %s does not exist"%inputFile
             sys.exit()
@@ -1164,16 +1164,16 @@ class ScalingFactor:  # TODO: possible optimizations: time.sleep functions from 
         #Save canvas
         if year == "2016":
             if vfp == 'preVFP':
-                savedir = "/groups/hephy/cms/fatih.okcu/www/StopsCompressed/TnP/final/2016_80X_v5_preVFP/2DleptonSF"
+                savedir = "/groups/hephy/cms/felix.lang/www/StopsCompressed/TnP/final/2016_80X_v5_preVFP/2DleptonSF"
             else:
-                savedir = "/groups/hephy/cms/fatih.okcu/www/StopsCompressed/TnP/final/2016_80X_v5_postVFP/2DleptonSF"
+                savedir = "/groups/hephy/cms/felix.lang/www/StopsCompressed/TnP/final/2016_80X_v5_postVFP/2DleptonSF"
         elif year == "2017":
-            savedir = "/groups/hephy/cms/fatih.okcu/www/StopsCompressed/TnP/final/2017_94X/2DleptonSF"
+            savedir = "/groups/hephy/cms/felix.lang/www/StopsCompressed/TnP/final/2017_94X/2DleptonSF"
         elif year == "2018":
-            savedir = "/groups/hephy/cms/fatih.okcu/www/StopsCompressed/TnP/final/2018_94_pre3/2DleptonSF"
+            savedir = "/groups/hephy/cms/felix.lang/www/StopsCompressed/TnP/final/2018_94_pre3/2DleptonSF"
 
 
-        # savedir = '/groups/hephy/cms/fatih.okcu/StopsCompressed/results/2017_94X/2DleptonSF'
+        # savedir = '/groups/hephy/cms/felix.lang/StopsCompressed/results/2017_94X/2DleptonSF'
         #savedir = "/mnt/hephy/cms/priya.hussain/www/StopsCompressed/TnP/final/2017_94X/2DleptonSF"
         #savedir = "/mnt/hephy/cms/priya.hussain/www/StopsCompressed/TnP/final/2018_94_pre3/2DleptonSF/noIso"
         #savedir = "/mnt/hephy/cms/priya.hussain/www/StopsCompressed/TnP/final/2016_80X_v5/2DleptonSF/legacy/comp"
