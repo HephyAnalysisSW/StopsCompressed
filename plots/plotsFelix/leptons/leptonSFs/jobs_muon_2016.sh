@@ -119,11 +119,11 @@
 # JOBS mod2DleptonsSF
 
 # PRE VFP
-#python mod_2DleptonSF.py hephy_scale_factors muon Id 2016 preVFP
-#python mod_2DleptonSF.py hephy_scale_factors muon IpIso 2016 preVFP
-#python mod_2DleptonSF.py hephy_scale_factors muon IpIsoSpec 2016 preVFP
-#
-## POST VFP
-#python mod_2DleptonSF.py hephy_scale_factors muon Id 2016 postVFP
-#python mod_2DleptonSF.py hephy_scale_factors muon IpIso 2016 postVFP
-#python mod_2DleptonSF.py hephy_scale_factors muon IpIsoSpec 2016 postVFP
+python mod_2DleptonSF.py hephy_scale_factors muon Id 2016 preVFP
+python mod_2DleptonSF.py hephy_scale_factors muon IpIso 2016 preVFP
+python mod_2DleptonSF.py hephy_scale_factors muon IpIsoSpec 2016 preVFP
+
+# POST VFP
+python mod_2DleptonSF.py hephy_scale_factors muon Id 2016 postVFP
+python mod_2DleptonSF.py hephy_scale_factors muon IpIso 2016 postVFP
+python mod_2DleptonSF.py hephy_scale_factors muon IpIsoSpec 2016 postVFP
