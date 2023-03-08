@@ -978,12 +978,12 @@ class ScalingFactor:  # TODO: possible optimizations: time.sleep functions from 
             stages = ['Id', 'IpIso', 'IpIsoSpec']
             flavors = flavors[::-1]
 
-        time_interval = 10
+        time_interval = 5
         unique_times = np.arange(0, len(flavors)*len(stages)*len(etabins)*time_interval, time_interval)
         unique_times_dict = {fl: {st: {et: 0 for et in etabins} for st in stages} for fl in flavors}
         for i, (fl, st, et) in enumerate(product(flavors, stages, etabins)):
             unique_times_dict[fl][st][et] = unique_times[i]
-        # time.sleep(unique_times_dict[self.flavor][stage][etabin])
+        time.sleep(unique_times_dict[self.flavor][stage][etabin])
 
         fsfout = TFile("/groups/hephy/cms/fatih.okcu/StopsCompressed/results/%s/finalplots/hephy_scale_factors_%s.root"%(self.datatag,self.flavor), "update")
         H_SFfitZ_name = "{0}_SF_{1}_{2}".format(self.flavor, stage, etabin)
