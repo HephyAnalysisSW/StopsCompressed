@@ -28,9 +28,9 @@ logger.info("Loading MC samples from directory %s", os.path.join(data_directory_
 DY_M4to50_HT = [
 #                ##"DYJetsToLL_M4to50_HT70to100",   ## not in samples list of 2016 Analysis
                 "DYJetsToLL_M4to50_HT100to200",
-#                "DYJetsToLL_M4to50_HT200to400",
-#                "DYJetsToLL_M4to50_HT400to600",
-#                "DYJetsToLL_M4to50_HT600toInf"
+                "DYJetsToLL_M4to50_HT200to400",
+                "DYJetsToLL_M4to50_HT400to600",
+                "DYJetsToLL_M4to50_HT600toInf"
                 ] 
 
 DY_M50_HT =[

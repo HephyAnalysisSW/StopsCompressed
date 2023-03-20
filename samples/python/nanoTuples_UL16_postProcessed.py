@@ -28,13 +28,13 @@ logger.info("Loading MC samples from directory %s", os.path.join(data_directory_
 DY_M4to50_HT = [
 #                ##"DYJetsToLL_M4to50_HT70to100",   ## not in samples list of 2016 Analysis
                 "DYJetsToLL_M4to50_HT100to200",
-#                "DYJetsToLL_M4to50_HT200to400",
+                "DYJetsToLL_M4to50_HT200to400",
                 "DYJetsToLL_M4to50_HT400to600",
                 "DYJetsToLL_M4to50_HT600toInf"
                 ] 
 
 DY_M50_HT =[
-            "DYJetsToLL_M50_HT70to100",
+#            "DYJetsToLL_M50_HT70to100",
             "DYJetsToLL_M50_HT100to200",
             "DYJetsToLL_M50_HT200to400",
             "DYJetsToLL_M50_HT400to600",
@@ -79,7 +79,7 @@ dirs['WJetsToLNu_HT']   = ["WJetsToLNu_HT70to100", "WJetsToLNu_HT100to200", "WJe
 
 dirs['WW']              = ["WWTo2L2Nu", "WWTo1L1Nu2Q"] 
 ##For the time being, till WWtoLNuQQ becomes available, use WW_inclusive
-dirs['WW_incl']		= ["WW"]
+#dirs['WW_incl']		= ["WW"]
 dirs['WZ']              = ["WZTo3LNu_amcatnlo", "WZTo1L1Nu2Q",  "WZTo1L3Nu", "WZTo2Q2L"]
 dirs['ZZ']              = ["ZZTo2L2Nu", "ZZTo2Nu2Q", "ZZTo2Q2L", "ZZTo4L"]
 #dirs['VVTo2L2Nu']       = ["VVTo2L2Nu_comb"]
@@ -108,10 +108,10 @@ dirs['QCD_HT'] 		= [
 			   ] 
 dirs['ZInv']            = ["DYJetsToNuNu_HT100to200", "DYJetsToNuNu_HT200to400", "DYJetsToNuNu_HT400to600", "DYJetsToNuNu_HT600to800", "DYJetsToNuNu_HT800to1200", "DYJetsToNuNu_HT1200to2500", "DYJetsToNuNu_HT2500toInf" ]
 
-dirs['others']           = dirs['DY_HT_LO'] + dirs['singleTop'] + dirs['TTX'] + dirs['VV']
+dirs['others']          = dirs['DY_HT_LO'] + dirs['singleTop'] + dirs['TTX'] + dirs['VV']
 
 #dirs['others']           = dirs['DY_HT_LO'] + dirs['singleTop'] + dirs['TTX'] + dirs['VV']
-#dirs['fakes'] 		= dirs['DY_HT_LO'] + dirs['Top_pow'] + dirs['singleTop'] + dirs['TTX'] + dirs['WJetsToLNu_HT'] + dirs['VV'] + dirs['QCD_HT'] +dirs['ZInv']
+dirs['fakes'] 		=  dirs['QCD_HT'] +dirs['ZInv']
 
 directories = { key : [ os.path.join( data_directory_, postProcessing_directory_, dir) for dir in dirs[key]] for key in dirs.keys()}
 
@@ -134,5 +134,5 @@ VV_16           	= Sample.fromDirectory(name="VV",                   treeName="E
 QCD_HT_16  		= Sample.fromDirectory(name="QCD_HT",    	    treeName="Events", isData=False, color=color.QCD_HT,          texName="QCD (HT)",                 directory=directories['QCD_HT'])
 ZInv_16  		= Sample.fromDirectory(name="ZInv",    	    	    treeName="Events", isData=False, color=color.ZInv,           texName="Z(#nu,#nu + Jets)",                 directory=directories['ZInv'])
 Others_16                = Sample.fromDirectory(name="others",              treeName="Events", isData=False, color=color.others,           texName="Others",                 directory=directories['others'])    
-#Fakes_16  		= Sample.fromDirectory(name="fakes",    	    treeName="Events", isData=False, color=color.fakes,           texName="Fakes(MC-nonPrompt)",                 directory=directories['fakes'])
+Fakes_16  		= Sample.fromDirectory(name="fakes",    	    treeName="Events", isData=False, color=color.fakes,           texName="Fakes(MC-nonPrompt)",                 directory=directories['fakes'])
 

@@ -32,9 +32,13 @@ special_cuts = {
     "isPrompt"          :  "l1_isPrompt>0",
     "isFake"            :  "l1_isPrompt==0",
     "isGenMatched"      :  "l1_isGenMatched>0",
+    "veryLow"		:  "l1_pt<5",
+    "low"		:  "l1_pt>=5&&l1_pt<12",
+    "medium"		:  "l1_pt>=12&&l1_pt<30",
+
   }
 
-continous_variables = [ ("met", "met_pt"), ("mt", "mt"), ("ht", "HT") , ('ISRJets_pt', 'ISRJets_pt'), ("nPV", "PV_npvsGood"), ("lpt","l1_pt") ,("leta","abs(l1_eta)"), ("Cone", "CT1"), ("Ctwo", "CT2"),("dphimetjet","dPhiMetJet")]
+continous_variables = [ ("met", "met_pt"), ("mt", "mt"), ("ht", "HT") , ('ISRJets_pt', 'ISRJets_pt'), ("nPV", "PV_npvsGood"), ("lpt","l1_pt") ,("leta","abs(l1_eta)"), ("Cone", "CT1"), ("Ctwo", "CT2"),("dphimetjet","dPhiMetJet"), ("dxy", "abs(l1_dxy)")]
 discrete_variables  = [ ("njet", "nJetGood"), ("nbtag", "nBTag") ,("nHardJet", "Sum$(JetGood_pt>=60&&abs(Jet_eta)<2.4)"), ("nSoftJets", "Sum$(JetGood_pt>=30&&JetGood_pt<60&&abs(Jet_eta)<2.4)"), ("nISRJets", "nISRJets"),( "ntau","nGoodTaus"),("nSoftBJets", "nSoftBJets"),("nHardBJets", "nHardBJets"), ("nISR", "nISR"), ("isPrompt","l1_isPrompt")]
 
 class cutInterpreter:

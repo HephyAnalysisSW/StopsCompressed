@@ -28,8 +28,8 @@ logger.info("Loading MC samples from directory %s", os.path.join(data_directory_
 DY_M4to50_HT = [
 #                ##"DYJetsToLL_M4to50_HT70to100",   ## not in samples list of 2016 Analysis
                 "DYJetsToLL_M4to50_HT100to200",
-#                "DYJetsToLL_M4to50_HT200to400",
-#                "DYJetsToLL_M4to50_HT400to600",
+                "DYJetsToLL_M4to50_HT200to400",
+                "DYJetsToLL_M4to50_HT400to600",
                 "DYJetsToLL_M4to50_HT600toInf"
                 ] 
 
@@ -81,7 +81,7 @@ dirs['WJetsToLNu_HT']   = [
           ] 
 
 dirs['WW']              = ["WWTo1L1Nu2Q", "WWTo2L2Nu"] 
-dirs['WZ']              = ["WZTo3LNu_amcatnlo", "WZTo1L1Nu2Q", "WZTo2Q2L"] # ,"WZTo1L3Nu"
+dirs['WZ']              = ["WZTo3LNu_amcatnlo", "WZTo1L1Nu2Q", "WZTo2Q2L", "WZTo1L3Nu"]
 dirs['ZZ']              = [ "ZZTo4L", "ZZTo2Nu2Q", "ZZTo2Q2L", "ZZTo2L2Nu"]
 
 dirs['VV']              = dirs['WW'] + dirs['WZ'] + dirs['ZZ']

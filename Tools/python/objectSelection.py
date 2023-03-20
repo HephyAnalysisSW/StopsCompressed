@@ -10,7 +10,7 @@ import numbers
 import textwrap  # needed for CutBased Ele ID
 import operator
 
-jetVars = ['eta','pt','phi','btagDeepB', 'btagCSVV2', 'jetId', 'area', 'rawFactor', 'corr_JER']
+jetVars = ['eta','pt','phi','btagDeepB', 'btagCSVV2', 'jetId', 'area', 'rawFactor', 'corr_JER', 'hadronFlavour', 'partonFlavour']
 
 def getJets(c, jetVars=jetVars, jetColl="Jet"):
     return [getObjDict(c, jetColl+'_', jetVars, i) for i in range(int(getVarValue(c, 'n'+jetColl)))]
@@ -70,11 +70,20 @@ def getGenLeps(c):
     return [getObjDict(c, 'genLep_', ['eta','pt','phi','charge', 'pdgId', 'sourceId'], i) for i in range(int(getVarValue(c, 'ngenLep')))]
 
 def getGenParts(c):
-    return [getObjDict(c, 'GenPart_', ['eta','pt','phi','charge', 'pdgId', 'motherId', 'grandmotherId'], i) for i in range(int(getVarValue(c, 'nGenPart')))]
+    return [getObjDict(c, 'GenPart_', ['eta','pt','phi','charge', 'pdgId', 'motherId', 'grandmotherId', 'vx', 'vy', 'vz'], i) for i in range(int(getVarValue(c, 'nGenPart')))]
 
 genVars = ['eta','pt','phi','mass','charge', 'status', 'pdgId', 'genPartIdxMother', 'statusFlags','index', 'vx', 'vy', 'vz'] 
+
 def getGenPartsAll(c, genVars=genVars):
     return [getObjDict(c, 'GenPart_', genVars, i) for i in range(int(getVarValue(c, 'nGenPart')))]
+
+def getGenDz (vx, vy, vz, px, py, pz, pt, GV_x, GV_y, GV_z):
+	genDz = (vz-GV_z) - ( (vx-GV_x)*px + (vy-GV_y)*py ) / pt * (pz / pt)
+	return genDz
+
+def getGenDxy (vx, vy, px, py, pt, GV_x, GV_y ):
+	genDxy = ( (vy-GV_y)*py - (vx-GV_x)*px ) / pt
+	return genDxy
 
 def matchLep (recoLep):
 	''' check reco leptons Flav,  0 unmatched, 1 prompt (gamma*) , 15 tau, 22 prompt photon (conv), 5 b, 4 c, 3 light/unknown,
@@ -84,6 +93,38 @@ def matchLep (recoLep):
 		return True
 	else: return False
 
+def matchTob (recoLep):
+	if (ord(recoLep['genPartFlav']) == 5):
+		return True
+	else:
+		return False
+
+def GenFlagString(flag):
+	    s = '{0:15b}'.format(flag)
+	    return s
+
+"""
+Comments on gen status flags:
+	According to the CMSSW GEN structure(), following bits are used for different status. 
+	So we need to check the correspoding element in the bit string returned by GenFlagString function
+	string index = 14-bit
+	"0 : isPrompt," : s[14] or s[-1] 
+	"1 : isDecayedLeptonHadron, "
+	"2 : isTauDecayProduct, "
+	"3 : isPromptTauDecayProduct, "
+	"4 : isDirectTauDecayProduct, "
+	"5 : isDirectPromptTauDecayProduct, "
+	"6 : isDirectHadronDecayProduct, "
+	"7 : isHardProcess, " 
+	"8 : fromHardProcess, " : s[6]
+	"9 : isHardProcessTauDecayProduct, "
+	"10 : isDirectHardProcessTauDecayProduct, "
+	"11 : fromHardProcessBeforeFSR, " : s[3]
+	"12 : isFirstCopy, " : s[2]
+	"13 : isLastCopy, "  : s[1]
+	"14 : isLastCopyBeforeFSR : s[0]
+"""
+
 def categorizeLep(recoPart, genParts, cone=0.1):
 	''' get matched reco lepton with gen lepton
 	'''
@@ -91,31 +132,29 @@ def categorizeLep(recoPart, genParts, cone=0.1):
 	#genParts = gen leptons coming from W, W from top, tau coming from W
 	dR = -999
 	dRcoll =[]
+	genpart = []
 	for g in genParts:
 		dR = deltaR(recoPart,g)	
-		print "*"*12
-		print "deltaR: ", dR, "gen index: ", g['index'], "gen pt: ", g['pt'],"gen pdgId: ",g['pdgId'], "reco genPartIdx: ", recoPart['genPartIdx'], "reco pdgId: ", recoPart['pdgId'], "reco pt: ", recoPart['pt'], "reco part eta: ", recoPart['eta'], "reco part phi: ", recoPart['phi']
 		if g['index'] == recoPart['genPartIdx'] : 
-			print "matched gen Idx with vertices: ", g['vx'], g['vy'], g['vz'], "pt: ", g['pt'],"phi: ",  g['phi'], "eta: ", g['eta'], "pdgId: ", g['pdgId']
 			return True, dR
-		if deltaR(recoPart,g) < cone: 
-			print "matched gen particle w/ Reco dR cone of < 0.1  with vertices: ", g['vx'], g['vy'], g['vz'],  "pt: ", g['pt'],"phi: ",  g['phi'] , "eta: ", g['eta'], "pdgId: ", g['pdgId'] 
+		if deltaR(recoPart,g)  < cone: 
+			#print "matched gen particle w/ Reco dR cone of < 0.1  with vertices: ", g['vx'], g['vy'], g['vz'],  "pt: ", g['pt'],"phi: ",  g['phi'] , "eta: ", g['eta'], "pdgId: ", g['pdgId'], "dx: ", g['dxy'], "dz: ", g['dz'] 
 			dRcoll.append(dR)
+
 		else:
 			print "Fake gen particles  with vertices: ", g['vx'], g['vy'], g['vz'], "pt: ", g['pt'], "phi: ", g['phi'] , "eta: ", g['eta'], "pdgId: ", g['pdgId'] 
-	print "*"*12
 	if dRcoll:
 		return True, min(dRcoll)
 	else:	
 		return False, dR
-		
+
 def genLepFromZ( genParts ):
     ''' get all gen leptons (e,m,tau) from Z
     '''
     try:
         leptons = list( filter( lambda l: abs(l['pdgId']) in [11,13,15] and abs(genParts[l['genPartIdxMother']]['pdgId']) == 23, genParts ) )
     except:
-        print "Found no generated leptons"
+        #print "Found no generated leptons"
         leptons = []
     return leptons
 
@@ -196,15 +235,17 @@ def muonSelector( lepton_selection, year):
     elif lepton_selection == 'noDxyDz':
 	print "here for %s"%lepton_selection
         def func(l):
-            if l["pt"] <= 25 and l["pt"] >3.5:
+            if l["pt"] <= 25 and l["pt"] >3:
                 return \
                     abs(l["eta"])       < 2.4 \
                     and (l['pfRelIso03_all']*l['pt']) < 5.0 \
+		    and abs(l["dz"])        < 10 \
                     and l["looseId"] 
             elif l["pt"] > 25:
                 return \
                     abs(l["eta"])       < 2.4 \
                     and l['pfRelIso03_all'] < 0.2 \
+		    and abs(l["dz"])        < 10 \
                     and l["looseId"] 
 
     elif lepton_selection == 'noDz':
@@ -356,6 +397,7 @@ def eleSelector( lepton_selection, year):
 		    abs(l["eta"]) < 2.5 \
 		    and ECALGap(l) \
                     and electronVIDSelector( l, idVal= 1, removedCuts=['pfRelIso03_all'] ) \
+		    and abs(l["dz"])        < 2 \
                     and (l['pfRelIso03_all']*l['pt']) < 5.0
             elif l["pt"] > 25:
                 
@@ -363,6 +405,7 @@ def eleSelector( lepton_selection, year):
 		    abs(l["eta"]) < 2.5 \
 		    and ECALGap(l) \
                     and electronVIDSelector( l, idVal= 1, removedCuts=['pfRelIso03_all'] ) \
+		    and abs(l["dz"])        < 2 \
                     and l['pfRelIso03_all'] < 0.2 
 
     elif lepton_selection == 'noDz':

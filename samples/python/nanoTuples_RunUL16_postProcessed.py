@@ -55,7 +55,7 @@ MET_Run2016                	  = getSample('MET',       	  'Run2016',           (
 allSamples_Data25ns += [MET_Run2016]
 
 Run2016postVFP = Sample.combine("Run2016postVFP", [MET_Run2016], texName = "Run2016postVFP")
-Run2016postVFP.lumi = (16.5)*1000
+Run2016postVFP.lumi = (16.81)*1000
 allSamples_Data25ns.append(Run2016postVFP)
 
 
