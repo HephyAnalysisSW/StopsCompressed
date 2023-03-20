@@ -2,15 +2,13 @@
 #python mod_ele_hist.py Data Id 2016 preVFP
 #python mod_ele_hist.py Data IdSpec 2016 preVFP
 #python mod_ele_hist.py Data IpIso 2016 preVFP
-#
-#python mod_ele_hist.py MC Id 2016 preVFP
-#python mod_ele_hist.py MC IdSpec 2016 preVFP
-#python mod_ele_hist.py MC IpIso 2016 preVFP
-#
 #python mod_ele_hist.py Data Id 2016 postVFP
 #python mod_ele_hist.py Data IdSpec 2016 postVFP
 #python mod_ele_hist.py Data IpIso 2016 postVFP
 #
+#python mod_ele_hist.py MC Id 2016 preVFP
+#python mod_ele_hist.py MC IdSpec 2016 preVFP
+#python mod_ele_hist.py MC IpIso 2016 preVFP
 #python mod_ele_hist.py MC Id 2016 postVFP
 #python mod_ele_hist.py MC IdSpec 2016 postVFP
 #python mod_ele_hist.py MC IpIso 2016 postVFP
@@ -88,8 +86,6 @@
 #python mod_ele_fit.py MC IpIso m1pm4_m1p5 2016 preVFP
 #python mod_ele_fit.py MC IpIso m0p8_m1p4 2016 preVFP
 #python mod_ele_fit.py MC IpIso m0p8 2016 preVFP
-#
-#
 #
 #python mod_ele_fit.py Data Id all 2016 postVFP
 #python mod_ele_fit.py Data Id 2p0_2p5 2016 postVFP
@@ -207,7 +203,6 @@
 #python mod_ploteff.py ele IpIso m2p0_m2p5 2016 preVFP
 #python mod_ploteff.py ele Id m2p0_m2p5 2016 preVFP
 #python mod_ploteff.py ele IdSpec m2p0_m2p5 2016 preVFP
-#
 #
 #
 #python mod_ploteff.py ele IpIso all 2016 postVFP

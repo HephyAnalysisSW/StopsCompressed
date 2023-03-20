@@ -248,16 +248,22 @@ c2c.Write()
 fout.Close()
 
 flavors = ['ele', 'muon']
-stages = ['Id', 'IpIso', 'IdSpec']
-etabins = ['all', '0p8', '0p8_1p4', '1p4_1p5', '1p5_2p0', '2p0_2p5', 'm0p8', 'm0p8_m1p4', 'm1pm4_m1p5', 'm1p5_m2p0', 'm2p0_m2p5']
-time_interval = 4
+if flavor == "ele":
+    etabins = ['all', '0p8', '0p8_1p4', '1p4_1p5', '1p5_2p0', '2p0_2p5', 'm0p8', 'm0p8_m1p4', 'm1pm4_m1p5', 'm1p5_m2p0', 'm2p0_m2p5']
+    stages = ['Id', 'IpIso', 'IdSpec']
+else:
+    etabins = ['all', '0p9', '0p9_1p2', '1p2_2p1', '2p1_2p4']
+    stages = ['Id', 'IpIso', 'IpIsoSpec']
+    flavors = flavors[::-1]
+
+time_interval = 10
 unique_times = np.arange(0, len(flavors)*len(stages)*len(etabins)*time_interval, time_interval)
 unique_times_dict = {fl: {st: {et: 0 for et in etabins} for st in stages} for fl in flavors}
 for i, (fl, st, et) in enumerate(product(flavors, stages, etabins)):
     unique_times_dict[fl][st][et] = unique_times[i]
 time.sleep(unique_times_dict[flavor][stage][etabin])
 
-fsfout = TFile("/groups/hephy/cms/felix.lang/StopsCompressed/results/%s/finalplots/hephy_scale_factors.root"%datatag,"update")
+fsfout = TFile("/groups/hephy/cms/felix.lang/StopsCompressed/results/%s/finalplots/hephy_scale_factors_%s.root"%(datatag,flavor),"update")
 H_SFfitZ_name = "{0}_SF_{1}_{2}".format(flavor,stage,etabin)
 fsfout.Delete(H_SFfitZ_name+";*")
 
