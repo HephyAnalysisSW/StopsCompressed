@@ -2,11 +2,13 @@
 class wPtWeight:
 	def __init__(self, year):
 		if year == 'UL2016_preVFP':
-			self.norm = 0.94
+			self.norm = 1.048
 		elif year == 'UL2016':
-			self.norm = 0.94
+			self.norm = 1.046
 		elif year == 'UL2017':
-			self.norm = 1
+			self.norm = 1.042
+		elif year == 'UL2018':
+			self.norm = 1.043
 		else:
 			self.norm = 1
 		#Parameters for 2016 data
