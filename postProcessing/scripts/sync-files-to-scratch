@@ -1,0 +1,105 @@
+#!/usr/bin/env python
+
+from __future__ import print_function
+
+import os
+import subprocess
+import fnmatch
+import threading
+import Queue
+
+EOSPATH="/eos/vbc/experiments/cms/store/user/liko/StopsCompressed/nanoTuples"
+SCRATCHPATH="/scratch-cbe/users/dietrich.liko/StopsCompressed/nanoTuples"
+
+NUM_THREADS = 6
+
+q = Queue.Queue()
+
+def check_and_copy():
+    while True:
+        tag, skim, dataset, name = q.get()
+        src = os.path.join(EOSPATH, tag, skim, dataset, name)
+        trg = os.path.join(SCRATCHPATH, tag, skim, dataset, name)
+        trg_dir = os.path.join(SCRATCHPATH, tag, skim, dataset)
+        if not os.path.exists(trg_dir):
+            try:
+                os.makedirs(trg_dir)
+            except OSError:
+                pass
+        if os.path.exists(trg):
+            src_size = os.stat(src).st_size
+            trg_size = os.stat(trg).st_size
+            if src_size != trg_size:
+                print("Size mismatch %s/%s/%s/%s ..." %(tag, skim, dataset, name))
+                os.unlink(trg)
+        if not os.path.exists(trg):
+            print("Copying %s/%s/%s/%s ..." %(tag, skim, dataset, name))
+            subprocess.check_call([
+                'xrdcp', 
+                '--nopbar',
+                '--retry',
+                '3', 
+                'root://eos.grid.vbc.ac.at/'+src,
+                trg
+            ])
+        else:
+            os.utime(trg, None)           
+        q.task_done()
+
+def main():
+
+    for i in range(NUM_THREADS):
+        worker = threading.Thread(target=check_and_copy)
+        worker.setDaemon(True)
+        worker.start()
+
+
+    for tag in os.listdir(EOSPATH):
+        if not fnmatch.fnmatch(tag, "compstop*v10*"):
+            continue
+        for skim in os.listdir(os.path.join(EOSPATH,tag)):
+            if skim != "Met":
+                continue
+            for dataset in os.listdir(os.path.join(EOSPATH,tag,skim)):
+                for name in os.listdir(os.path.join(EOSPATH,tag,skim,dataset)):
+                    q.put((tag, skim, dataset, name))
+        
+    q.join() 
+
+if __name__ == "__main__":
+    main()
+
+# for root, dirs, files in os.walk(EOSPATH):
+
+#     if len(files):
+#         print('Checking %s ...' % root[len(EOSPATH)+1:])
+    
+#     for name in files:
+#         eospath = os.path.join(root, name)
+#         relative_path = eospath[len(EOSPATH)+1:]
+#         scratchpath = os.path.join(SCRATCHPATH, relative_path)
+
+#         # remove bad files
+
+#         size = os.stat(eospath).st_size
+#         if os.path.exists(scratchpath):
+#             if os.stat(scratchpath).st_size != size:
+#                 print('Size mismatch NFS-SCRATCH. Removing SCRATCH file %s' % scratchpath) 
+#                 os.remove(scratchpath)
+
+#         # copy files
+#         if not os.path.exists(scratchpath):
+#             print("Copying to SCRATCH %s" % relative_path)
+#             scratchdir = os.path.dirname(scratchpath)
+#             if not os.path.exists(scratchdir):
+#                 os.makedirs(scratchdir)
+#             subprocess.check_call([
+#                 'xrdcp', 
+#                 '--nopbar',
+#                 '--retry',
+#                 '3', 
+#                 'root://eos.grid.vbc.ac.at/'+eospath,
+#                  scratchpath
+#             ])
+
+#         os.utime(scratchpath, None)
