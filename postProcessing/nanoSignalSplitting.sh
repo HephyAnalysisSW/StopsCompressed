@@ -1,49 +1,13 @@
-##UL FullSim 
-python nanoSignalSplitting.py --year UL2016 --T2tt --processingEra compstops_UL16v9_nano_v4 --inputDir /scratch/priya.hussain/StopsCompressed/nanoTuples/  --targetDir /scratch/priya.hussain/StopsCompressed/nanoTuples/  --skim MetSingleLep --samples SMS_T2tt_mStop_500_mLSP_420 #SPLIT5
-python nanoSignalSplitting.py --year UL2016 --T2tt --processingEra compstops_UL16v9_nano_v4 --inputDir /scratch/priya.hussain/StopsCompressed/nanoTuples/  --targetDir /scratch/priya.hussain/StopsCompressed/nanoTuples/  --skim MetSingleLep --samples SMS_T2tt_mStop_500_mLSP_450 #SPLIT5
-python nanoSignalSplitting.py --year UL2016 --T2tt --processingEra compstops_UL16v9_nano_v4 --inputDir /scratch/priya.hussain/StopsCompressed/nanoTuples/  --targetDir /scratch/priya.hussain/StopsCompressed/nanoTuples/  --skim MetSingleLep --samples SMS_T2tt_mStop_500_mLSP_470 #SPLIT5
+##UL FastSim Grids
+python nanoSignalSplitting.py --year UL2016 --T2tt --processingEra compstops_UL16v9_nano_v10 --inputDir /groups/hephy/cms/priya.hussain/StopsCompressed/nanoTuples/  --targetDir /scratch-cbe/users/priya.hussain/StopsCompressed/nanoTuples/  --skim Met --samples SMS_T2tt_mStop_250to1100_dM_10to30 #SPLIT50
 
-python nanoSignalSplitting.py --year UL2016_preVFP --T2tt --processingEra compstops_UL16APVv9_nano_v4 --inputDir /scratch/priya.hussain/StopsCompressed/nanoTuples/  --targetDir /scratch/priya.hussain/StopsCompressed/nanoTuples/  --skim MetSingleLep --samples SMS_T2tt_mStop_500_mLSP_420 #SPLIT5
-python nanoSignalSplitting.py --year UL2016_preVFP --T2tt --processingEra compstops_UL16APVv9_nano_v4 --inputDir /scratch/priya.hussain/StopsCompressed/nanoTuples/  --targetDir /scratch/priya.hussain/StopsCompressed/nanoTuples/  --skim MetSingleLep --samples SMS_T2tt_mStop_500_mLSP_450 #SPLIT5
-python nanoSignalSplitting.py --year UL2016_preVFP --T2tt --processingEra compstops_UL16APVv9_nano_v4 --inputDir /scratch/priya.hussain/StopsCompressed/nanoTuples/  --targetDir /scratch/priya.hussain/StopsCompressed/nanoTuples/  --skim MetSingleLep --samples SMS_T2tt_mStop_500_mLSP_470 #SPLIT5
-#python nanoSignalSplitting.py --year 2016 --fastSim --T2tt --processingEra compstops_2016_nano_v2 --inputDir /afs/hephy.at/data/cms02/StopsCompressed/nanoTuples/ --targetDir /afs/hephy.at/data/cms05/StopsCompressed/nanoTuples/ --skim singleLep --samples SMS_T2tt_dM_10to80 #SPLIT10
-#python nanoSignalSplitting.py --year 2016 --fastSim --T2tt --inputDir  /afs/hephy.at/data/cms07/nanoTuples/ --targetDir /afs/hephy.at/data/cms05/nanoTuples/ --processingEra stops_2016_nano_v0p16 --skim dilep --samples SMS_T2tt_mStop_150to250
-#python nanoSignalSplitting.py --year 2016 --fastSim --T2tt   --targetDir /afs/hephy.at/data/cms05/nanoTuples/ --processingEra stops_2016_nano_v0p16 --skim dilep --samples SMS_T2tt_mStop_250to350
-#python nanoSignalSplitting.py --year 2016 --fastSim --T2tt   --targetDir /afs/hephy.at/data/cms05/nanoTuples/ --processingEra stops_2016_nano_v0p16 --skim dilep --samples SMS_T2tt_mStop_350to400
-#python nanoSignalSplitting.py --year 2016 --fastSim --T2tt   --targetDir /afs/hephy.at/data/cms05/nanoTuples/ --processingEra stops_2016_nano_v0p16 --skim dilep --samples SMS_T2tt_mStop_400to1200 # SPLIT8
-#python nanoSignalSplitting.py --year 2016 --fastSim --T2bW   --targetDir /afs/hephy.at/data/cms05/nanoTuples/ --processingEra stops_2016_nano_v0p16 --skim dilep --samples SMS_T2bW
-#python nanoSignalSplitting.py --overwrite --year 2016 --fastSim --T8bbllnunu   --targetDir /afs/hephy.at/data/cms05/nanoTuples/ --processingEra stops_2016_nano_v0p16 --skim dilep --samples SMS_T8bbllnunu_XCha0p5_XSlep0p05 #SPLIT10
-#python nanoSignalSplitting.py --overwrite --year 2016 --fastSim --T8bbllnunu   --targetDir /afs/hephy.at/data/cms05/nanoTuples/ --processingEra stops_2016_nano_v0p16 --skim dilep --samples SMS_T8bbllnunu_XCha0p5_XSlep0p05_mN1_700_1000 #SPLIT10
-#python nanoSignalSplitting.py --overwrite --year 2016 --fastSim --T8bbllnunu   --targetDir /afs/hephy.at/data/cms05/nanoTuples/ --processingEra stops_2016_nano_v0p16 --skim dilep --samples SMS_T8bbllnunu_XCha0p5_XSlep0p5 #SPLIT10
-#python nanoSignalSplitting.py --overwrite --year 2016 --fastSim --T8bbllnunu   --targetDir /afs/hephy.at/data/cms05/nanoTuples/ --processingEra stops_2016_nano_v0p16 --skim dilep --samples SMS_T8bbllnunu_XCha0p5_XSlep0p5_mN1_700_1300 #SPLIT10
-#python nanoSignalSplitting.py --overwrite --year 2016 --fastSim --T8bbllnunu   --targetDir /afs/hephy.at/data/cms05/nanoTuples/ --processingEra stops_2016_nano_v0p16 --skim dilep --samples SMS_T8bbllnunu_XCha0p5_XSlep0p95 #SPLIT10
-#python nanoSignalSplitting.py --overwrite --year 2016 --fastSim --T8bbllnunu   --targetDir /afs/hephy.at/data/cms05/nanoTuples/ --processingEra stops_2016_nano_v0p16 --skim dilep --samples SMS_T8bbllnunu_XCha0p5_XSlep0p95_mN1_700_1600 #SPLIT10
-#2017 T8bbstausnu
-#python nanoSignalSplitting.py --year 2017 --fastSim --T8bbstausnu --processingEra stops_2017_nano_v0p16   --skim dilep --sample SMS_T8bbstausnu_mStop_200to1800_XCha0p5_XStau0p5 #SPLIT10
-#python nanoSignalSplitting.py --year 2017 --fastSim --T8bbstausnu --processingEra stops_2017_nano_v0p16   --skim dilep --sample SMS_T8bbstausnu_mStop_200to1800_XCha0p5_XStau0p75 #SPLIT10
-#python nanoSignalSplitting.py --year 2017 --fastSim --T8bbstausnu --processingEra stops_2017_nano_v0p16   --skim dilep --sample SMS_T8bbstausnu_XCha0p5_mStop_200to1800_XStau0p25 #SPLIT10
-#python nanoSignalSplitting.py --year 2017 --fastSim --T8bbstausnu --processingEra stops_2017_nano_v0p16   --skim dilep --sample SMS_T8bbstausnu_mStop_200to1800_XCha0p5_XStau0p5  --nJobs 10 --job 9
-#
-#python nanoSignalSplitting.py --year 2017 --fastSim --T2tt   --targetDir /afs/hephy.at/data/cms05/nanoTuples/ --processingEra stops_2017_nano_v0p16 --skim dilep --samples SMS_T2tt_mStop_150to250
-#python nanoSignalSplitting.py --year 2017 --fastSim --T2tt   --targetDir /afs/hephy.at/data/cms05/nanoTuples/ --processingEra stops_2017_nano_v0p16 --skim dilep --samples SMS_T2tt_mStop_250to350
-#python nanoSignalSplitting.py --year 2017 --fastSim --T2tt   --targetDir /afs/hephy.at/data/cms05/nanoTuples/ --processingEra stops_2017_nano_v0p16 --skim dilep --samples SMS_T2tt_mStop_350to400
-#python nanoSignalSplitting.py --year 2017 --fastSim --T2tt   --targetDir /afs/hephy.at/data/cms05/nanoTuples/ --processingEra stops_2017_nano_v0p16 --skim dilep --samples SMS_T2tt_mStop_400to1200 # SPLIT6
-#python nanoSignalSplitting.py --year 2017 --fastSim --T2bW   --targetDir /afs/hephy.at/data/cms05/nanoTuples/ --processingEra stops_2017_nano_v0p16 --skim dilep --samples SMS_T2bW
-#python nanoSignalSplitting.py --year 2017 --fastSim --T8bbllnunu   --targetDir /afs/hephy.at/data/cms05/nanoTuples/ --processingEra stops_2017_nano_v0p16 --skim dilep --samples SMS_T8bbllnunu_XCha0p5_XSlep0p05 #SPLIT10
-#python nanoSignalSplitting.py --year 2017 --fastSim --T8bbllnunu   --targetDir /afs/hephy.at/data/cms05/nanoTuples/ --processingEra stops_2017_nano_v0p16 --skim dilep --samples SMS_T8bbllnunu_XCha0p5_XSlep0p05_mN1_700_1000
-#python nanoSignalSplitting.py --year 2017 --fastSim --T8bbllnunu   --targetDir /afs/hephy.at/data/cms05/nanoTuples/ --processingEra stops_2017_nano_v0p16 --skim dilep --samples SMS_T8bbllnunu_XCha0p5_XSlep0p5 #SPLIT10
-#python nanoSignalSplitting.py --year 2017 --fastSim --T8bbllnunu   --targetDir /afs/hephy.at/data/cms05/nanoTuples/ --processingEra stops_2017_nano_v0p16 --skim dilep --samples SMS_T8bbllnunu_XCha0p5_XSlep0p5_mN1_700_1300 #SPLIT10
-#python nanoSignalSplitting.py --year 2017 --fastSim --T8bbllnunu   --targetDir /afs/hephy.at/data/cms05/nanoTuples/ --processingEra stops_2017_nano_v0p16 --skim dilep --samples SMS_T8bbllnunu_XCha0p5_XSlep0p95 #SPLIT10
-#python nanoSignalSplitting.py --year 2017 --fastSim --T8bbllnunu   --targetDir /afs/hephy.at/data/cms05/nanoTuples/ --processingEra stops_2017_nano_v0p16 --skim dilep --samples SMS_T8bbllnunu_XCha0p5_XSlep0p95_mN1_700_1600 #SPLIT10
-#
-#python nanoSignalSplitting.py --year 2018 --fastSim --T2tt   --targetDir /afs/hephy.at/data/cms05/nanoTuples/ --processingEra stops_2018_nano_v0p16 --skim dilep --samples SMS_T2tt_mStop_150to250
-#python nanoSignalSplitting.py --year 2018 --fastSim --T2tt   --targetDir /afs/hephy.at/data/cms05/nanoTuples/ --processingEra stops_2018_nano_v0p16 --skim dilep --samples SMS_T2tt_mStop_250to350
-#python nanoSignalSplitting.py --year 2018 --fastSim --T2tt   --targetDir /afs/hephy.at/data/cms05/nanoTuples/ --processingEra stops_2018_nano_v0p16 --skim dilep --samples SMS_T2tt_mStop_350to400
-#python nanoSignalSplitting.py --year 2018 --fastSim --T2tt   --targetDir /afs/hephy.at/data/cms05/nanoTuples/ --processingEra stops_2018_nano_v0p16 --skim dilep --samples SMS_T2tt_mStop_400to1200 # SPLIT6
-#python nanoSignalSplitting.py --year 2018 --fastSim --T2bW   --targetDir /afs/hephy.at/data/cms05/nanoTuples/ --processingEra stops_2018_nano_v0p16 --skim dilep --samples SMS_T2bW
-#python nanoSignalSplitting.py --year 2018 --fastSim --T8bbllnunu   --targetDir /afs/hephy.at/data/cms05/nanoTuples/ --processingEra stops_2018_nano_v0p16 --skim dilep --samples SMS_T8bbllnunu_XCha0p5_XSlep0p05 #SPLIT10
-#python nanoSignalSplitting.py --year 2018 --fastSim --T8bbllnunu   --targetDir /afs/hephy.at/data/cms05/nanoTuples/ --processingEra stops_2018_nano_v0p16 --skim dilep --samples SMS_T8bbllnunu_XCha0p5_XSlep0p05_mN1_700_1000 #SPLIT10
-#python nanoSignalSplitting.py --year 2018 --fastSim --T8bbllnunu   --targetDir /afs/hephy.at/data/cms05/nanoTuples/ --processingEra stops_2018_nano_v0p16 --skim dilep --samples SMS_T8bbllnunu_XCha0p5_XSlep0p5 #SPLIT10
-#python nanoSignalSplitting.py --year 2018 --fastSim --T8bbllnunu   --targetDir /afs/hephy.at/data/cms05/nanoTuples/ --processingEra stops_2018_nano_v0p16 --skim dilep --samples SMS_T8bbllnunu_XCha0p5_XSlep0p5_mN1_700_1300 #SPLIT10
-#python nanoSignalSplitting.py --year 2018 --fastSim --T8bbllnunu   --targetDir /afs/hephy.at/data/cms05/nanoTuples/ --processingEra stops_2018_nano_v0p16 --skim dilep --samples SMS_T8bbllnunu_XCha0p5_XSlep0p95_mN1_0_650 #SPLIT10
-#python nanoSignalSplitting.py --year 2018 --fastSim --T8bbllnunu   --targetDir /afs/hephy.at/data/cms05/nanoTuples/ --processingEra stops_2018_nano_v0p16 --skim dilep --samples SMS_T8bbllnunu_XCha0p5_XSlep0p95_mN1_700_1600 #SPLIT10
+#python nanoSignalSplitting.py --year UL2016 --T2tt --processingEra compstops_UL16v9_nano_v10 --inputDir /groups/hephy/cms/priya.hussain/StopsCompressed/nanoTuples/  --targetDir /scratch-cbe/users/priya.hussain/StopsCompressed/nanoTuples/  --skim Met --samples SMS_T2tt_mStop_250to1100_dM_10to30_LL #SPLIT60
+
+python nanoSignalSplitting.py --year UL2017 --T2tt --processingEra compstops_UL17v9_nano_v10 --inputDir /groups/hephy/cms/priya.hussain/StopsCompressed/nanoTuples/  --targetDir /scratch-cbe/users/priya.hussain/StopsCompressed/nanoTuples/  --skim Met --samples SMS_T2tt_mStop_250to1100_dM_10to30 #SPLIT60
+
+#python nanoSignalSplitting.py --year UL2017 --T2tt --processingEra compstops_UL17v9_nano_v10 --inputDir /groups/hephy/cms/priya.hussain/StopsCompressed/nanoTuples/  --targetDir /scratch-cbe/users/priya.hussain/StopsCompressed/nanoTuples/  --skim Met --samples SMS_T2tt_mStop_250to1100_dM_10to30_LL #SPLIT90
+
+python nanoSignalSplitting.py --year UL2018 --T2tt --processingEra compstops_UL18v9_nano_v10 --inputDir /groups/hephy/cms/priya.hussain/StopsCompressed/nanoTuples/  --targetDir /scratch-cbe/users/priya.hussain/StopsCompressed/nanoTuples/  --skim Met --samples SMS_T2tt_mStop_250to1100_dM_10to30 #SPLIT90
+
+#python nanoSignalSplitting.py --year UL2018 --T2tt --processingEra compstops_UL18v9_nano_v10 --inputDir /groups/hephy/cms/priya.hussain/StopsCompressed/nanoTuples/  --targetDir /scratch-cbe/users/priya.hussain/StopsCompressed/nanoTuples/  --skim Met --samples SMS_T2tt_mStop_250to1100_dM_10to30_LL #SPLIT90
+

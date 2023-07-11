@@ -223,15 +223,15 @@ else:
 
 # Add scale etc. friends
 has_susy_weight_friend = False
-if options.susySignal and options.fastSim:
-    # Make friend sample
-    friend_dir = "/groups/hephy/cms/priya.hussain/StopsCompressed/nanoTuples/signalWeights/%s/%s"% (options.year, sample.name )
-    if os.path.exists( friend_dir ):
-        weight_friend = Sample.fromDirectory( "weight_friend", directory = [friend_dir] ) 
-        if weight_friend.chain.BuildIndex("luminosityBlock", "event")>0:
-            has_susy_weight_friend = True
-    else:
-        raise RuntimeError( "We need the LHE weight friend tries. Not found in: %s" % friend_dir )
+#if options.susySignal and options.fastSim:
+#    # Make friend sample
+#    friend_dir = "/groups/hephy/cms/priya.hussain/StopsCompressed/nanoTuples/signalWeights/%s/%s"% (options.year, sample.name )
+#    if os.path.exists( friend_dir ):
+#        weight_friend = Sample.fromDirectory( "weight_friend", directory = [friend_dir] ) 
+#        if weight_friend.chain.BuildIndex("luminosityBlock", "event")>0:
+#            has_susy_weight_friend = True
+#    else:
+#        raise RuntimeError( "We need the LHE weight friend tries. Not found in: %s" % friend_dir )
 
 if options.reduceSizeBy > 1:
     logger.info("Sample size will be reduced by a factor of %s", options.reduceSizeBy)
@@ -405,7 +405,7 @@ btagEff = BTagEfficiency( fastSim = options.fastSim, year=options.year, tagger='
 #    btagEff = BTagEfficiency( fastSim = options.fastSim, year=options.year, tagger='DeepCSV' )
 
 # L1 prefire weight
-#L1PW = L1PrefireWeight(options.year)
+L1PW = L1PrefireWeight(options.year)
 
 #branches to be kept for data and MC
 
@@ -421,15 +421,11 @@ branchKeepStrings_DATAMC = [\
     "nPhoton", "Photon_*",
     "nIsoTrack", "IsoTrack_*",
     "LowPtElectron_*",
-    "L1PreFiringWeight_*",
 ]
+    #"L1PreFiringWeight_*",
 if not options.fastSim:
-    branchKeepStrings_DATAMC += ["HLT_*"]
+    branchKeepStrings_DATAMC += ["HLT_*", "L1PreFiringWeight_*",]
 
-if options.year == "2017":
-    branchKeepStrings_DATAMC += [\
-        "METFixEE2017_*",
-    ]
 
 #branches to be kept for MC samples only
 branchKeepStrings_MC = [ "Generator_*", "GenPart_*", "nGenPart", "GenVtx_*", "genWeight", "Pileup_nTrueInt","GenMET_pt","GenMET_phi" ,"nISR"] #keep, if you run the nanoAODTools ISR counter
@@ -481,9 +477,10 @@ if isMC:
 
 read_variables += [ TreeVariable.fromString('nPhoton/I'),
                     VectorTreeVariable.fromString('Photon[pt/F,eta/F,phi/F,mass/F,cutBased/I,pdgId/I]')  ]
-read_variables.append( TreeVariable.fromString('L1PreFiringWeight_Dn/F') )
-read_variables.append( TreeVariable.fromString('L1PreFiringWeight_Nom/F') )
-read_variables.append( TreeVariable.fromString('L1PreFiringWeight_Up/F') )
+if not options.fastSim:
+    read_variables.append( TreeVariable.fromString('L1PreFiringWeight_Dn/F') )
+    read_variables.append( TreeVariable.fromString('L1PreFiringWeight_Nom/F') )
+    read_variables.append( TreeVariable.fromString('L1PreFiringWeight_Up/F') )
 
 new_variables = [ 'weight/F', 'year/I']
 if isMC:
@@ -523,11 +520,11 @@ new_variables += [\
 # Add weight branches for susy signal samples from friend tree
 if has_susy_weight_friend:
     new_variables.extend([ "LHE[weight/F]", "LHE_weight_original/F"] )
-#cache_dir = "/mnt/hephy/cms/priya.hussain/StopsCompressed/signals/caches/modified2016"
-cache_dir = "/groups/hephy/cms/priya.hussain/StopsCompressed/signals/caches/modified2016"
+#cache_dir = "/groups/hephy/cms/priya.hussain/StopsCompressed/signals/caches/modified2016"
 ##For UL FullSim points: 
-#cache_dir = "/groups/hephy/cms/priya.hussain/StopsCompressed/signals/caches/ISRUL2016"
-#cache_dir = "/mnt/hephy/cms/priya.hussain/StopsCompressed/signals/caches/gen_v7_2016"
+##UL
+cache_dir = "/groups/hephy/cms/priya.hussain/StopsCompressed/signals/caches/UL/"
+cache_dir += "%s/"%options.year
 renormISR = False
 if options.susySignal:
     from StopsCompressed.samples.helpers import getT2ttSignalWeight , getT2ttISRNorm
@@ -781,8 +778,8 @@ def filler( event ):
 	    if len(stopsList)!= 0 and stopsList[-1] == 24:
 		    wStop = stopsList
 	    #print " @@@ length of chains from W coming from stop: ", len(wStop), wStop
-	    if len(wStop)>3:
-		    print "CHECK!", len(wStop), wStop
+	#    if len(wStop)>3:
+	#	    print "CHECK!", len(wStop), wStop
 	    quarks = [1,2,3,4,5,6,111]
 	    for quark in quarks:
 		    if wStop and quark not in wStop:
@@ -833,8 +830,10 @@ def filler( event ):
 	if Lxy:
 	    event.stop1_Lxy = Lxy[0]
 	    event.stop1_dt  = dt[0]
-	    event.stop2_Lxy = Lxy[1]
-	    event.stop2_dt  = dt[1]
+	    if len(Lxy)>1:
+
+	    	event.stop2_Lxy = Lxy[1]
+	    	event.stop2_dt  = dt[1]
     elif isMC:
         if hasattr(r, "genWeight"):
             event.weight = lumiScaleFactor*r.genWeight if lumiScaleFactor is not None else 1
@@ -887,7 +886,13 @@ def filler( event ):
     
     allSlimmedJets      = getJets(r)
     allSlimmedPhotons   = getPhotons(r, year=options.year)
-    event.reweightL1Prefire, event.reweightL1PrefireUp, event.reweightL1PrefireDown = r.L1PreFiringWeight_Nom, r.L1PreFiringWeight_Up, r.L1PreFiringWeight_Dn
+    if options.fastSim:
+        if options.year == 'UL2018':
+	    event.reweightL1Prefire, event.reweightL1PrefireUp, event.reweightL1PrefireDown = 1., 1., 1.
+	else:
+	    event.reweightL1Prefire, event.reweightL1PrefireUp, event.reweightL1PrefireDown = L1PW.getWeight(allSlimmedPhotons, allSlimmedJets)
+    else:
+         event.reweightL1Prefire, event.reweightL1PrefireUp, event.reweightL1PrefireDown = r.L1PreFiringWeight_Nom, r.L1PreFiringWeight_Up, r.L1PreFiringWeight_Dn
     #if options.year == 2018:
     #    event.reweightL1Prefire, event.reweightL1PrefireUp, event.reweightL1PrefireDown = 1., 1., 1.
     #else:

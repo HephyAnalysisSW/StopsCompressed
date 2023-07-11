@@ -258,26 +258,20 @@ if options.year == "UL2016":
     #UL changes
     from Samples.nanoAOD.UL16v9_private                 import allSamples as mcSamples
     from Samples.nanoAOD.Run2016_private_ULnanoAODv9    import allSamples as dataSamples
-    #from Samples.nanoAOD.Summer16_private_legacy_v1 import allSamples as mcSamples
-    #from Samples.nanoAOD.Run2016_nanoAODv6  	    import allSamples as dataSamples
     allSamples = mcSamples + dataSamples 
 elif options.year == "UL2016_preVFP":
     from Samples.nanoAOD.UL16APVv9_private                 import allSamples as mcSamples
     from Samples.nanoAOD.Run2016APV_private_ULnanoAODv9    import allSamples as dataSamples
     allSamples = mcSamples + dataSamples
-elif options.year == 2017:
-    from Samples.nanoAOD.Autumn18_nanoAODv6 import allSamples as mcSamples
-    from Samples.nanoAOD.Run2018_nanoAODv6  import allSamples as dataSamples
 
-    #from Samples.nanoAOD.Fall17_private_legacy_v1   import allSamples as mcSamples
-    #from Samples.nanoAOD.Run2017_31Mar2018_private  import allSamples as dataSamples
+elif options.year == "UL2017":
+    from Samples.nanoAOD.UL17v9_private                     import allSamples as mcSamples
+    from Samples.nanoAOD.Run2017_private_ULnanoAODv9        import allSamples as dataSamples
     allSamples = mcSamples + dataSamples
-elif options.year == 2018:
-    from Samples.nanoAOD.Spring18_private           import allSamples as HEMSamples
-    from Samples.nanoAOD.Run2018_26Sep2018_private  import allSamples as HEMDataSamples
-    from Samples.nanoAOD.Autumn18_private_legacy_v1 import allSamples as mcSamples
-    from Samples.nanoAOD.Run2018_17Sep2018_private  import allSamples as dataSamples
-    allSamples = HEMSamples + HEMDataSamples + mcSamples + dataSamples
+elif options.year == "UL2018":
+    from Samples.nanoAOD.UL18v9_private 		    import allSamples as mcSamples
+    from Samples.nanoAOD.Run2018_private_ULnanoAODv9        import allSamples as dataSamples
+    allSamples = mcSamples + dataSamples
 else:
     raise NotImplementedError
 
@@ -301,7 +295,7 @@ if options.T2tt or options.T8bbllnunu or options.T2bW or options.T2bt or options
     assert len(samples)==1, "Can only process one SUSY sample at a time."
     samples[0].files = samples[0].files[:maxN]
     logger.debug( "Fetching signal weights..." )
-    signalWeight = getT2ttSignalWeight( samples[0], lumi = targetLumi, cacheDir = '/groups/hephy/cms/priya.hussain/StopsCompressed/signals/caches/%s/'%(options.year)) #Can use same x-sec/weight for T8bbllnunu as for T2tt
+    signalWeight = getT2ttSignalWeight( samples[0], lumi = targetLumi, cacheDir = '/groups/hephy/cms/priya.hussain/StopsCompressed/signals/caches/UL/%s/'%(options.year)) #Can use same x-sec/weight for T8bbllnunu as for T2tt
     logger.debug("Done fetching signal weights.")
 
 if len(samples)==0:

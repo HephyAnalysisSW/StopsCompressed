@@ -29,7 +29,7 @@ import StopsCompressed.Tools.user as user
 #from StopsDilepton.tools.topPtReweighting import getUnscaledTopPairPtReweightungFunction, getTopPtDrawString, getTopPtsForReweighting
 
 # use a cacheDir that's read/writable for all of us
-cacheDir = "/groups/hephy/cms/priya.hussain/StopsCompressed/signals/caches/preUL"
+cacheDir = "/groups/hephy/cms/priya.hussain/StopsCompressed/signals/caches/UL/"
 #cacheDir = "/mnt/hephy/cms/priya.hussain/StopsCompressed/signals/caches/modified"
 #cacheDir = "/afs/hephy.at/data/cms08/StopsCompressed/signals/caches/"
 
@@ -57,9 +57,7 @@ logger  = _logger.get_logger(options.logLevel, logFile = logFile)
 
 import RootTools.core.logger as _logger_rt
 logger_rt = _logger_rt.get_logger(options.logLevel, logFile = None )
-
 cacheDir += "%s/"%options.year
-
 ## First, get the normalization per masspoint (done on nanoAOD tuples)
 
 if options.year == 'UL2016':
@@ -68,21 +66,23 @@ if options.year == 'UL2016':
     #from Samples.nanoAOD.Run2016_17Jul2018_private  import allSamples as dataSamples
     #allSamples = bkgSamples + dataSamples + signalSamples
     from Samples.nanoAOD.UL16v9_private import compSUSY as signalSamples
-    
+ 
     allSamples = signalSamples
-elif options.year == 2017:
-    from Samples.nanoAOD.Fall17_private_legacy_v1   import allSamples as bkgSamples
-    from Samples.nanoAOD.Fall17_private_legacy_v1   import SUSY as signalSamples
-    from Samples.nanoAOD.Run2017_31Mar2018_private  import allSamples as dataSamples
-    allSamples = bkgSamples + dataSamples
-elif options.year == 2018:
-    from Samples.nanoAOD.Spring18_private           import allSamples as HEMSamples
-    from Samples.nanoAOD.Run2018_26Sep2018_private  import allSamples as HEMDataSamples
-    from Samples.nanoAOD.Autumn18_private_legacy_v1 import allSamples as bkgSamples
-    from Samples.nanoAOD.Run2018_17Sep2018_private  import allSamples as dataSamples
-    allSamples = HEMSamples + HEMDataSamples + bkgSamples + dataSamples
+ 
+elif options.year == "UL2016_preVFP":
+    from Samples.nanoAOD.UL16APVv9_private               import compSUSY as signalSamples
+    allSamples = signalSamples
+
+elif options.year == "UL2017":
+    from Samples.nanoAOD.UL17v9_private                  import compSUSY as signalSamples
+    allSamples = signalSamples
+
+elif options.year == "UL2018":
+    from Samples.nanoAOD.UL18v9_private                  import compSUSY as signalSamples
+    allSamples = signalSamples
 else:
     raise NotImplementedError
+
 
 samples = []
 for selectedSamples in options.samples:
