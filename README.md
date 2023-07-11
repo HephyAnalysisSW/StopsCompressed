@@ -7,7 +7,7 @@ cd CMSSW_10_6_25/src
 cmsenv
 
 # Download patched version of install_correctionslib.sh
-curl -sLO https://gist.githubusercontent.com/dietrichliko/96865aa4c47d7fabc7d746d163fc7cf5/raw/3cc1cb04dd0991b5dc920b3c45266a5b82baea0e/install_correctionslib.sh
+curl -sLO https://gist.githubusercontent.com/dietrichliko/96865aa4c47d7fabc7d746d163fc7cf5/raw/943ebc27101408c14659cc25d935565936da7fc9/install_correctionslib.sh
 . ./install_correctionslib.sh
 rm install_correctionslib.sh
 

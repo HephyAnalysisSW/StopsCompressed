@@ -14,11 +14,15 @@ class default_locations:
     #data_2016_postProcessing_directory = "compstops_UL16v9_nano_v7/Met/noDxyDz/"
     data_2016_postProcessing_directory = "compstops_UL16v9_nano_v8/Met/HInoDxyDz/"
 
-    #mc_2016APV_data_directory = "/groups/hephy/cms/priya.hussain/StopsCompressed/nanoTuples/"
-    mc_2016APV_data_directory = "/scratch-cbe/users/dietrich.liko/StopsCompressed/nanoTuples/"
-    mc_2016APV_postProcessing_directory = "compstops_UL16APVv9_nano_v8/Met/"
+    mc_2016_data_directory = "/scratch-cbe/users/dietrich.liko/StopsCompressed/nanoTuples/"
+    mc_2016_postProcessing_directory = "compstops_UL16v9_nano_v10/Met/"
 
-    #data_2016APV_data_directory = "/groups/hephy/cms/priya.hussain/StopsCompressed/nanoTuples/"
+    data_2016_data_directory = "/scratch-cbe/users/dietrich.liko/StopsCompressed/nanoTuples/"
+    data_2016_postProcessing_directory = "compstops_UL16v9_nano_v10/Met/"
+
+    mc_2016APV_data_directory = "/scratch-cbe/users/dietrich.liko/StopsCompressed/nanoTuples/"
+    mc_2016APV_postProcessing_directory = "compstops_UL16APVv9_nano_v10/Met/"
+
     data_2016APV_data_directory = "/scratch-cbe/users/dietrich.liko/StopsCompressed/nanoTuples/"
     data_2016APV_postProcessing_directory = "compstops_UL16APVv9_nano_v8/Met/"
 
@@ -63,46 +67,16 @@ class default_locations:
     #signal_2016_postProcessing_directory = "compstops_2016_nano_v27/MetSingleLep/"
     #signal_2016_postProcessing_directory = "compstops_2016_nano_v24/MetSingleLep/"
 
+    data_2016APV_postProcessing_directory = "compstops_UL16APVv9_nano_v10/Met/"
     
-    # data_2016_data_directory = "/groups/hephy/cms/priya.hussain/StopsCompressed/nanoTuples/"
-    #data_2016_data_directory = "/scratch/priya.hussain/StopsCompressed/nanoTuples/"
-
-    ##v27 has fixed leptonSFs and ISR reweighting w/o normalization
-    #data_2016_postProcessing_directory = "compstops_2016_nano_v27/MetSingleLep/"
-
-    ##for jets with pt-threshold 20 GeV we use v28
-    #data_2016_postProcessing_directory = "compstops_2016_nano_v28/MetSingleLep/"
-    
-    
-    # data_2016_postProcessing_directory = "compstops_2016_nano_v22/MetSingleLep/looseHybridIso/"
-    # data_2016_postProcessing_directory = "compstops_2016_nano_v23/MetSingleLep/"
-    #data_2016_postProcessing_directory = "compstops_2016_nano_v26/MetSingleLep/"
-    #data_2016_postProcessing_directory = "compstops_2016_nano_v15/MetSingleLep/"
-    #data_2016_postProcessing_directory = "compstops_2016_nano_v8/MetSingleLep/"
-    ## data w/ all ext samples && old ID: v21
-    #data_2016_postProcessing_directory = "compstops_2016_nano_v21/MetSingleLep/"
-    ## data sample w/ ID mu_medium, el_loose: v22
-    #data_2016_postProcessing_directory = "compstops_2016_nano_v22/MetSingleLep/"
-    ## data sample w/ ID mu_medium, el_loose && isPrompt (data has no gen info, same with isPrompt flag): v23
-    #data_2016_postProcessing_directory = "compstops_2016_nano_v23/MetSingleLep/"
-
-
-    #mc_2017_data_directory = "/mnt/hephy/cms/priya.hussain/StopsCompressed/nanoTuples/"
-    #mc_2017_postProcessing_directory = "compstops_2017_nano_v8/MetSingleLep/"
-    #data_2017_data_directory = "/mnt/hephy/cms/priya.hussain/StopsCompressed/nanoTuples/"
-    #data_2017_postProcessing_directory = "compstops_2017_nano_v8/MetSingleLep/"
-
-
-    #mc_2017_data_directory = "/groups/hephy/cms/priya.hussain/StopsCompressed/nanoTuples/"
     mc_2017_data_directory = "/scratch-cbe/users/dietrich.liko/StopsCompressed/nanoTuples/"
-    mc_2017_postProcessing_directory = "compstops_UL17v9_nano_v7/Met"
+    mc_2017_postProcessing_directory = "compstops_UL17v9_nano_v10/Met"
 
-    #data_2017_data_directory = "/groups/hephy/cms/priya.hussain/StopsCompressed/nanoTuples/"
     data_2017_data_directory = "/scratch-cbe/users/dietrich.liko/StopsCompressed/nanoTuples/"
-    data_2017_postProcessing_directory = "compstops_UL17v9_nano_v7/Met"
+    data_2017_postProcessing_directory = "compstops_UL17v9_nano_v10/Met"
 
     mc_2018_data_directory = "/scratch-cbe/users/dietrich.liko/StopsCompressed/nanoTuples/"
-    mc_2018_postProcessing_directory = "compstops_UL18v9_nano_v7/Met/"
+    mc_2018_postProcessing_directory = "compstops_UL18v9_nano_v10/Met/"
 
     data_2018_data_directory = "/scratch-cbe/users/dietrich.liko/StopsCompressed/nanoTuples/"
-    data_2018_postProcessing_directory = "compstops_UL18v9_nano_v7/Met/"
+    data_2018_postProcessing_directory = "compstops_UL18v9_nano_v10/Met/"

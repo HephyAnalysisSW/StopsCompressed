@@ -22,8 +22,8 @@ class genFilter:
 		##print self.genEff
 		#for self.effMap in self.genEff: assert self.effMap
 
-		self.dataDir = "/users/priya.hussain/private/CMSSW_10_6_25/src/StopsCompressed/Tools/data/filterEffs"
-		#self.dataDir = "$CMSSW_BASE/src/StopsCompressed/Tools/data/filterEffs"
+		# self.dataDir = "/users/priya.hussain/private/CMSSW_10_6_25/src/StopsCompressed/Tools/data/filterEffs"
+		self.dataDir = os.path.join(os.environ["CMSSW_BASE"],"src/StopsCompressed/Tools/data/filterEffs")
 		#self.dataDir = "/scratch/priya.hussain/StopsCompressed/filterEff"
 		self.name = "filterEffs_T2tt_dM_10to80_genHT_160_genMET_80_mWMin0p1"
 		pklFile= os.path.join(self.dataDir,"filterEffs_T2tt_dM_10to80_genHT_160_genMET_80_mWMin0p1.pkl")
